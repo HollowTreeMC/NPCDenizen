@@ -6,7 +6,7 @@ calypso:
         - trigger name:chat state:true radius:5
     interact scripts:
     - calypso_main
-   
+
 calypso_main:
     type: interact
     steps:

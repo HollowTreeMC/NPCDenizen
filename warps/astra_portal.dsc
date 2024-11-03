@@ -1,3 +1,4 @@
+#this script is for astra the astra clone at the portal island
 astra_portal:
     type: assignment
     actions:

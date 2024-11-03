@@ -1,3 +1,4 @@
+#this script is for astra, who will warp players to the portal island from spawn
 astra:
     type: assignment
     actions:
