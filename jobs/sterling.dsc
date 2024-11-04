@@ -22,7 +22,7 @@ sterling_main:
             click trigger:
                 script:
                 - ratelimit <player> 10s
-                - if <player.has_advancement[minecraft:obtain_armor]>:
+                - if <player.has_advancement[minecraft:story/obtain_armor]>:
                     - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Sterling<&f>: Ah! A robust chestplate. Rough around the edgest, but it'll do..."
                     - zap 3
                 - else:
@@ -31,7 +31,10 @@ sterling_main:
         3:
             click trigger:
                 script:
-                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Sterling<&f>: Would you like to join the core and work as a Smith? <&7>[Yes]"
+                - if <player.has_advancement[jobsr_user_isin_[Smith]]>:
+                    - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Sterling<&f>: You'll get arms of steel in no time!"
+                - else:
+                    - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Sterling<&f>: Would you like to join the core and work as a Smith? <&7>[Yes]"
 
             chat trigger:
                 1:
@@ -40,7 +43,7 @@ sterling_main:
                     show as normal chat: false
                     script:
                     - if <placeholder[jobsr_user_joinedjobcount]> >= <placeholder[jobsr_maxjobs]>:
-                        - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Sterling<&f>: You must leave a job before you can become a Smith."
+                        - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Sterling<&f>: You must leave a job before you can become a Smith. <&7>/jobs leave"
                     - else:
                         - jobs join Smith
                         - narrate "You have been employed as a Smith."

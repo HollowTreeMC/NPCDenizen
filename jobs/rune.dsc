@@ -22,7 +22,7 @@ rune_main:
             click trigger:
                 script:
                 - ratelimit <player> 10s
-                - if <player.has_advancement[minecraft:brew_potion]>:
+                - if <player.has_advancement[minecraft:nether/brew_potion]>:
                     - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Rune<&f>: Ah! So you've brewed a potion... Perhaps you would do..."
                     - zap 3
                 - else:
@@ -31,7 +31,10 @@ rune_main:
         3:
             click trigger:
                 script:
-                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Rune<&f>: Would you like to join the guild and work as a Sorcerer? <&7>[Yes]"
+                - if <player.has_advancement[jobsr_user_isin_[Sorcerer]]>:
+                    - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Rune<&f>: Hello fellow Sorcerer. We should discuss potion brewing sometime."
+                - else:
+                    - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Rune<&f>: Would you like to join the guild and work as a Sorcerer? <&7>[Yes]"
 
             chat trigger:
                 1:
@@ -40,7 +43,7 @@ rune_main:
                     show as normal chat: false
                     script:
                     - if <placeholder[jobsr_user_joinedjobcount]> >= <placeholder[jobsr_maxjobs]>:
-                        - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Rune<&f>: You must leave a job before you can become a Sorcerer."
+                        - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Rune<&f>: You must leave a job before you can become a Sorcerer. <&7>/jobs leave"
                     - else:
                         - jobs join Sorcerer
                         - narrate "You have been employed as a Sorcerer."

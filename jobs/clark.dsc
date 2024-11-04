@@ -22,7 +22,7 @@ clark_main:
             click trigger:
                 script:
                 - ratelimit <player> 10s
-                - if <player.has_advancement[minecraft:brew_potion]>:
+                - if <player.has_advancement[minecraft:adventure/salvage_sherd]>:
                     - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Clark<&f>: Well done! You've completed my quest. Impressive work!"
                     - zap 3
                 - else:
@@ -31,7 +31,10 @@ clark_main:
         3:
             click trigger:
                 script:
-                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Clark<&f>: Would you like to join the ranks of the Explorers? <&7>[Yes]"
+                - if <player.has_advancement[jobsr_user_isin_[Explorer]]>:
+                    - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Rune<&f>: Perhaps one day all of the lands shall be explored."
+                - else:
+                    - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Clark<&f>: Would you like to join the ranks of the Explorers? <&7>[Yes]"
 
             chat trigger:
                 1:
@@ -40,7 +43,7 @@ clark_main:
                     show as normal chat: false
                     script:
                     - if <placeholder[jobsr_user_joinedjobcount]> >= <placeholder[jobsr_maxjobs]>:
-                        - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Clark<&f>: You have too many jobs!"
+                        - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Clark<&f>: You have too many jobs! Leave one to become an explorer. <&7>/jobs leave"
                     - else:
                         - jobs join Explorer
                         - narrate "You have been employed as an Explorer."
