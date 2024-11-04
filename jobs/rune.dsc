@@ -15,7 +15,7 @@ rune_main:
             click trigger:
                 script:
                 - ratelimit <player> 10s
-                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Rune<&f>: Do you have an affinity for alchemy? You can take the Sorcerer's guild's test once you've brewed a potion."
+                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Rune<&f>: Do you have an affinity for alchemy? You may join the Sorcerer's guild once you've brewed a potion."
                 - zap 2
         #giving quests to the player
         2:
