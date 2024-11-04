@@ -1,3 +1,4 @@
+#Rune is the NPC which hands out the Sorcerer job, located on the portal island inside the brewery hall.
 rune:
     type: assignment
     actions:

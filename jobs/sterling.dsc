@@ -1,3 +1,4 @@
+#Rune is the NPC which hands out the Smith job, located on the portal island inside the smeltery.
 sterling:
     type: assignment
     actions:

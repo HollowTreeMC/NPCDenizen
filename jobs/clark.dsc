@@ -1,3 +1,4 @@
+#Clark is the NPC which hands out the Explorer job, located on the explorer island.
 clark:
     type: assignment
     actions:
