@@ -20,4 +20,4 @@ lewis_main:
         2:
             click trigger:
                 script:
-                - execute as_server "/dm open biomewarps_menu <player.name>"
+                - execute as_server "dm open biomewarps_menu <player.name>"
