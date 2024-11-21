@@ -15,15 +15,15 @@ cali_main:
                 entry:
                     script:
                     - ratelimit <player> 100s
-                    - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Cali<&f>: Hi <player.name>! Welcome to Hollowtree! I'm Cali, your guide!"
-                    - wait 2s
-                    - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Cali<&f>: Right click to speak with any Aeronaut or NPC here!"
+                    - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Cali<&f>: Hi <player.name>! Welcome to Hollowtree! I'm Cali, your guide! Get started by <&e>right clicking <&f>NPCs such as myself!"
+                    - wait 5s
+                    - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Cali<&f>: I offer many guides, and if this is your first time here, I recommend viewing our <&e>Introduction to Hollowtree Guide! <&f>You'll be rewarded with coins for viewing any of these guides!"
             click trigger:
                 script:
-                    - zap 2
                     - execute as_server "dm open guides_menu <player.name>"
+                    - zap 2
+
         2:
             click trigger:
                 script:
-                - ratelimit <player> 5s
                 - execute as_server "dm open guides_menu <player.name>"
