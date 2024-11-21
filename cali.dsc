@@ -2,7 +2,7 @@ cali:
     type: assignment
     actions:
         on assignment:
-        - trigger name:proximity trigger:true
+        - trigger name:proximity state:true radius:5
         - trigger name:click state:true
     interact scripts:
     - cali_main
