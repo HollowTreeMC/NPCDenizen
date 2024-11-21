@@ -12,16 +12,18 @@ cali_main:
     steps:
         1:
             proximity trigger:
+                entry:
+                    script:
+                    - ratelimit <player> 100s
+                    - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Cali<&f>: Hi <player.name>! Welcome to Hollowtree! I'm Cali, your guide!"
+                    - wait 2s
+                    - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Cali<&f>: Right click to speak with any Aeronaut or NPC here!"
+            click trigger:
                 script:
-                - ratelimit <player> 10s
-                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Cali<&f>: Hi <player.name>! Welcome to Hollowtree! I'm Cali, your guide!"
-                - wait 2s
-                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Cali<&f>: Here's your guide menu, you can access it anytime here!"
-                - wait 2s
-                - execute as_server "dm open guides_menu <player.name>"
-                - zap 2
+                    - zap 2
+                    - execute as_server "dm open guides_menu <player.name>"
         2:
             click trigger:
                 script:
-                - ratelimit <player> 10s
-                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Cali<&f>: Hello <player.name>!"
+                - ratelimit <player> 5s
+                - execute as_server "dm open guides_menu <player.name>"
