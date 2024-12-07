@@ -11,7 +11,7 @@ astra:
 astra_main:
     type: interact
     steps:
-        #first time meeting the NPC
+        #first time meeting the NPC, Intro + Option to TP for free
         1:
             click trigger:
                 script:
@@ -21,13 +21,14 @@ astra_main:
                 - wait 6
                 - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Astra<&f>: We've got precious cargo today, bound for the smeltery on the Portal Island."
                 - wait 5
-                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Astra<&f>: We're leaving now, you're welcome to join if you'd like. <&7>[Okay]"
+                - clickable astra_tp for<player> until:1m
+                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Astra<&f>: We're leaving now, you're welcome to join if you'd like. <&7><element[[Okay]].on_click[/denizenclickable chat Yes]>"
                 - zap 2
-        #free warp script
+        #free warp script, if a player does not TP initially, they possess 1 free TP
         2:
             click trigger:
                 script:
-                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Astra<&f>: We're leaving to the Portal Island now, want to come along? <&7>[Yes]"
+                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Astra<&f>: We're leaving to the Portal Island now, want to come along? <&7><element[[Yes]].on_click[/denizenclickable chat Yes]>"
 
             chat trigger:
                 1:
@@ -41,7 +42,7 @@ astra_main:
         3:
             click trigger:
                 script:
-                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Astra<&f>: <player.name>! Want to go to the portal island? I can take you for 500 coins. <&7>[Yes] [No]"
+                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Astra<&f>: <player.name>! Want to go to the portal island? I can take you for 500 coins. <&7><element[[Yes]].on_click[/denizenclickable chat Yes]> <&7><element[[No]].on_click[/denizenclickable chat No]>"
 
             chat trigger:
                 1:
@@ -61,7 +62,7 @@ astra_main:
                     hide trigger message: true
                     show as normal chat: false
                     script:
-                        - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Astra<&f>: No worries, you know where to find me!"
+                    - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Astra<&f>: No worries, you know where to find me!"
 
 astra_tp:
     type: task
