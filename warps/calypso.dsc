@@ -44,7 +44,7 @@ calypso_main:
                 - ratelimit <player> 10s
                 - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Calypso<&f>: <player.name>! You've the air of an explorer. Come venture to the beyond with us!"
                 - wait 1s
-                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Calypso<&f>: The fare is a mere 500 coins, would you like to depart?  <&7><element[[Yes]].on_click[/denizenclickable chat Yes]> [No]"
+                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Calypso<&f>: The fare is a mere 500 coins, would you like to depart?  <&7><element[[Yes]].on_click[/denizenclickable chat Yes]> <&7><element[[No]].on_click[/denizenclickable chat No]>"
 
             chat trigger:
                 1:
