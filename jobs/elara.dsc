@@ -35,7 +35,7 @@ elara_main:
                 - if <player.has_advancement[jobsr_user_isin_[Fighter]]>:
                     - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Elara<&f>: Bested anyone in combat recently?"
                 - else:
-                    - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Elara<&f>: Become a fighter? <&7>[Yes]"
+                    - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Elara<&f>: Become a fighter? <&7><element[[Yes]].on_click[/denizenclickable chat Yes]>"
 
             chat trigger:
                 1:

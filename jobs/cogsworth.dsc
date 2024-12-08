@@ -35,7 +35,7 @@ cogsworth_main:
                 - if <player.has_advancement[jobsr_user_isin_[Tinkerer]]>:
                     - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Cogsworth<&f>: What did the differential gear tell the spigot? Hahahaha!"
                 - else:
-                    - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Cogsworth<&f>: Would you like to join the guild and work as a Sorcerer? <&7>[Yes]"
+                    - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Cogsworth<&f>: Would you like to join the guild and work as a Sorcerer? <&7><element[[Yes]].on_click[/denizenclickable chat Yes]>"
 
             chat trigger:
                 1:

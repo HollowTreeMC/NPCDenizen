@@ -35,7 +35,7 @@ sterling_main:
                 - if <player.has_advancement[jobsr_user_isin_[Smith]]>:
                     - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Sterling<&f>: You'll get arms of steel in no time!"
                 - else:
-                    - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Sterling<&f>: Would you like to join the core and work as a Smith? <&7>[Yes]"
+                    - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Sterling<&f>: Would you like to join the core and work as a Smith? <&7><element[[Yes]].on_click[/denizenclickable chat Yes]>"
 
             chat trigger:
                 1:

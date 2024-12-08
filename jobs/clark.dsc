@@ -35,7 +35,7 @@ clark_main:
                 - if <player.has_advancement[jobsr_user_isin_[Explorer]]>:
                     - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Rune<&f>: Perhaps one day all of the lands shall be explored."
                 - else:
-                    - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Clark<&f>: Would you like to join the ranks of the Explorers? <&7>[Yes]"
+                    - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Clark<&f>: Would you like to join the ranks of the Explorers? <&7><element[[Yes]].on_click[/denizenclickable chat Yes]>"
 
             chat trigger:
                 1:

@@ -20,13 +20,13 @@ calypso_main:
                 - wait 6
                 - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Calypso<&f>: I'm on an adventure, heading to the Explorer Island"
                 - wait 5
-                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Astra<&f>: We're leaving now, you're welcome to join if you'd like. <&7>[Okay]"
+                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Astra<&f>: We're leaving now, you're welcome to join if you'd like. <&7><element[[Yes]].on_click[/denizenclickable chat Yes]>"
                 - zap 2
         #free warp script
         2:
             click trigger:
                 script:
-                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Calypso<&f>: We're leaving to the Explorer Island now, want to come along? <&7>[Yes]"
+                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Calypso<&f>: We're leaving to the Explorer Island now, want to come along? <&7><element[[Yes]].on_click[/denizenclickable chat Yes]>"
 
             chat trigger:
                 1:
@@ -44,7 +44,7 @@ calypso_main:
                 - ratelimit <player> 10s
                 - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Calypso<&f>: <player.name>! You've the air of an explorer. Come venture to the beyond with us!"
                 - wait 1s
-                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Calypso<&f>: The fare is a mere 500 coins, would you like to depart?  <&7>[Yes] [No]"
+                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Calypso<&f>: The fare is a mere 500 coins, would you like to depart?  <&7><element[[Yes]].on_click[/denizenclickable chat Yes]> [No]"
 
             chat trigger:
                 1:

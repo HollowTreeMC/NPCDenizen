@@ -15,7 +15,7 @@ ender_main:
                 - ratelimit <player> 10s
                 - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Ender<&f>: Dare to face combat trials <player.name>?"
                 - wait 1s
-                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Ender<&f>: There is no fee, say the word and I'll take you."
+                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Ender<&f>: There is no fee, say the word and I'll take you. <&7><element[[Okay]].on_click[/denizenclickable chat Yes]>"
 
             chat trigger:
                 1:

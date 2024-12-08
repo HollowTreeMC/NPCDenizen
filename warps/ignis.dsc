@@ -25,7 +25,7 @@ ignis_main:
             click trigger:
                 script:
                 - ratelimit <player> 10s
-                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Ignis<&f>: I can take you a bit farther out in the Nether for a small fee, only 250 coins. <&7>[Yes] [No]"
+                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Ignis<&f>: I can take you a bit farther out in the Nether for a small fee, only 250 coins. <&7><element[[Yes]].on_click[/denizenclickable chat Yes]> <&7><element[[No]].on_click[/denizenclickable chat No]>"
 
             chat trigger:
                 1:

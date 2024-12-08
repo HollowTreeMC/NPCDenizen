@@ -13,7 +13,7 @@ vacuus_main:
             click trigger:
                 script:
                 - ratelimit <player> 10s
-                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Vacuus<&f>: For only 250 coins, I'll make it a random teleport. Want to? <&7><&o>Yes"
+                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Vacuus<&f>: For only 250 coins, I'll make it a random teleport. Want to? <&7><element[[Yes]].on_click[/denizenclickable chat Yes]>"
 
             chat trigger:
                 1:

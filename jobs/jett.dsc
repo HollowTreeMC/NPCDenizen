@@ -35,7 +35,7 @@ jett_main:
                 - if <player.has_advancement[jobsr_user_isin_[Quartermaster]]>:
                     - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Jett<&f>: Give a go at brewing when you have the time."
                 - else:
-                    - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Jett<&f>: Would you like to become a quartermaster? <&7>[Yes]"
+                    - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Jett<&f>: Would you like to become a quartermaster? <&7><element[[Yes]].on_click[/denizenclickable chat Yes]>"
 
             chat trigger:
                 1:
