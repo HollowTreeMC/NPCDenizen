@@ -32,7 +32,7 @@ jett_main:
         3:
             click trigger:
                 script:
-                - if <player.has_advancement[jobsr_user_isin_[Quartermaster]]>:
+                - if <placeholder[jobsr_user_isin_[Quartermaster]]> == yes:
                     - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Jett<&f>: Give a go at brewing when you have the time."
                 - else:
                     - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Jett<&f>: Would you like to become a quartermaster? <&7><element[[Yes]].on_click[/denizenclickable chat Yes]>"

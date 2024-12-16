@@ -32,7 +32,7 @@ rune_main:
         3:
             click trigger:
                 script:
-                - if <player.has_advancement[jobsr_user_isin_[Sorcerer]]>:
+                - if <placeholder[jobsr_user_isin_[Sorcerer]]>:
                     - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Rune<&f>: Hello fellow Sorcerer. We should discuss potion brewing sometime."
                 - else:
                     - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Rune<&f>: Would you like to join the guild and work as a Sorcerer? <&7><element[[Yes]].on_click[/denizenclickable chat Yes]>"

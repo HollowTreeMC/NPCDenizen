@@ -1,4 +1,5 @@
 calypso:
+    debug: false
     type: assignment
     actions:
         on assignment:
@@ -8,6 +9,7 @@ calypso:
     - calypso_main
 
 calypso_main:
+    debug: false
     type: interact
     steps:
         #first time meeting the NPC
@@ -20,7 +22,7 @@ calypso_main:
                 - wait 6
                 - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Calypso<&f>: I'm on an adventure, heading to the Explorer Island"
                 - wait 5
-                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Calypso<&f>: We're leaving now, you're welcome to join if you'd like. <&7><element[[Yes]].on_click[/denizenclickable chat Yes]>"
+                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Astra<&f>: We're leaving now, you're welcome to join if you'd like. <&7><element[[Yes]].on_click[/denizenclickable chat Yes]>"
                 - zap 2
         #free warp script
         2:
@@ -67,6 +69,7 @@ calypso_main:
 
 
 calypso_tp:
+    debug: false
     type: task
     script:
         - playsound <player> sound:item_elytra_flying

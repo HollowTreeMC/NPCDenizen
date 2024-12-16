@@ -13,6 +13,7 @@ fischer_main:
         1:
             click trigger:
                 script:
+                	- cooldown 10s
                     - random:
-                        - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Fischer<&f>: It's a looong way down"
-                        - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Fischer<&f>: The whole world is down there"
+                        - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Fischer<&f>: It's a looong way down..."
+                        - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Fischer<&f>: The whole world is down there..."
