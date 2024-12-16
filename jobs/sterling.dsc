@@ -1,4 +1,4 @@
-#Rune is the NPC which hands out the Smith job, located on the portal island inside the smeltery.
+#Sterling is the Smith job NPC
 sterling:
     type: assignment
     actions:
@@ -11,31 +11,40 @@ sterling:
 sterling_main:
     type: interact
     steps:
-        #first time meeting the NPC
+        # npc intro
         1:
             click trigger:
                 script:
-                - ratelimit <player> 10s
-                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Sterling<&f>: Who's there? We need more hands at the forge, forge an iron chestplate to prove your mettle."
+                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Sterling<&f>: Hello, I'm Sterling, head of this here Gold Refinery. We can always use more hands at the forge, come talk to me if you want to be a Smith."
                 - zap 2
-        #giving quests to the player
+
+        # give quest
         2:
             click trigger:
                 script:
                 - ratelimit <player> 10s
-                - if <player.has_advancement[minecraft:story/obtain_armor]>:
-                    - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Sterling<&f>: Ah! A robust chestplate. Rough around the edgest, but it'll do..."
-                    - zap 3
-                - else:
-                    - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Sterling<&f>: Come back once you've forged a chestplate..."
-        #job handout script
+                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Sterling<&f>: Who's there? We need more hands at the forge, <&hover[<&6>Craft an Iron Chestplate]><&6>forge an iron chestplate<&end_hover><&f> to prove your mettle."
+                - zap 3
+
+        # check quest
         3:
             click trigger:
                 script:
-                - if <player.has_advancement[jobsr_user_isin_[Smith]]>:
+                - ratelimit <player> 10s
+                - if <player.has_advancement[minecraft:story/obtain_armor]>:
+                    - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Sterling<&f>: Ah! A robust armour plate. Rough around the edges, but it'll do..."
+                    - zap 4
+                - else:
+                    - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Sterling<&f>: Come back once you've <&hover[<&6>Craft an Iron Chestplate]><&6>forged a chestplate<&end_hover><&f>..."
+
+        # main - job handout script
+        4:
+            click trigger:
+                script:
+                - if <placeholder[jobsr_user_isin_Smith].contains_text[True]>:
                     - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Sterling<&f>: You'll get arms of steel in no time!"
                 - else:
-                    - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Sterling<&f>: Would you like to join the core and work as a Smith? <&7><element[[Yes]].on_click[/denizenclickable chat Yes]>"
+                    - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Sterling<&f>: Would you like to join the core and work as a Smith? <&hover[<&6>Become a Smith]><&7><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover>"
 
             chat trigger:
                 1:
@@ -44,9 +53,9 @@ sterling_main:
                     show as normal chat: false
                     script:
                     - if <placeholder[jobsr_user_joinedjobcount]> >= <placeholder[jobsr_maxjobs]>:
-                        - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Sterling<&f>: You must leave a job before you can become a Smith. <&7>/jobs leave"
+                        - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Sterling<&f>: You must leave a job before you can become a Smith <&hover[<&7>/jobs leave]><&7><element[/jobs leave].on_click[/jobs leave ].type[SUGGEST_COMMAND]><&end_hover>"
                     - else:
                         - jobs join Smith
-                        - narrate "You have been employed as a Smith."
+                        - narrate "<&6>You have been employed as a Smith."
                         - wait 2s
                         - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Sterling<&f>: Ha ha! Welcome another to the forge!"
