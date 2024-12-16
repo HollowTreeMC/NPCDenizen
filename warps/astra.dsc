@@ -56,7 +56,7 @@ astra_main:
                         - run astra_tp
                     - else:
                         - define temp 500
-                        - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Astra<&f>: I'll take you for another <[temp].sub[<player.money>]> coins."
+                        - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Astra<&f>: I'll take you for another <[temp].sub[<player.money>].round_up> coins."
                 2:
                     trigger: /no|na/
                     hide trigger message: true

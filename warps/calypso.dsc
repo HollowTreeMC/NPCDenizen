@@ -20,10 +20,11 @@ calypso_main:
                 - wait 2
                 - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Calpyso<&f>: I'm Calypso, captain of the Coldest Hot Air Balloon, <player.name> is it?"
                 - wait 6
-                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Calypso<&f>: I'm on an adventure, heading to the Explorer Island"
+                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Calypso<&f>: I'm on a gold ore run, heading to the Explorer Island"
                 - wait 5
                 - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Astra<&f>: We're leaving now, you're welcome to join if you'd like. <&7><element[[Yes]].on_click[/denizenclickable chat Yes]>"
                 - zap 2
+
         #free warp script
         2:
             click trigger:
@@ -59,7 +60,7 @@ calypso_main:
                         - run calypso_tp
                     - else:
                         - define temp 500
-                        - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Calypso<&f>: Sorry, you need another <[temp].sub[<player.money>]> coins."
+                        - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Calypso<&f>: Sorry, you need another <[temp].sub[<player.money>].round_up> coins."
                 2:
                     trigger: /no|na/
                     hide trigger message: true

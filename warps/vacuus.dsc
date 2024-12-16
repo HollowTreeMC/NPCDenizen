@@ -30,4 +30,4 @@ vacuus_main:
                         - execute as_server "/rt <player.name> Hollowtree_the_end"
                     - else:
                         - define temp 250
-                        - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Vacuus<&f>: Sorry, you need another <[temp].sub[<player.money>]> coins."
+                        - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Vacuus<&f>: Sorry, you need another <[temp].sub[<player.money>].round_up> coins."

@@ -42,7 +42,7 @@ ignis_main:
                         - execute as_server "/rt <player.name> Hollowtree_nether"
                     - else:
                         - define temp 250
-                        - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Ignis<&f>: Sorry, you need another <[temp].sub[<player.money>]> coins."
+                        - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Ignis<&f>: Sorry, you need another <[temp].sub[<player.money>].round_up> coins."
 
                 2:
                     trigger: /no|na/
@@ -60,5 +60,5 @@ Ignis_tp:
         - execute as_server "/rt <player.name> Hollowtree_nether"
         - wait 2s
         - random:
-            - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Ignis<&f>: It's a tad bit warm, Why did I wear a sweater"
+            - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Ignis<&f>: It's a tad bit warm, why did I wear a sweater"
             - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Ignis<&f>: Was that some netherite?"
