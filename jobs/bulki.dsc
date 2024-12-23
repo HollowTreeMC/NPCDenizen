@@ -15,14 +15,14 @@ bulki_main:
         1:
             click trigger:
                 script:
-                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Bulki<&f>: Hello, I'm Bulki, the head of the Scrapper's guild. Welcome, <player.name>! Come talk to me if you'd like to know more about the Scrapper Guild."
-               # - zap 2 
+                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Bulki<&f>: Hello, I'm Bulki, senior Scrapper. Talk to me if you'd like to know more about the Scrapper Guild."
+                - zap 2
 
         # give quest
         2:
             click trigger:
                 script:
-                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Bulki<&f>: If you'd like to join the Guild and become a Scrapper, you'll need to <&hover[<&6>TBD]><&6>TBD<&end_hover><&f>..."
+                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Bulki<&f>: If you'd like to join the Guild and become a Scrapper, you'll need to <&hover[<&6>Obtain an Iron Nugget]><&6>bring me an iron nugget<&end_hover><&f>..."
                 - zap 3
 
         # check quest
@@ -30,11 +30,11 @@ bulki_main:
             click trigger:
                 script:
                 - ratelimit <player> 5s
-                - if <player.inventory.contains_item[minecraft:iron_nugget]>:
+                - if <player.inventory.contains_item[iron_nugget]>:
                     - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Bulki<&f>: Well done! You've completed my quest. Impressive work!"
                     - zap 4
                 - else:
-                    - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Bulki<&f>: It seems you haven't finished the quest yet. As a reminder, you need to <&hover[<&6>Brush a Suspicious block to obtain a Pottery Shard]><&6>respect the remnants<&end_hover><&f>!"
+                    - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Bulki<&f>: It seems you haven't finished the quest yet. As a reminder, you need to <&hover[<&6>Obtain an Iron Nugget]><&6>bring me an iron nugget<&end_hover><&f>!"
 
         # main - job handout script
         4:
