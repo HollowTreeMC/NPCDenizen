@@ -53,7 +53,7 @@ bulki_main:
                     show as normal chat: false
                     script:
                     - if <placeholder[jobsr_user_joinedjobcount]> >= <placeholder[jobsr_maxjobs]>:
-                        - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Bulki<&f>: You have too many jobs! Leave one to become an Explorer <&hover[<&7>/jobs leave]><&7><element[/jobs leave].on_click[/jobs leave ].type[SUGGEST_COMMAND]><&end_hover>"
+                        - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Bulki<&f>: You have too many jobs! Leave one to become a Scrapper <&hover[<&7>/jobs leave]><&7><element[/jobs leave].on_click[/jobs leave ].type[SUGGEST_COMMAND]><&end_hover>"
                     - else:
                         - jobs join Scrapper
                         - narrate "<&6>You're now a professional Scrapper!"
