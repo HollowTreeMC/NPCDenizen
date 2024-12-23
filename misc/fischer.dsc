@@ -1,3 +1,4 @@
+#this script is for the fisherman at spawn
 fischer:
     type: assignment
     actions:
