@@ -24,6 +24,17 @@ Welcome:
                 - wait 2
                 - disengage
                 - zap 2
+            chat trigger:
+              rules:
+                Trigger: /rules/, give me the rules boss!
+                script:
+                - run newPlayerRules
+              What did you say:
+                trigger: /REGEX:\w+/
+                script:
+                - chat "<white><player.name><yellow>, I don<&sq>t know what <&sq><white><context.message><yellow><&sq> means."
+                - ^narrate Say<&co>
+                - ^narrate Rules
         2:
             click trigger:
                 script:
@@ -41,6 +52,26 @@ Welcome:
                 - else:
                   - narrate "<[kirraTag]> Please click to view our <aqua>[<blue><element[rules].on_click[<entry[rules].command>]><aqua>]<reset> to continue on your journey!"
                   - disengage
+            chat trigger:
+              rules:
+                Trigger: /rules/, give me the rules boss!
+                script:
+                - define kirraTag "[<&3>Ki<&b>rr<&f>a]:"
+                - if <player.has_flag[rulesRead]>:
+                  - narrate "<[kirraTag]> Thank you for reading our rules!"
+                  - wait 2
+                  - narrate "<[kirraTag]> <&color[#ccfffc]>You can stay and learn more by clicking me again, or I can teleport you to <aqua>[<blue><element[Spawn].on_click[<entry[spawn].command>]><aqua>]<&color[#e6fff4]> or the <aqua>[<green><element[Wilds].on_click[<entry[wilds].command>]><aqua>]<reset>."
+                  - zap 3
+                  - disengage
+                - else:
+                  - run newPlayerRules
+              What did you say:
+                trigger: /REGEX:\w+/
+                script:
+                - define kirraTag "[<&3>Ki<&b>rr<&f>a]:"
+                - narrate "<[kirraTag]> <white><player.name>,<yellow> I don<&sq>t know what <&sq><white><context.message><yellow><&sq> means."
+                - ^narrate <red><&l>Say<&co>
+                - ^narrate "  <blue>'Rules' <&r>to continue."
         3:
             click trigger:
                 script:
