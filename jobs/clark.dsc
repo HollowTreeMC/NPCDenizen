@@ -41,6 +41,7 @@ clark_main:
             click trigger:
                 script:
                 - ratelimit <player> 5s
+                # this jobs PAPI returns True with a color tag instead of a boolean, so here's the workaround
                 - if <placeholder[jobsr_user_isin_Explorer].contains_text[True]>:
                     - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Clark<&f>: Hello Explorer! Perhaps one day all of the lands will be explored."
                 - else:
