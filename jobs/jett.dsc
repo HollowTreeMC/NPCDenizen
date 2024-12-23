@@ -41,6 +41,7 @@ jett_main:
         4:
             click trigger:
                 script:
+                # this jobs PAPI returns True with a color tag instead of a boolean, so here's the workaround
                 - if <placeholder[jobsr_user_isin_Quartermaster].contains_text[True]>:
                     - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Jett<&f>: Give a go at brewing when you have the time."
                 - else:

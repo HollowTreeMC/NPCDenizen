@@ -41,6 +41,7 @@ bulki_main:
             click trigger:
                 script:
                 - ratelimit <player> 5s
+                # this jobs PAPI returns True with a color tag instead of a boolean, so here's the workaround
                 - if <placeholder[jobsr_user_isin_Scrapper].contains_text[True]>:
                     - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Bulki<&f>: Hiya fellow Scrapper. We can scrap all kinds of tools and gear for materials!"
                 - else:
