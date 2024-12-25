@@ -19,3 +19,5 @@ xur_main:
                     - narrate "<&8>{<&f>Black Marketeer<&8>} <&6>Xûr<&f>: My function here is to trade. I know this."
                     - narrate "<&8>{<&f>Black Marketeer<&8>} <&6>Xûr<&f>: I am filled with secrets, but you would not understand them."
                     - narrate "<&8>{<&f>Black Marketeer<&8>} <&6>Xûr<&f>: May we speak?"
+                    - narrate "<&8>{<&f>Black Marketeer<&8>} <&6>Xûr<&f>: There is no reason to fear me."
+                    - narrate "<&8>{<&f>Black Marketeer<&8>} <&6>Xûr<&f>: Do not be alarmed, I have no reason to cause you harm."
