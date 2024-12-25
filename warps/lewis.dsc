@@ -13,9 +13,9 @@ lewis_main:
             click trigger:
                 script:
                 - ratelimit <player> 10s
-                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Lewis<&f>: Our guild has travelled far and wide, establishing many outposts!"
+                - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Lewis<&f>: Our guild has travelled far and wide, establishing many outposts!"
                 - wait 2s
-                - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Lewis<&f>: Come talk to me if you want to visit one of them."
+                - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Lewis<&f>: Come talk to me if you want to visit one of them."
                 - zap 2
         2:
             click trigger:
