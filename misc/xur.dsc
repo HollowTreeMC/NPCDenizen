@@ -16,5 +16,6 @@ xur_main:
                 script:
                 - cooldown 10s
                 - random:
-                    - narrate "<&7>{<&f>Black Marketeer<&7>}<&6>Xur<&f>: It's a looong way down..."
-                    - narrate "<&7>{<&f>Black Marketeer<&7>}<&6>Xur<&f>: The whole world is down there..."
+                    - narrate "<&7>{<&f>Black Marketeer<&7>}<&6>Xûr<&f>: My function here is to trade. I know this."
+                    - narrate "<&7>{<&f>Black Marketeer<&7>}<&6>Xûr<&f>: I am filled with secrets, but you would not understand them."
+                    - narrate "<&7>{<&f>Black Marketeer<&7>}<&6>Xûr<&f>: May we speak?"
