@@ -16,11 +16,11 @@ calypso_main:
         1:
             click trigger:
                 script:
-                - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Calypso<&f>: Hello Explorer! Welcome aboard!"
+                - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Calypso<&f>: Hello Trailblazer! Welcome aboard!"
                 - wait 2
-                - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Calypso<&f>: I'm Calypso, captain of the Coldest Hot Air Balloon, <player.name> is it?"
+                - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Calypso<&f>: I'm Calypso, the captain of the Coldest Hot Air Balloon!s <player.name> is it?"
                 - wait 6
-                - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Calypso<&f>: I'm on a gold ore run, heading to the Explorer Island"
+                - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Calypso<&f>: I'm on a gold run, heading to the Windspire Cove"
                 - wait 5
                 - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Calypso<&f>: We're leaving now, you're welcome to join if you'd like. <&8><element[[Yes]].on_click[/denizenclickable chat Yes]>"
                 - zap 2
@@ -29,7 +29,7 @@ calypso_main:
         2:
             click trigger:
                 script:
-                - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Calypso<&f>: We're leaving to the Explorer Island now, want to come along? <&8><element[[Yes]].on_click[/denizenclickable chat Yes]>"
+                - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Calypso<&f>: We're leaving to the Windspire Cove now, want to come along? <&8><element[[Yes]].on_click[/denizenclickable chat Yes]>"
 
             chat trigger:
                 1:
@@ -80,6 +80,6 @@ calypso_tp:
         - wait 2s
         - random:
             - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Calypso<&f>: Is it hot up here?.... Oh right, its a hot air balloon"
-            - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Calypso<&f>: Look over there! It's Explorer Island"
+            - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Calypso<&f>: Look over there! It's the Windspire Cove"
             - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Calypso<&f>: Ready for Landing?"
             - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Calypso<&f>: Did I ever tell you i'm afraid of heights?"
