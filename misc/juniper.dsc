@@ -14,4 +14,4 @@ juniper_main:
             click trigger:
                 script:
                     - cooldown 10s
-                    - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Juniper<&f>: The portal to the resource world is up and running. Status code Green. I've calibrated it to take you somewhere random. Fair winds!"
+                    - narrate "<&8>{<&f>Aeronaut<&8> <&6>Juniper<&f>: The portal to the resource world is up and running. Status code Green. I've calibrated it to take you somewhere random. Fair winds!"

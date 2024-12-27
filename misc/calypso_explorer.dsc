@@ -16,4 +16,4 @@ calypso_explorer_main:
                 script:
                 - ratelimit <player> 5s
                 - random:
-                    - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Calypso<&f>: Land Ho! The Explorer's Guild"
+                    - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Calypso<&f>: Land Ho! The Explorer's Guild"

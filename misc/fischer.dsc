@@ -16,5 +16,5 @@ fischer_main:
                 script:
                 - cooldown 10s
                 - random:
-                    - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Fischer<&f>: It's a looong way down..."
-                    - narrate "<&7>{<&f>Aeronaut<&7>}<&6>Fischer<&f>: The whole world is down there..."
+                    - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Fischer<&f>: It's a looong way down..."
+                    - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Fischer<&f>: The whole world is down there..."
