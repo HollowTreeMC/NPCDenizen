@@ -22,4 +22,9 @@ npc_handler:
         #   Misc NPCs
         - flag server fischer:<&8>{<&f>Aeronaut<&8>}<&sp><&6>Fischer<&f>:<&f>
         - flag server juniper:<&8>{<&f>Aeronaut<&8>}<&sp><&6>Juniper<&f>:<&f>
-        - flag server xur:<&8>{<&f>Black Marketeer<&8>}<&sp><&6>Xûr<&f>:<&f>
+        - flag server xur:<&8>{<&f>Black<&sp>Marketeer<&8>}<&sp><&6>Xûr<&f>:<&f>
+
+        # NPC SETUPS
+        #   Xur NPC
+        #teleport xur to a specified location
+        #set up the proper trades
