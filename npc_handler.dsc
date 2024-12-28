@@ -28,6 +28,7 @@ npc_handler:
         - flag server pfx_fischer:<&8>{<&f>Aeronaut<&8>}<&sp><&6>Fischer<&f>:<&f>
         - flag server pfx_juniper:<&8>{<&f>Aeronaut<&8>}<&sp><&6>Juniper<&f>:<&f>
         - flag server pfx_xur:<&8>{<&f>Black<&sp>Marketeer<&8>}<&sp><&6>Xûr<&f>:<&f>
+        - flag server pfx_ladyvalvewright:<&8>{<&f>Chronarch<&8>}<&sp><&6>Lady<&sp>Valvewright<&f>:<&f>
 
         # NPC SETUPS
         #   Xur NPC

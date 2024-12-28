@@ -15,11 +15,11 @@ ladyvalvewright_main:
         1:
             click trigger:
                 script:
-                - narrate "<&8>{<&f>Chronarch<&8>} <&6>Lady Valvewright<&f>: Ah! Welcome to ChronoTech Emporium. You may address me as Lady Valvewright."
+                - narrate "<server.flag[pfx_ladyvalvewright]><&f> Ah! Welcome to ChronoTech Emporium. You may address me as Lady Valvewright."
                 - wait 5
-                - narrate "<&8>{<&f>Chronarch<&8>} <&6>Lady Valvewright<&f>: Here, you'll find anything and everything you can imagine. However, we do only currently supply blocks."
+                - narrate "<server.flag[pfx_ladyvalvewright]><&f> Here, you'll find anything and everything you can imagine. However, we do only currently supply blocks."
                 - wait 5
-                - narrate "<&8>{<&f>Chronarch<&8>} <&6>Lady Valvewright<&f>: However, our services are not without cost! Onl those who have achieved the title of <&6>Chronarch or higher <&f>are permitted to enter."
+                - narrate "<server.flag[pfx_ladyvalvewright]><&f> However, our services are not without cost! Onl those who have achieved the title of <&6>Chronarch or higher <&f>are permitted to enter."
                 - zap 2
 
         # main - dialogue handout script
@@ -27,6 +27,6 @@ ladyvalvewright_main:
             click trigger:
                 script:
                 - if <placeholder[cmi_user_maxperm_sethome_0]> > 10:
-                    - narrate "<&8>{<&f>Chronarch<&8>} <&6>Lady Valvewright<&f>: Wonderful! With such a grand title, you may enter our grand emporium."
+                    - narrate "<server.flag[pfx_ladyvalvewright]><&f> Wonderful! With such a grand title, you may enter our grand emporium."
                 - else:
-                    - narrate "<&8>{<&f>Chronarch<&8>} <&6>Lady Valvewright<&f>: Ugh, you lack <&6>prestige <&f> and <&6>status<&f>! Return once you have progressed through the echelon!"
+                    - narrate "<server.flag[pfx_ladyvalvewright]><&f> Ugh, you lack <&6>prestige <&f> and <&6>status<&f>! Return once you have progressed through the echelon!"
