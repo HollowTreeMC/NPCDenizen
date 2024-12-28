@@ -13,7 +13,7 @@ vacuus_main:
             click trigger:
                 script:
                 - ratelimit <player> 10s
-                - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Vacuus<&f>: For only 250 coins, I'll make it a random teleport. Want to? <&8><element[[Yes]].on_click[/denizenclickable chat Yes]>"
+                - narrate "<server.flag[pfx_vacuus]><&f> For only 250 coins, I'll make it a random teleport. Want to? <&8><element[[Yes]].on_click[/denizenclickable chat Yes]>"
 
             chat trigger:
                 1:
@@ -23,11 +23,11 @@ vacuus_main:
                     - if <player.money> >= 250:
                         - money take quantity:250 players:<player>
                         - random:
-                            - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Vacuus<&f>: Wait until you see the end of this!"
-                            - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Vacuus<&f>: Oh the places you can go! You chose here I guess..."
-                            - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Vacuus<&f>: Can you hear the dragon roar?"
+                            - narrate "<server.flag[pfx_vacuus]><&f> Wait until you see the end of this!"
+                            - narrate "<server.flag[pfx_vacuus]><&f> Oh the places you can go! You chose here I guess..."
+                            - narrate "<server.flag[pfx_vacuus]><&f> Can you hear the dragon roar?"
                         - execute as_server "/effect <player.name> Blindness 3 255"
                         - execute as_server "/rt <player.name> Hollowtree_the_end"
                     - else:
                         - define temp 250
-                        - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Vacuus<&f>: Sorry, you need another <[temp].sub[<player.money>].round_up> coins."
+                        - narrate "<server.flag[pfx_vacuus]><&f> Sorry, you need another <[temp].sub[<player.money>].round_up> coins."

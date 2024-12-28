@@ -15,20 +15,20 @@ astra_main:
         1:
             click trigger:
                 script:
-                - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Astra<&f>: Hello scrapper! Welcome aboard!"
+                - narrate "<server.flag[pfx_astra]><&f> Hello scrapper! Welcome aboard!"
                 - wait 2
-                - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Astra<&f>: I'm Astra, captain of the Guilded, whose deck you're standing on. <player.name> is it?"
+                - narrate "<server.flag[pfx_astra]><&f> I'm Astra, captain of the Guilded, whose deck you're standing on. <player.name> is it?"
                 - wait 6
-                - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Astra<&f>: We've got precious cargo today, bound for the smeltery on the Portal Island."
+                - narrate "<server.flag[pfx_astra]><&f> We've got precious cargo today, bound for the smeltery on the Portal Island."
                 - wait 5
                 - clickable astra_tp for<player> until:1m
-                - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Astra<&f>: We're leaving now, you're welcome to join if you'd like. <&8><element[[Okay]].on_click[/denizenclickable chat Yes]>"
+                - narrate "<server.flag[pfx_astra]><&f> We're leaving now, you're welcome to join if you'd like. <&8><element[[Okay]].on_click[/denizenclickable chat Yes]>"
                 - zap 2
         #free warp script, if a player does not TP initially, they possess 1 free TP
         2:
             click trigger:
                 script:
-                - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Astra<&f>: We're leaving to the Portal Island now, want to come along? <&8><element[[Yes]].on_click[/denizenclickable chat Yes]>"
+                - narrate "<server.flag[pfx_astra]><&f> We're leaving to the Portal Island now, want to come along? <&8><element[[Yes]].on_click[/denizenclickable chat Yes]>"
 
             chat trigger:
                 1:
@@ -42,7 +42,7 @@ astra_main:
         3:
             click trigger:
                 script:
-                - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Astra<&f>: <player.name>! Want to go to the portal island? I can take you for 500 coins. <&8><element[[Yes]].on_click[/denizenclickable chat Yes]> <&8><element[[No]].on_click[/denizenclickable chat No]>"
+                - narrate "<server.flag[pfx_astra]><&f> <player.name>! Want to go to the portal island? I can take you for 500 coins. <&8><element[[Yes]].on_click[/denizenclickable chat Yes]> <&8><element[[No]].on_click[/denizenclickable chat No]>"
 
             chat trigger:
                 1:
@@ -51,18 +51,18 @@ astra_main:
                     show as normal chat: false
                     script:
                     - if <player.money> >= 500:
-                        - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Astra<&f>: Pleasure doing business. Let's set sail!"
+                        - narrate "<server.flag[pfx_astra]><&f> Pleasure doing business. Let's set sail!"
                         - money take quantity:500 players:<player>
                         - run astra_tp
                     - else:
                         - define temp 500
-                        - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Astra<&f>: I'll take you for another <[temp].sub[<player.money>].round_up> coins."
+                        - narrate "<server.flag[pfx_astra]><&f> I'll take you for another <[temp].sub[<player.money>].round_up> coins."
                 2:
                     trigger: /no|na/
                     hide trigger message: true
                     show as normal chat: false
                     script:
-                    - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Astra<&f>: No worries, you know where to find me!"
+                    - narrate "<server.flag[pfx_astra]><&f> No worries, you know where to find me!"
 
 astra_tp:
     type: task
@@ -73,7 +73,7 @@ astra_tp:
         - execute as_server "/warp <player.name> PortaLIsland -s"
         - wait 2s
         - random:
-            - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Astra<&f>: Woohoo! To the smeltery!"
-            - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Astra<&f>: Welcome to Portal Island! Time to offload all this gold ore..."
-            - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Astra<&f>: These portals give me the creeps!"
-            - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Astra<&f>: I heard Sterling is looking for apprentice smiths..."
+            - narrate "<server.flag[pfx_astra]><&f> Woohoo! To the smeltery!"
+            - narrate "<server.flag[pfx_astra]><&f> Welcome to Portal Island! Time to offload all this gold ore..."
+            - narrate "<server.flag[pfx_astra]><&f> These portals give me the creeps!"
+            - narrate "<server.flag[pfx_astra]><&f> I heard Sterling is looking for apprentice smiths..."
