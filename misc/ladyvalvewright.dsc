@@ -26,7 +26,7 @@ ladyvalvewright_main:
         2:
             click trigger:
                 script:
-                - if <placeholder[jobsr_user_isin_Quartermaster].contains_text[True]>:
+                - if <placeholder[cmi_user_maxperm_sethome_0]> > 10:
                     - narrate "<&8>{<&f>Chronarch<&8>} <&6>Lady Valvewright<&f>: Wonderful! With such a grand title, you may enter our grand emporium."
                 - else:
                     - narrate "<&8>{<&f>Chronarch<&8>} <&6>Lady Valvewright<&f>: Ugh, you lack <&6>prestige <&f> and <&6>status<&f>! Return once you have progressed through the echelon!"
