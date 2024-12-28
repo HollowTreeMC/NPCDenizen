@@ -15,9 +15,12 @@ xur_main:
             click trigger:
                 script:
                 - cooldown 10s
-                - random:
-                    - narrate "<&8>{<&f>Black Marketeer<&8>} <&6>Xûr<&f>: My function here is to trade. I know this."
-                    - narrate "<&8>{<&f>Black Marketeer<&8>} <&6>Xûr<&f>: I am filled with secrets, but you would not understand them."
-                    - narrate "<&8>{<&f>Black Marketeer<&8>} <&6>Xûr<&f>: May we speak?"
-                    - narrate "<&8>{<&f>Black Marketeer<&8>} <&6>Xûr<&f>: There is no reason to fear me."
-                    - narrate "<&8>{<&f>Black Marketeer<&8>} <&6>Xûr<&f>: Do not be alarmed, I have no reason to cause you harm."
+                - if <util.random_chance[1]>:
+                    - narrate "<server.flag[xur]><&f> Wait, why am I blocky?"
+                - else:
+                    - random:
+                        - narrate "<server.flag[xur]><&f> My function here is to trade. I know this."
+                        - narrate "<server.flag[xur]><&f> I am filled with secrets, but you would not understand them."
+                        - narrate "<server.flag[xur]><&f> May we speak?"
+                        - narrate "<server.flag[xur]><&f> There is no reason to fear me."
+                        - narrate "<server.flag[xur]><&f> Do not be alarmed, I have no reason to cause you harm."

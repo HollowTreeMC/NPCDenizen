@@ -16,6 +16,6 @@ astra_portal_main:
                 script:
                 - ratelimit <player> 5s
                 - random:
-                    - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Astra<&f>: We got a big haul this time!"
-                    - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Astra<&f>: <player.name>? I'll remember you for next time."
-                    - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Astra<&f>: An explosion? Probably just the sorcerer's guild having some fun."
+                    - narrate "<server.flag[astra]><&f> We got a big haul this time!"
+                    - narrate "<server.flag[astra]><&f> <player.name>? I'll remember you for next time."
+                    - narrate "<server.flag[astra]><&f> An explosion? Probably just the sorcerer's guild having some fun."

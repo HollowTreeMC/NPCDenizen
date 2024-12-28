@@ -15,7 +15,7 @@ sterling_main:
         1:
             click trigger:
                 script:
-                - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Sterling<&f>: Hello, I'm Sterling, head of this here Gold Refinery. We can always use more hands at the forge, come talk to me if you want to be a Smith."
+                - narrate "<server.flag[sterling]><&f> Hello, I'm Sterling, head of this here Gold Refinery. We can always use more hands at the forge, come talk to me if you want to be a Smith."
                 - zap 2
 
         # give quest
@@ -23,7 +23,7 @@ sterling_main:
             click trigger:
                 script:
                 - ratelimit <player> 10s
-                - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Sterling<&f>: Who's there? We need more hands at the forge, <&hover[<&6>Craft an Iron Chestplate]><&6>forge an iron chestplate<&end_hover><&f> to prove your mettle."
+                - narrate "<server.flag[sterling]><&f> Who's there? We need more hands at the forge, <&hover[<&6>Craft an Iron Chestplate]><&6>forge an iron chestplate<&end_hover><&f> to prove your mettle."
                 - zap 3
 
         # check quest
@@ -32,10 +32,10 @@ sterling_main:
                 script:
                 - ratelimit <player> 10s
                 - if <player.has_advancement[minecraft:story/obtain_armor]>:
-                    - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Sterling<&f>: Ah! A robust armour plate. Rough around the edges, but it'll do..."
+                    - narrate "<server.flag[sterling]><&f> Ah! A robust armour plate. Rough around the edges, but it'll do..."
                     - zap 4
                 - else:
-                    - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Sterling<&f>: Come back once you've <&hover[<&6>Craft an Iron Chestplate]><&6>forged a chestplate<&end_hover><&f>..."
+                    - narrate "<server.flag[sterling]><&f> Come back once you've <&hover[<&6>Craft an Iron Chestplate]><&6>forged a chestplate<&end_hover><&f>..."
 
         # main - job handout script
         4:
@@ -43,9 +43,9 @@ sterling_main:
                 script:
                 # this jobs PAPI returns True with a color tag instead of a boolean, so here's the workaround
                 - if <placeholder[jobsr_user_isin_Smith].contains_text[True]>:
-                    - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Sterling<&f>: You'll get arms of steel in no time!"
+                    - narrate "<server.flag[sterling]><&f> You'll get arms of steel in no time!"
                 - else:
-                    - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Sterling<&f>: Would you like to join the core and work as a Smith? <&hover[<&6>Become a Smith]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover>"
+                    - narrate "<server.flag[sterling]><&f> Would you like to join the core and work as a Smith? <&hover[<&6>Become a Smith]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover>"
 
             chat trigger:
                 1:
@@ -54,9 +54,9 @@ sterling_main:
                     show as normal chat: false
                     script:
                     - if <placeholder[jobsr_user_joinedjobcount]> >= <placeholder[jobsr_maxjobs]>:
-                        - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Sterling<&f>: You must leave a job before you can become a Smith <&hover[<&8>/jobs leave]><&8><element[/jobs leave].on_click[/jobs leave ].type[SUGGEST_COMMAND]><&end_hover>"
+                        - narrate "<server.flag[sterling]><&f> You must leave a job before you can become a Smith <&hover[<&8>/jobs leave]><&8><element[/jobs leave].on_click[/jobs leave ].type[SUGGEST_COMMAND]><&end_hover>"
                     - else:
                         - jobs join Smith
                         - narrate "<&6>You have been employed as a Smith."
                         - wait 2s
-                        - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Sterling<&f>: Ha ha! Welcome another to the forge!"
+                        - narrate "<server.flag[sterling]><&f> Ha ha! Welcome another to the forge!"

@@ -16,4 +16,4 @@ calypso_explorer_main:
                 script:
                 - ratelimit <player> 5s
                 - random:
-                    - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Calypso<&f>: Land Ho! The Explorer's Guild"
+                    - narrate "<server.flag[calypso]><&f> Land Ho! The Explorer's Guild"
