@@ -16,5 +16,5 @@ fischer_main:
                 script:
                 - cooldown 10s
                 - random:
-                    - narrate "<server.flag[fischer]><&f> It's a looong way down..."
-                    - narrate "<server.flag[fischer]><&f> The whole world is down there..."
+                    - narrate "<server.flag[pfx_fischer]><&f> It's a looong way down..."
+                    - narrate "<server.flag[pfx_fischer]><&f> The whole world is down there..."

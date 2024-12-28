@@ -14,4 +14,4 @@ juniper_main:
             click trigger:
                 script:
                     - cooldown 10s
-                    - narrate "<server.flag[juniper]><&f> The portal to the resource world is up and running. Status code Green. I've calibrated it to take you somewhere random. Fair winds!"
+                    - narrate "<server.flag[pfx_juniper]><&f> The portal to the resource world is up and running. Status code Green. I've calibrated it to take you somewhere random. Fair winds!"

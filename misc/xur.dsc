@@ -16,11 +16,11 @@ xur_main:
                 script:
                 - cooldown 10s
                 - if <util.random_chance[1]>:
-                    - narrate "<server.flag[xur]><&f> Wait, why am I blocky?"
+                    - narrate "<server.flag[pfx_xur]><&f> Wait, why am I blocky?"
                 - else:
                     - random:
-                        - narrate "<server.flag[xur]><&f> My function here is to trade. I know this."
-                        - narrate "<server.flag[xur]><&f> I am filled with secrets, but you would not understand them."
-                        - narrate "<server.flag[xur]><&f> May we speak?"
-                        - narrate "<server.flag[xur]><&f> There is no reason to fear me."
-                        - narrate "<server.flag[xur]><&f> Do not be alarmed, I have no reason to cause you harm."
+                        - narrate "<server.flag[pfx_xur]><&f> My function here is to trade. I know this."
+                        - narrate "<server.flag[pfx_xur]><&f> I am filled with secrets, but you would not understand them."
+                        - narrate "<server.flag[pfx_xur]><&f> May we speak?"
+                        - narrate "<server.flag[pfx_xur]><&f> There is no reason to fear me."
+                        - narrate "<server.flag[pfx_xur]><&f> Do not be alarmed, I have no reason to cause you harm."
