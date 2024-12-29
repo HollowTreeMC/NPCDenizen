@@ -27,7 +27,8 @@ ladyvalvewright_main:
         2:
             click trigger:
                 script:
-                - if <placeholder[cmi_user_maxperm_sethome_0]> > 10:
+                - cooldown 5s
+                - if <placeholder[cmi_user_maxperm_cmi.command.sethome_0]> > 10:
                     - narrate "<server.flag[pfx_ladyvalvewright]><&f> Wonderful! With such a grand title, you may enter our grand emporium."
                 - else:
                     - narrate "<server.flag[pfx_ladyvalvewright]><&f> Ugh, you lack <&6>prestige <&f>and <&6>status<&f>! Return once you have progressed through the echelon!"
