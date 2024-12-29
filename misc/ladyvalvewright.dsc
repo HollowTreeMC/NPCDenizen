@@ -15,6 +15,7 @@ ladyvalvewright_main:
         1:
             click trigger:
                 script:
+                - cooldown 11s
                 - narrate "<server.flag[pfx_ladyvalvewright]><&f> Ah! Welcome to ChronoTech Emporium. You may address me as Lady Valvewright."
                 - wait 5
                 - narrate "<server.flag[pfx_ladyvalvewright]><&f> Here, you'll find anything and everything you can imagine. However, we do only currently supply blocks."
@@ -29,4 +30,4 @@ ladyvalvewright_main:
                 - if <placeholder[cmi_user_maxperm_sethome_0]> > 10:
                     - narrate "<server.flag[pfx_ladyvalvewright]><&f> Wonderful! With such a grand title, you may enter our grand emporium."
                 - else:
-                    - narrate "<server.flag[pfx_ladyvalvewright]><&f> Ugh, you lack <&6>prestige <&f> and <&6>status<&f>! Return once you have progressed through the echelon!"
+                    - narrate "<server.flag[pfx_ladyvalvewright]><&f> Ugh, you lack <&6>prestige <&f>and <&6>status<&f>! Return once you have progressed through the echelon!"
