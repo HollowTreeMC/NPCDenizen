@@ -32,7 +32,7 @@ ladyvalvewright_main:
                     - wait 5
                     - narrate "<server.flag[pfx_ladyvalvewright]><&f> Would you be interested in purchasing a pass?   <&8><element[[Yes]].on_click[/denizenclickable chat Yes]> <&8><element[[No]].on_click[/denizenclickable chat No]>"
                 - else:
-                    - narrate "<server.flag[pfx_ladyvalvewright]><&f> Ugh, you lack <&6>prestige <&f>and <&6>status<&f>! Return once you have progressed through the echelon!"
+                    - narrate "<server.flag[pfx_ladyvalvewright]><&f> Ugh, you lack <&hover[<&a>Achieve the rank Chronarch]><&6>prestige and status<&end_hover><&f>! Return once you have progressed through the echelon!"
 
                 chat trigger:
                     1:
