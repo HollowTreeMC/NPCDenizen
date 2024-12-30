@@ -13,22 +13,22 @@ ender_main:
             click trigger:
                 script:
                 - ratelimit <player> 10s
-                - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Ender<&f>: Dare to face combat trials <player.name>?"
+                - narrate "<server.flag[pfx_ender]><&f> Dare to face combat trials <player.name>?"
                 - wait 1s
-                - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Ender<&f>: There is no fee, say the word and I'll take you. <&8><element[[Okay]].on_click[/denizenclickable chat Yes]>"
+                - narrate "<server.flag[pfx_ender]><&f> There is no fee, say the word and I'll take you. <&8><element[[Okay]].on_click[/denizenclickable chat Yes]>"
 
             chat trigger:
                 1:
                     trigger: /*/
                     hide trigger message: true
                     script:
-                    - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Ender<&f>: Never a dull day."
+                    - narrate "<server.flag[pfx_ender]><&f> Never a dull day."
                     - execute as_server "/effect <player.name> Blindness 2 255"
                     - wait 1s
                     - execute as_server "/warp <player.name> PvPIsland"
                     - wait 2s
                     - random:
-                        - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Ender<&f>: I wonder what the statue is made of..."
-                        - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Ender<&f>: I took an arrow to the knee once..."
-                        - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Ender<&f>: HAH! I'd go down in the arena, but you wouldn't want that..."
-                        - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Ender<&f>: Those warriors look mean..."
+                        - narrate "<server.flag[pfx_ender]><&f> I wonder what the statue is made of..."
+                        - narrate "<server.flag[pfx_ender]><&f> I took an arrow to the knee once..."
+                        - narrate "<server.flag[pfx_ender]><&f> HAH! I'd go down in the arena, but you wouldn't want that..."
+                        - narrate "<server.flag[pfx_ender]><&f> Those warriors look mean..."

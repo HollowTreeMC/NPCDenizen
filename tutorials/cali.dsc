@@ -14,9 +14,9 @@ cali_main:
             proximity trigger:
                 entry:
                     script:
-                    - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Cali<&f>: Hi <player.name>! Welcome to Hollowtree! I'm Cali, your guide! Get started by <&e>right clicking <&f>NPCs such as myself!"
+                    - narrate "<server.flag[pfx_cali]><&f> Hi <player.name>! Welcome to Hollowtree! I'm Cali, your guide! Get started by <&e>right clicking <&f>NPCs such as myself!"
                     - wait 5s
-                    - narrate "<&8>{<&f>Aeronaut<&8>} <&6>Cali<&f>: I offer many guides, and if this is your first time here, I recommend viewing our <&e>Introduction to Hollowtree Guide! <&f>You'll be rewarded with coins for viewing any of these guides!"
+                    - narrate "<server.flag[pfx_cali]><&f> I offer many guides, and if this is your first time here, I recommend viewing our <&e>Introduction to Hollowtree Guide! <&f>You'll be rewarded with coins for viewing any of these guides!"
                     - zap 2
             click trigger:
                 script:

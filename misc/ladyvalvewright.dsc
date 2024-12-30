@@ -11,6 +11,7 @@ ladyvalvewright:
 ladyvalvewright_main:
     type: interact
     steps:
+
         # NPC intro
         1:
             click trigger:
