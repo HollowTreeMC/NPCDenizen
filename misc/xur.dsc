@@ -23,7 +23,7 @@ xur_main:
             click trigger:
                 script:
                 - cooldown 10s
-                - if <util.time_now.day_of_week> < 4:
+                - if <util.time_now.day_of_week> < 5:
                     - run xur_weekday
                 - else:
                     - run xur_weekend
@@ -48,7 +48,7 @@ xur_weekend:
     script:
     #check to see if player has the xur flag
     - if <player.has_flag[xur_quest]>:
-        - narrate "open the shop DM"
+            - execute as_server "dm open xurshop_menu <player.name>"
     #prompts the player with a quest
     - else:
         #gives flag with 3 day expiry upon quest completion
@@ -67,7 +67,7 @@ xur_shop:
         - flag server xur_location:<location[83.5,150,-11.8,-5,-64,Void]>
 
     # Friday Configuration
-    - if <util.time_now.day_of_week> == 4:
+    - if <util.time_now.day_of_week> == 5:
         - random:
             - flag server xur_location:<location[-70.5,154,2.5,0,0,Void]>
             - flag server xur_location:<location[-81.5,148,-40.5,0,0,Void]>
