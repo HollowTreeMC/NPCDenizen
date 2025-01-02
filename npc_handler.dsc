@@ -4,6 +4,7 @@ npc_handler:
     events:
         on scripts loaded:
         # SET PREFIX FLAGS
+        - flag server pfx_chronarch:<&7>{<&color[#530179]>C<&color[#890079]>h<&color[#b70071]>r<&color[#dd0063]>o<&color[#f94051]>n<&color[#ff6f3b]>a<&color[#ff9f31]>r<&color[#ffc900]>c<&color[#f5f50a]>h<&7>}<&f>
         #   Job NPCs
         - flag server pfx_bulki:<&8>{<&f>Scrapper<&8>}<&sp><&6>Bulki<&f>:<&f>
         - flag server pfx_clark:<&8>{<&f>Explorer<&8>}<&sp><&6>Clark<&f>:<&f>
@@ -28,7 +29,7 @@ npc_handler:
         - flag server pfx_fischer:<&8>{<&f>Aeronaut<&8>}<&sp><&6>Fischer<&f>:<&f>
         - flag server pfx_juniper:<&8>{<&f>Aeronaut<&8>}<&sp><&6>Juniper<&f>:<&f>
         - flag server pfx_xur:<&8>{<&f>Black<&sp>Marketeer<&8>}<&sp><&6>Xûr<&f>:<&f>
-        - flag server pfx_ladyvalvewright:<&8>{<&f>Chronarch<&8>}<&sp><&6>Lady<&sp>Valvewright<&f>:<&f>
+        - flag server pfx_ladyvalvewright:<server.flag[pfx_chronarch]><&sp><&6>Lady<&sp>Valvewright<&f>:<&f>
 
         # NPC SETUPS
         #   Xur NPC
