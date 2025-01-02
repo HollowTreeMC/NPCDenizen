@@ -26,7 +26,7 @@ rune_main:
             click trigger:
                 script:
                 - ratelimit <player> 10s
-                - narrate "<server.flag[pfx_rune]><&f> Do you have an affinity for alchemy? You may join the Sorcerer's guild once you've <&hover[<&a>\[Brew a Potion\]]><&6>brewed a potion<&end_hover><&f>."
+                - narrate "<server.flag[pfx_rune]><&f> Do you have an affinity for alchemy? You may join the Sorcerer's guild once you've <&hover[<&a>[Brew a Potion]]><&6>brewed a potion<&end_hover><&f>."
                 - zap 3
 
         # give quest
@@ -38,7 +38,7 @@ rune_main:
                     - narrate "<server.flag[pfx_rune]><&f> Ah! So you've brewed a potion... Perhaps you would do..."
                     - zap 4
                 - else:
-                    - narrate "<server.flag[pfx_rune]><&f> Come back once you've <&hover[<&a>\[Brew a Potion\]]><&6>brewed a potion<&end_hover><&f>..."
+                    - narrate "<server.flag[pfx_rune]><&f> Come back once you've <&hover[<&a>[Brew a Potion]]><&6>brewed a potion<&end_hover><&f>..."
 
         # main - job handout script
         4:

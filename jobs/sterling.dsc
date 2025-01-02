@@ -23,7 +23,7 @@ sterling_main:
             click trigger:
                 script:
                 - ratelimit <player> 10s
-                - narrate "<server.flag[pfx_sterling]><&f> Who's there? We need more hands at the forge, <&hover[<&a>\[Craft an Iron Chestplate\]]><&6>forge an iron chestplate<&end_hover><&f> to prove your mettle."
+                - narrate "<server.flag[pfx_sterling]><&f> Who's there? We need more hands at the forge, <&hover[<&a>[Craft an Iron Chestplate]]><&6>forge an iron chestplate<&end_hover><&f> to prove your mettle."
                 - zap 3
 
         # check quest
@@ -35,7 +35,7 @@ sterling_main:
                     - narrate "<server.flag[pfx_sterling]><&f> Ah! A robust armour plate. Rough around the edges, but it'll do..."
                     - zap 4
                 - else:
-                    - narrate "<server.flag[pfx_sterling]><&f> Come back once you've <&hover[<&a>\[Craft an Iron Chestplate\]]><&6>forged a chestplate<&end_hover><&f>..."
+                    - narrate "<server.flag[pfx_sterling]><&f> Come back once you've <&hover[<&a>[Craft an Iron Chestplate]]><&6>forged a chestplate<&end_hover><&f>..."
 
         # main - job handout script
         4:
@@ -45,7 +45,7 @@ sterling_main:
                 - if <placeholder[jobsr_user_isin_Smith].contains_text[True]>:
                     - narrate "<server.flag[pfx_sterling]><&f> You'll get arms of steel in no time!"
                 - else:
-                    - narrate "<server.flag[pfx_sterling]><&f> Would you like to join the core and work as a Smith? <&hover[<&9>\[Become a Smith\]]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover>"
+                    - narrate "<server.flag[pfx_sterling]><&f> Would you like to join the core and work as a Smith? <&hover[<&9>[Become a Smith]]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover>"
 
             chat trigger:
                 1:

@@ -22,7 +22,7 @@ elara_main:
         2:
             click trigger:
                 script:
-                - narrate "<server.flag[pfx_elara]><&f> Want to become a fighter? Prove yourself by giving a pillager a <&hover[<&a>\[Kill a pillager with a crossbow\]]><&6>taste of their own medicine<&end_hover><&f>."
+                - narrate "<server.flag[pfx_elara]><&f> Want to become a fighter? Prove yourself by giving a pillager a <&hover[<&a>[Kill a pillager with a crossbow]]><&6>taste of their own medicine<&end_hover><&f>."
                 - zap 3
 
         # check quest
@@ -34,7 +34,7 @@ elara_main:
                     - narrate "<server.flag[pfx_elara]><&f> Well done <player.name>! I knew you had the chops."
                     - zap 4
                 - else:
-                    - narrate "<server.flag[pfx_elara]><&f> Best a pillager by <&hover[<&a>\[Kill a pillager with a crossbow\]]><&6>becoming one<&end_hover><&f>..."
+                    - narrate "<server.flag[pfx_elara]><&f> Best a pillager by <&hover[<&a>[Kill a pillager with a crossbow]]><&6>becoming one<&end_hover><&f>..."
 
         # main - job handout script
         4:
@@ -44,7 +44,7 @@ elara_main:
                 - if <placeholder[jobsr_user_isin_Fighter].contains_text[True]>:
                     - narrate "<server.flag[pfx_elara]><&f> Bested anyone in combat recently?"
                 - else:
-                    - narrate "<server.flag[pfx_elara]><&f> Wanna join the fighters guild? <&hover[<&9>\[Become a fighter\]]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover>"
+                    - narrate "<server.flag[pfx_elara]><&f> Wanna join the fighters guild? <&hover[<&9>[Become a fighter]]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover>"
 
             chat trigger:
                 1:

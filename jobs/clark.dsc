@@ -23,7 +23,7 @@ clark_main:
         2:
             click trigger:
                 script:
-                - narrate "<server.flag[pfx_clark]><&f> If you'd like to join the Guild and become an Explorer, you'll need to <&hover[<&a>\[Brush a Suspicious block to obtain a Pottery Shard\]]><&6>respect the remnants<&end_hover><&f>..."
+                - narrate "<server.flag[pfx_clark]><&f> If you'd like to join the Guild and become an Explorer, you'll need to <&hover[<&a>[Brush a Suspicious block to obtain a Pottery Shard]]><&6>respect the remnants<&end_hover><&f>..."
                 - zap 3
 
         # check quest
@@ -35,7 +35,7 @@ clark_main:
                     - narrate "<server.flag[pfx_clark]><&f> Well done! You've completed my quest. Impressive work!"
                     - zap 4
                 - else:
-                    - narrate "<server.flag[pfx_clark]><&f> It seems you haven't finished the quest yet. As a reminder, you need to <&hover[<&a>\[Brush a Suspicious block to obtain a Pottery Shard\]]><&6>respect the remnants<&end_hover><&f>!"
+                    - narrate "<server.flag[pfx_clark]><&f> It seems you haven't finished the quest yet. As a reminder, you need to <&hover[<&a>[Brush a Suspicious block to obtain a Pottery Shard]]><&6>respect the remnants<&end_hover><&f>!"
 
         # main - job handout script
         4:
@@ -46,7 +46,7 @@ clark_main:
                 - if <placeholder[jobsr_user_isin_Explorer].contains_text[True]>:
                     - narrate "<server.flag[pfx_clark]><&f> Hello Explorer! Perhaps one day all of the lands will be explored."
                 - else:
-                    - narrate "<server.flag[pfx_clark]><&f> Would you like to join the ranks of the Explorers? <&hover[<&9>\[Become an Explorer\]]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover>"
+                    - narrate "<server.flag[pfx_clark]><&f> Would you like to join the ranks of the Explorers? <&hover[<&9>[Become an Explorer]]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover>"
 
             chat trigger:
                 1:
