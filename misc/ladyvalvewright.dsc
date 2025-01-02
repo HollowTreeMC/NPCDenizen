@@ -11,24 +11,56 @@ ladyvalvewright:
 ladyvalvewright_main:
     type: interact
     steps:
-        # npc intro
+        # NPC intro
         1:
             click trigger:
                 script:
                 - cooldown 11s
-                - narrate "<server.flag[pfx_ladyvalvewright]><&f> Ah! Welcome to ChronoTech Emporium. You may address me as Lady Valvewright."
+                - narrate "<server.flag[pfx_ladyvalvewright]><&f> Ah! Welcome to the ChronoTech Emporium. You may address me as Lady Valvewright."
+                - wait 3
+                - narrate "<server.flag[pfx_ladyvalvewright]><&f> Here, you'll find any block you can imagine, which you can access with a pass!"
                 - wait 5
-                - narrate "<server.flag[pfx_ladyvalvewright]><&f> Here, you'll find anything and everything you can imagine. However, we do only currently supply blocks."
-                - wait 5
-                - narrate "<server.flag[pfx_ladyvalvewright]><&f> However, our services are not without cost! Onl those who have achieved the title of <&6>Chronarch or higher <&f>are permitted to enter."
+                - narrate "<server.flag[pfx_ladyvalvewright]><&f> Those who have achieved the title of <server.flag[pfx_chronarch]> are permitted to purchase a pass."
                 - zap 2
 
-        # main - dialogue handout script
+        # Pass handler
         2:
             click trigger:
                 script:
                 - cooldown 5s
-                - if <placeholder[cmi_user_maxperm_cmi.command.sethome_0]> > 10:
-                    - narrate "<server.flag[pfx_ladyvalvewright]><&f> Wonderful! With such a grand title, you may enter our grand emporium."
+                # player already has the pass
+                - if <player.has_permission[cmi.command.portal.adminshop]>:
+                    - narrate "<server.flag[pfx_ladyvalvewright]><&f> Your pass is valid. Enjoy the Emporium!"
+                # player does not have the pass
                 - else:
-                    - narrate "<server.flag[pfx_ladyvalvewright]><&f> Ugh, you lack <&6>prestige <&f>and <&6>status<&f>! Return once you have progressed through the echelon!"
+                    # player meets the requisite rank or balance
+                    - if <player.has_permission[group.chronarch]> || <player.money> > 1000000:
+                        - narrate "<server.flag[pfx_ladyvalvewright]><&f> Wonderful! With your status, you may purchase a temporary emporium pass!"
+                        - wait 2
+                        - narrate "<server.flag[pfx_ladyvalvewright]><&f> Would like to purchase a pass? For 5,000 coins, you can purchase a 1-week pass! <&hover[<&6>Purchase Pass]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover> <&hover[Do not purchase]><&8><element[[No]].on_click[/denizenclickable chat No]><&end_hover>"
+                    # player does not meet the requisite to purchase the pass
+                    - else:
+                        - narrate "<server.flag[pfx_ladyvalvewright]><&f> Ugh, you lack <&hover[<&a>Achieve the Chronarch rank]><&6>status and wealth<&end_hover><&f>! Return once you have progressed through the echelon!"
+
+            chat trigger:
+                1:
+                    trigger: /ye/ok/
+                    hide trigger message: true
+                    show as normal chat: false
+                    script:
+                        - if <player.has_permission[group.chronarch]> || <player.money> > 1000000:
+                            - if <player.money> >= 5000:
+                                - money take quantity:5000 players:<player>
+                                - execute as_server "/lp user <player.name> permission settemp cmi.command.portal.adminshop 7d replace hollowtreeproject"
+                                - wait 5
+                                - narrate "<server.flag[pfx_ladyvalvewright]><&f> Your pass is now valid. Enjoy the Emporium!"
+                            - else:
+                                - define temp 5000
+                                - narrate "<server.flag[pfx_ladyvalvewright]><&f> Your esteemed self, another <[temp].sub[<player.money>].round_up> coins are required."
+
+                2:
+                    trigger: /no|na/
+                    hide trigger message: true
+                    show as normal chat: false
+                    script:
+                    - narrate "<server.flag[pfx_ladyvalvewright]><&f> Be sure to purchase your pass to enjoy our emporium!"
