@@ -91,18 +91,18 @@ xur_tier1:
     definitions: slot_flag
     script:
     - random:
-        - flag server slot_flag:<server.flag[xur_shop_doombringer]>
-        - flag server slot_flag:<server.flag[xur_shop_arachnids]>
-        - flag server slot_flag:<server.flag[xur_shop_divine]>
-        - flag server slot_flag:<server.flag[xur_shop_earthsrich]>
-        - flag server slot_flag:<server.flag[xur_shop_earthmover]>
-        - flag server slot_flag:<server.flag[xur_shop_midas]>
-        - flag server slot_flag:<server.flag[xur_shop_silkstrike]>
-        - flag server slot_flag:<server.flag[xur_shop_splintered]>
-        - flag server slot_flag:<server.flag[xur_shop_silked]>
-        - flag server slot_flag:<server.flag[xur_shop_wings]>
-        - flag server slot_flag:<server.flag[xur_shop_shadowstrike]>
-        - flag server slot_flag:<server.flag[xur_shop_abyssal]>
+        - flag server <[slot_flag]>:<server.flag[xur_shop_doombringer]>
+        - flag server <[slot_flag]>:<server.flag[xur_shop_arachnids]>
+        - flag server <[slot_flag]>:<server.flag[xur_shop_divine]>
+        - flag server <[slot_flag]>:<server.flag[xur_shop_earthsrich]>
+        - flag server <[slot_flag]>:<server.flag[xur_shop_earthmover]>
+        - flag server <[slot_flag]>:<server.flag[xur_shop_midas]>
+        - flag server <[slot_flag]>:<server.flag[xur_shop_silkstrike]>
+        - flag server <[slot_flag]>:<server.flag[xur_shop_splintered]>
+        - flag server <[slot_flag]>:<server.flag[xur_shop_silked]>
+        - flag server <[slot_flag]>:<server.flag[xur_shop_wings]>
+        - flag server <[slot_flag]>:<server.flag[xur_shop_shadowstrike]>
+        - flag server <[slot_flag]>:<server.flag[xur_shop_abyssal]>
 
 xur_tier2:
     type: task
