@@ -26,7 +26,7 @@ rune_main:
             click trigger:
                 script:
                 - ratelimit <player> 10s
-                - narrate "<server.flag[pfx_rune]><&f> Do you have an affinity for alchemy? You may join the Sorcerer's guild once you've <&hover[<&6>Brew a Potion]><&6>brewed a potion<&end_hover><&f>."
+                - narrate "<server.flag[pfx_rune]><&f> Do you have an affinity for alchemy? You may join the Sorcerer's guild once you've <&hover[<&a>[Brew a Potion]]><&6>brewed a potion<&end_hover><&f>."
                 - zap 3
 
         # give quest
@@ -38,7 +38,7 @@ rune_main:
                     - narrate "<server.flag[pfx_rune]><&f> Ah! So you've brewed a potion... Perhaps you would do..."
                     - zap 4
                 - else:
-                    - narrate "<server.flag[pfx_rune]><&f> Come back once you've <&hover[<&6>Brew a Potion]><&6>brewed a potion<&end_hover><&f>..."
+                    - narrate "<server.flag[pfx_rune]><&f> Come back once you've <&hover[<&a>[Brew a Potion]]><&6>brewed a potion<&end_hover><&f>..."
 
         # main - job handout script
         4:
@@ -48,7 +48,7 @@ rune_main:
                 - if <placeholder[jobsr_user_isin_Sorcerer].contains_text[True]>:
                     - narrate "<server.flag[pfx_rune]><&f> Hello fellow Sorcerer. We should discuss potion brewing sometime."
                 - else:
-                    - narrate "<server.flag[pfx_rune]><&f> Would you like to join the guild and work as a Sorcerer? <&hover[<&6>Become a Sorcerer]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover>"
+                    - narrate "<server.flag[pfx_rune]><&f> Would you like to join the guild and work as a Sorcerer? <&hover[<&9>Become a Sorcerer]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover>"
 
             chat trigger:
                 1:
@@ -60,6 +60,6 @@ rune_main:
                         - narrate "<server.flag[pfx_rune]><&f> You must leave a job before you can become a Sorcerer <&hover[<&8>/jobs leave]><&8><element[/jobs leave].on_click[/jobs leave ].type[SUGGEST_COMMAND]><&end_hover>"
                     - else:
                         - jobs join Sorcerer
-                        - narrate "<&6>You have been employed as a Sorcerer."
+                        - narrate "<&9>You have been employed as a Sorcerer."
                         - wait 2s
                         - narrate "<server.flag[pfx_rune]><&f> Do you feel the magic?"
