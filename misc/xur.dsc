@@ -75,13 +75,12 @@ xur_shop:
             - flag server xur_location:<location[86.5,142,-47.5,0,0,Void]>
             - flag server xur_location:<location[54.5,130.0,42.5,0,0,Void]>
 
-        # select the items for this week's shop, rarity of item decreases a -> e
-        - run xur_tier1 def:<server.flag[xur_shop_slot1]>
-        - run xur_tier1 def:<server.flag[xur_shop_slot2]>
-
-        - run xur_tier2 def:<server.flag[xur_shop_slot3]>
-        - run xur_tier2 def:<server.flag[xur_shop_slot4]>
-        - run xur_tier2 def:<server.flag[xur_shop_slot5]>
+        # select the items for this week's shop
+        - run xur_tier1 def:xur_shop_slot1
+        - run xur_tier1 def:xur_shop_slot2
+        - run xur_tier2 def:xur_shop_slot3
+        - run xur_tier2 def:xur_shop_slot4
+        - run xur_tier2 def:xur_shop_slot5
 
     # teleports xur to the correct location
     - teleport <npc[28]> <server.flag[xur_location]>
@@ -106,7 +105,7 @@ xur_tier1:
 
 xur_tier2:
     type: task
-    definitions: item_flag
+    definitions: slot_flag
     script:
     - random:
-        - flag server item_flag:<server.flag[xur_shop_doombringer]>
+        - flag server <[slot_flag]>:<server.flag[xur_shop_doombringer]>
