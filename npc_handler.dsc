@@ -37,5 +37,3 @@ npc_handler:
             - run xur_shop
         - if <util.time_now.day_of_week> == 1:
             - run xur_shop
-            #teleport xur to a specified location
-            #set up the proper trades
