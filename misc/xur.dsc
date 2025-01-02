@@ -51,11 +51,65 @@ xur_weekend:
         - narrate "open the shop DM"
     #prompts the player with a quest
     - else:
-        - narrate "<server.flag[pfx_xur]><&f> Here's your quest"
         #gives flag with 3 day expiry upon quest completion
+        - if <player.inventory.contains_item[beacon]>:
+            - narrate "<server.flag[pfx_xur]><&f> it shines so brightly..."
+            - flag <player> xur_quest expire:3d
+        - else:
+            - narrate "<server.flag[pfx_xur]><&f> <player.name> bring me a beacon..."
 
 # configures the xur shop, meant only to run once a week
 xur_shop:
     type: task
     script:
-    - narrate "<server.flag[pfx_xur]><&f> Configured the shop"
+    # Monday Reset
+    - if <util.time_now.day_of_week> == 1:
+        - flag server xur_location:<location[83.5,150,-11.8,-5,-64,Void]>
+
+    # Friday Configuration
+    - if <util.time_now.day_of_week> == 5:
+        - random:
+            - flag server xur_location:<location[-70.5,154,2.5,0,0,Void ]>
+            - flag server xur_location:<location[-81.5,148,-40.5,0,0,Void ]>
+            - flag server xur_location:<location[11.5,155,-93.5,0,0,Void ]>
+            - flag server xur_location:<location[86.5,142,-47.5,0,0,Void ]>
+            - flag server xur_location:<location[54.5,130.0,42.5,0,0,Void ]>
+
+        # select the items for this week's shop, rarity of item decreases a -> e
+        - random:
+            - flag server xur_shop_a:<server.flag[xur_shop_x1]>
+            - flag server xur_shop_a:<server.flag[xur_shop_x2]>
+            - flag server xur_shop_a:<server.flag[xur_shop_x3]>
+            - flag server xur_shop_a:<server.flag[xur_shop_x4]>
+            - flag server xur_shop_a:<server.flag[xur_shop_x5]>
+
+        - random:
+            - flag server xur_shop_b:<server.flag[xur_shop_b1]>
+            - flag server xur_shop_b:<server.flag[xur_shop_b2]>
+            - flag server xur_shop_b:<server.flag[xur_shop_b3]>
+            - flag server xur_shop_b:<server.flag[xur_shop_b4]>
+            - flag server xur_shop_b:<server.flag[xur_shop_b5]>
+
+        - random:
+            - flag server xur_shop_c:<server.flag[xur_shop_c1]>
+            - flag server xur_shop_c:<server.flag[xur_shop_c2]>
+            - flag server xur_shop_c:<server.flag[xur_shop_c3]>
+            - flag server xur_shop_c:<server.flag[xur_shop_c4]>
+            - flag server xur_shop_c:<server.flag[xur_shop_c5]>
+
+        - random:
+            - flag server xur_shop_d:<server.flag[xur_shop_d1]>
+            - flag server xur_shop_d:<server.flag[xur_shop_d2]>
+            - flag server xur_shop_d:<server.flag[xur_shop_d3]>
+            - flag server xur_shop_d:<server.flag[xur_shop_d4]>
+            - flag server xur_shop_d:<server.flag[xur_shop_d5]>
+
+        - random:
+            - flag server xur_shop_e:<server.flag[xur_shop_e1]>
+            - flag server xur_shop_e:<server.flag[xur_shop_e2]>
+            - flag server xur_shop_e:<server.flag[xur_shop_e3]>
+            - flag server xur_shop_e:<server.flag[xur_shop_e4]>
+            - flag server xur_shop_e:<server.flag[xur_shop_e5]>
+
+    # teleports xur to the correct location
+    - teleport <npc[28]> <server.flag[xur_location]>

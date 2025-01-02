@@ -33,5 +33,9 @@ npc_handler:
 
         # NPC SETUPS
         #   Xur NPC
-        #teleport xur to a specified location
-        #set up the proper trades
+        - if <util.time_now.day_of_week> == 5:
+            - run xur_shop
+        - if <util.time_now.day_of_week> == 1:
+            - run xur_shop
+            #teleport xur to a specified location
+            #set up the proper trades
