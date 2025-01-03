@@ -108,4 +108,28 @@ xur_tier2:
     definitions: slot_flag
     script:
     - random:
-        - flag server <[slot_flag]>:<server.flag[xur_shop_doombringer]>
+        - flag server <[slot_flag]>:<server.flag[gearlord_smiter]>
+        - flag server <[slot_flag]>:<server.flag[gearlord_edge]>
+        - flag server <[slot_flag]>:<server.flag[gearlord_carver]>
+        - flag server <[slot_flag]>:<server.flag[gearlord_silkenspade]>
+        - flag server <[slot_flag]>:<server.flag[gearlord_channeler]>
+        - flag server <[slot_flag]>:<server.flag[gearlord_flintlock]>
+        - flag server <[slot_flag]>:<server.flag[gearlord_impact]>
+        - flag server <[slot_flag]>:<server.flag[gearlord_spitfire]>
+        - flag server <[slot_flag]>:<server.flag[gearlord_glimmer]>
+        - flag server <[slot_flag]>:<server.flag[gearlord_pike]>
+        - flag server <[slot_flag]>:<server.flag[gearlord_fortune_seeker]>
+        - flag server <[slot_flag]>:<server.flag[gearlord_tinker]>
+        - flag server <[slot_flag]>:<server.flag[gearlord_handaxe]>
+        - flag server <[slot_flag]>:<server.flag[gearlord_hatchet]>
+        - flag server <[slot_flag]>:<server.flag[gearlord_fractal_drill]>
+        - flag server <[slot_flag]>:<server.flag[gearlord_harvester]>
+        - flag server <[slot_flag]>:<server.flag[gearlord_sparkle]>
+        - flag server <[slot_flag]>:<server.flag[gearlord_cultivator]>
+        - flag server <[slot_flag]>:<server.flag[gearlord_hood]>
+        - flag server <[slot_flag]>:<server.flag[gearlord_plating]>
+        - flag server <[slot_flag]>:<server.flag[gearlord_embrace]>
+        - flag server <[slot_flag]>:<server.flag[gearlord_ice_treads]>
+        - flag server <[slot_flag]>:<server.flag[gearlord_water_treads]>
+        - flag server <[slot_flag]>:<server.flag[gearlord_jetpack]>
+        - flag server <[slot_flag]>:<server.flag[platypus]>
