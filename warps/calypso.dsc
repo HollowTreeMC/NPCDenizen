@@ -18,9 +18,9 @@ calypso_main:
                 script:
                 - narrate "<server.flag[pfx_calypso]><&f> Hello Trailblazer! Welcome aboard!"
                 - wait 2
-                - narrate "<server.flag[pfx_calypso]><&f> I'm Calypso, the captain of the Coldest Hot Air Balloon!s <player.name> is it?"
+                - narrate "<server.flag[pfx_calypso]><&f> I'm Calypso, the captain of the Coldest Hot Air Balloon! <player.name> is it?"
                 - wait 6
-                - narrate "<server.flag[pfx_calypso]><&f> I'm on a gold run, heading to the Windspire Cove"
+                - narrate "<server.flag[pfx_calypso]><&f> I'm on a gold run, heading to the Windspire Cove; home of the March of Progress!"
                 - wait 5
                 - narrate "<server.flag[pfx_calypso]><&f> We're leaving now, you're welcome to join if you'd like. <&8><element[[Yes]].on_click[/denizenclickable chat Yes]>"
                 - zap 2
@@ -45,7 +45,7 @@ calypso_main:
             click trigger:
                 script:
                 - ratelimit <player> 10s
-                - narrate "<server.flag[pfx_calypso]><&f> <player.name>! You've the air of an explorer. Come venture to the beyond with us!"
+                - narrate "<server.flag[pfx_calypso]><&f> <player.name>! You've the air of a Trailblazer. Come venture to the beyond with us!"
                 - wait 1s
                 - narrate "<server.flag[pfx_calypso]><&f> The fare is a mere 500 coins, would you like to depart?  <&8><element[[Yes]].on_click[/denizenclickable chat Yes]> <&8><element[[No]].on_click[/denizenclickable chat No]>"
 

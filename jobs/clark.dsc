@@ -16,14 +16,14 @@ clark_main:
         1:
             click trigger:
                 script:
-                - narrate "<server.flag[pfx_clark]><&f> Hello, I'm Clark, the head of the Explorer's guild. Welcome, <player.name>! Come talk to me if you'd like to know more about the Explorer Guild."
+                - narrate "<server.flag[pfx_clark]><&f> Hello, I'm Clark, the Captain of the Trailblazer Corps. Welcome, <player.name>! Come talk to me if you'd like to know more about us Trailblazers."
                 - zap 2
 
         # give quest
         2:
             click trigger:
                 script:
-                - narrate "<server.flag[pfx_clark]><&f> If you'd like to join the Guild and become an Explorer, you'll need to <&hover[<&a>[Brush a Suspicious block to obtain a Pottery Shard]]><&6>respect the remnants<&end_hover><&f>..."
+                - narrate "<server.flag[pfx_clark]><&f> If you'd like to join the Trailblazer Corps and become a Trailblazer, you'll need to <&hover[<&a>[Brush a Suspicious block to obtain a Pottery Shard]]><&6>respect the remnants<&end_hover><&f>..."
                 - zap 3
 
         # check quest
@@ -44,9 +44,9 @@ clark_main:
                 - ratelimit <player> 5s
                 # this jobs PAPI returns True with a color tag instead of a boolean, so here's the workaround
                 - if <placeholder[jobsr_user_isin_Explorer].contains_text[True]>:
-                    - narrate "<server.flag[pfx_clark]><&f> Hello Explorer! Perhaps one day all of the lands will be explored."
+                    - narrate "<server.flag[pfx_clark]><&f> Perhaps, one day, all of the lands will be explored, Trailblazer."
                 - else:
-                    - narrate "<server.flag[pfx_clark]><&f> Would you like to join the ranks of the Explorers? <&hover[<&9>[Become an Explorer]]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover>"
+                    - narrate "<server.flag[pfx_clark]><&f> Would you like to join the Trailblazer Corps? <&hover[<&9>[Become a Trailblazer]]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover>"
 
             chat trigger:
                 1:
@@ -55,9 +55,9 @@ clark_main:
                     show as normal chat: false
                     script:
                     - if <placeholder[jobsr_user_joinedjobcount]> >= <placeholder[jobsr_maxjobs]>:
-                        - narrate "<server.flag[pfx_clark]><&f> You have too many jobs! Leave one to become an Explorer <&hover[<&8>/jobs leave]><&8><element[/jobs leave].on_click[/jobs leave ].type[SUGGEST_COMMAND]><&end_hover>"
+                        - narrate "<server.flag[pfx_clark]><&f> You have too many jobs! Leave one to become a Trailblazer <&hover[<&8>[/jobs leave]]><&8><element[/jobs leave].on_click[/jobs leave ].type[SUGGEST_COMMAND]><&end_hover>"
                     - else:
                         - jobs join Explorer
-                        - narrate "<&9>You have been employed as an Explorer"
+                        - narrate "<&9>You have been employed as a Trailblaze. Welcome to the Trailblazer Corps!"
                         - wait 2s
                         - narrate "<server.flag[pfx_clark]><&f> Welcome aboard! Hot air balloon not included, haha."
