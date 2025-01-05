@@ -16,14 +16,14 @@ bulki_main:
         1:
             click trigger:
                 script:
-                - narrate "<server.flag[pfx_bulki]><&f> Hiya! I'm Bulki, Master Scrapper! Let me know if you're interested in learning more about our Scrapper Guild."
+                - narrate "<server.flag[pfx_bulki]><&f> Greetings! I'm Bulki, of The Scrapclad Collective! Let me know if you're interested in learning more about us."
                 - zap 2
 
         # give quest
         2:
             click trigger:
                 script:
-                - narrate "<server.flag[pfx_bulki]><&f> If you'd like to join us as a Scrapper, you'll need to <&hover[<&a>[Obtain an Iron Nugget]]><&6>bring me an iron nugget<&end_hover><&f>..."
+                - narrate "<server.flag[pfx_bulki]><&f> If you'd like to join The Scrapclad Collective as a Scrapper, you'll need to <&hover[<&a>[Obtain an Iron Nugget]]><&6>bring me an iron nugget<&end_hover><&f>..."
                 - zap 3
 
         # check quest
@@ -46,7 +46,7 @@ bulki_main:
                 - if <placeholder[jobsr_user_isin_Scrapper].contains_text[True]>:
                     - narrate "<server.flag[pfx_bulki]><&f> Hiya fellow Scrapper. We can scrap all kinds of tools and gear for materials!"
                 - else:
-                    - narrate "<server.flag[pfx_bulki]><&f> Wanna finally become a Scrapper? <&hover[<&9>[Become a Scrapper]]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover>"
+                    - narrate "<server.flag[pfx_bulki]><&f> Wanna finally join The Scrapclad Collective and become a Scrapper? <&hover[<&9>[Become a Scrapper]]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover>"
 
             chat trigger:
                 1:
@@ -55,9 +55,9 @@ bulki_main:
                     show as normal chat: false
                     script:
                     - if <placeholder[jobsr_user_joinedjobcount]> >= <placeholder[jobsr_maxjobs]>:
-                        - narrate "<server.flag[pfx_bulki]><&f> You have too many jobs! Leave one to become a Scrapper <&hover[<&8>/jobs leave]><&8><element[/jobs leave].on_click[/jobs leave ].type[SUGGEST_COMMAND]><&end_hover>"
+                        - narrate "<server.flag[pfx_bulki]><&f> You have too many jobs! Leave one to become a Scrapper <&hover[<&8>[/jobs leave]]><&8><element[/jobs leave].on_click[/jobs leave].type[SUGGEST_COMMAND]><&end_hover>"
                     - else:
                         - jobs join Scrapper
-                        - narrate "<&9>You're now a professional Scrapper!"
+                        - narrate "<&9>You have been employed as a Scrapper. Welcome to The Scrapclad Collective!"
                         - wait 2s
                         - narrate "<server.flag[pfx_bulki]><&f> Get those hands dirty! Let's see what resources you can bring new life."

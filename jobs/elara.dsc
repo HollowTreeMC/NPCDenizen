@@ -15,14 +15,14 @@ elara_main:
         1:
             click trigger:
                 script:
-                - narrate "<server.flag[pfx_elara]><&f> I'm the strongest fighter here, making me the head of the guild. Stop by if you want in."
+                - narrate "<server.flag[pfx_elara]><&f> I'm the strongest Bladewarden here, making me the Commander of the Bladewarden Guard. Stop by if you want in."
                 - zap 2
 
         # give quest
         2:
             click trigger:
                 script:
-                - narrate "<server.flag[pfx_elara]><&f> Want to become a fighter? Prove yourself by giving a pillager a <&hover[<&a>[Kill a pillager with a crossbow]]><&6>taste of their own medicine<&end_hover><&f>."
+                - narrate "<server.flag[pfx_elara]><&f> Want to become a Bladewarden? Prove yourself by giving a pillager a <&hover[<&a>[Kill a pillager with a crossbow]]><&6>taste of their own medicine<&end_hover><&f>."
                 - zap 3
 
         # check quest
@@ -44,7 +44,7 @@ elara_main:
                 - if <placeholder[jobsr_user_isin_Fighter].contains_text[True]>:
                     - narrate "<server.flag[pfx_elara]><&f> Bested anyone in combat recently?"
                 - else:
-                    - narrate "<server.flag[pfx_elara]><&f> Wanna join the fighters guild? <&hover[<&9>[Become a fighter]]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover>"
+                    - narrate "<server.flag[pfx_elara]><&f> Wanna join the Bladewarden Guard? <&hover[<&9>[Become a fighter]]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover>"
 
             chat trigger:
                 1:
@@ -53,9 +53,9 @@ elara_main:
                     show as normal chat: false
                     script:
                     - if <placeholder[jobsr_user_joinedjobcount]> >= <placeholder[jobsr_maxjobs]>:
-                        - narrate "<server.flag[pfx_elara]><&f> You must leave a job before you can become a Fighter <&hover[<&8>/jobs leave]><&8><element[/jobs leave].on_click[/jobs leave ].type[SUGGEST_COMMAND]><&end_hover>"
+                        - narrate "<server.flag[pfx_elara]><&f> You must leave a job before you can become a Bladewarden <&hover[<&8>[/jobs leave]]><&8><element[/jobs leave].on_click[/jobs leave ].type[SUGGEST_COMMAND]><&end_hover>"
                     - else:
                         - jobs join Fighter
-                        - narrate "<&9>You have been employed as a Fighter."
+                        - narrate "<&9>You have been employed as a Bladewarden. Welcome to the Bladewarden Guard!"
                         - wait 2s
-                        - narrate "<server.flag[pfx_elara]><&f> The Goddess's blessings be with you."
+                        - narrate "<server.flag[pfx_elara]><&f> Auriel's blessings be with you, Bladewarden."

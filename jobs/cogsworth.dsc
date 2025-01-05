@@ -16,7 +16,7 @@ cogsworth_main:
             click trigger:
                 script:
                 - ratelimit <player> 120s
-                - narrate "<server.flag[pfx_cogsworth]><&f> Where did I put my compass? Oh hello <player.name>. Want to become a tinkerer? Hmm...I'll come up with a test, come see me again later..."
+                - narrate "<server.flag[pfx_cogsworth]><&f> Where did I put my compass? Oh hello <player.name>. Want to join The Clockwork Assembly as a Tinkerer? Hmm...I'll come up with a test, come see me again later..."
                 - zap 2
 
         # give quest
@@ -56,9 +56,9 @@ cogsworth_main:
                     show as normal chat: false
                     script:
                     - if <placeholder[jobsr_user_joinedjobcount]> >= <placeholder[jobsr_maxjobs]>:
-                        - narrate "<server.flag[pfx_cogsworth]><&f> Dearie me, you're too involved to become a Tinkerer <&hover[<&8>/jobs leave]><&8><element[/jobs leave].on_click[/jobs leave ].type[SUGGEST_COMMAND]><&end_hover>"
+                        - narrate "<server.flag[pfx_cogsworth]><&f> Dearie me, you're too involved to become a Tinkerer <&hover[<&8>[/jobs leave]]><&8><element[/jobs leave].on_click[/jobs leave ].type[SUGGEST_COMMAND]><&end_hover>"
                     - else:
                         - jobs join Tinkerer
-                        - narrate "<&9>You have been employed as a Tinkerer"
+                        - narrate "<&9>You have been employed as a Tinkerer. Welcome to The Clockwork Assembly!"
                         - wait 2s
                         - narrate "<server.flag[pfx_cogsworth]><&f> I know you'll make wonderful contraptions!"

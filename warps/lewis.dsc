@@ -13,7 +13,7 @@ lewis_main:
             click trigger:
                 script:
                 - ratelimit <player> 10s
-                - narrate "<server.flag[pfx_lewis]><&f> Our guild has travelled far and wide, establishing many outposts!"
+                - narrate "<server.flag[pfx_lewis]><&f> Our Guild has travelled far and wide, establishing many outposts!"
                 - wait 2s
                 - narrate "<server.flag[pfx_lewis]><&f> Come talk to me if you want to visit one of them."
                 - zap 2

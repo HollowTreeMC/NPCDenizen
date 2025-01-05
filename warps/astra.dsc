@@ -15,9 +15,9 @@ astra_main:
         1:
             click trigger:
                 script:
-                - narrate "<server.flag[pfx_astra]><&f> Hello scrapper! Welcome aboard!"
+                - narrate "<server.flag[pfx_astra]><&f> Hello! Welcome aboard!"
                 - wait 2
-                - narrate "<server.flag[pfx_astra]><&f> I'm Astra, captain of the Guilded, whose deck you're standing on. <player.name> is it?"
+                - narrate "<server.flag[pfx_astra]><&f> I'm Astra, Captain of the Guilded, whose deck you're standing on. <player.name> is it?"
                 - wait 6
                 - narrate "<server.flag[pfx_astra]><&f> We've got precious cargo today, bound for the smeltery on the Portal Island."
                 - wait 5

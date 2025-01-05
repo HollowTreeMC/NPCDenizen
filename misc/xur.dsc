@@ -23,7 +23,7 @@ xur_main:
             click trigger:
                 script:
                 - cooldown 10s
-                - if <util.time_now.day_of_week> < 5:
+                - if <util.time_now.day_of_week> < 6:
                     - run xur_weekday
                 - else:
                     - run xur_weekend
@@ -48,15 +48,21 @@ xur_weekend:
     script:
     #check to see if player has the xur flag
     - if <player.has_flag[xur_quest]>:
+            - narrate "<server.flag[pfx_xur]><&f> My wares... Choose wisely..."
+            - wait 2
             - execute as_server "dm open xurshop_menu <player.name>"
     #prompts the player with a quest
     - else:
         #gives flag with 3 day expiry upon quest completion
         - if <player.inventory.contains_item[beacon]>:
-            - narrate "<server.flag[pfx_xur]><&f> it shines so brightly..."
+            - narrate "<server.flag[pfx_xur]><&f> Ah... it shines so brightly..."
             - flag <player> xur_quest expire:3d
         - else:
-            - narrate "<server.flag[pfx_xur]><&f> <player.name> bring me a beacon..."
+            - narrate "<server.flag[pfx_xur]><&f> <player.name>, that which shines..."
+            - wait 3
+            - narrate "<server.flag[pfx_xur]><&f> A beacon... yes, I remember"
+            - wait 3
+            - narrate "<server.flag[pfx_xur]><&f> Bring it to me, and I will exchange its light for something far more... elusive..."
 
 # configures the xur shop, meant only to run once a week
 xur_shop:
@@ -66,15 +72,23 @@ xur_shop:
     - if <util.time_now.day_of_week> == 1:
         - flag server xur_location:<location[83.5,150,-11.8,-5,-64,Void]>
 
-    # Friday Configuration
-    - if <util.time_now.day_of_week> == 5:
+    # Saturday Configuration
+    - if <util.time_now.day_of_week> == 6:
         - random:
+            # Next to Crates Room
             - flag server xur_location:<location[-70.5,154,2.5,0,0,Void]>
+            # Cave Side
             - flag server xur_location:<location[-81.5,148,-40.5,0,0,Void]>
+            # Main Island Explorer Warp area - In the room attachec to the side of the island
             - flag server xur_location:<location[11.5,155,-93.5,0,0,Void]>
+            # Under Hollowtree tree
             - flag server xur_location:<location[86.5,142,-47.5,0,0,Void]>
+            # Next to waterfall
             - flag server xur_location:<location[54.5,130.0,42.5,0,0,Void]>
-
+            # Explorer Island - Under the large decorative house in the back of the island
+            - flag server xur_location:<location[-1033.5,170.0,111.5,0,0,Void]>
+            # Portal Island - On the resource world teleport island
+            - flag server xur_location:<location[-1903.5,38.0,1066.5,0,0,Void]>
         # select the items for this week's shop
         - run xur_tier1 def:xur_shop_slot1
         - run xur_tier1 def:xur_shop_slot2

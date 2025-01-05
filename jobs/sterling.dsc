@@ -15,7 +15,7 @@ sterling_main:
         1:
             click trigger:
                 script:
-                - narrate "<server.flag[pfx_sterling]><&f> Hello, I'm Sterling, head of this here Gold Refinery. We can always use more hands at the forge, come talk to me if you want to be a Smith."
+                - narrate "<server.flag[pfx_sterling]><&f> Hello, I'm Sterling, head of this here Gold Refinery. We can always use more hands at the forge, come talk to me if you want to be an Artificer."
                 - zap 2
 
         # give quest
@@ -45,7 +45,7 @@ sterling_main:
                 - if <placeholder[jobsr_user_isin_Smith].contains_text[True]>:
                     - narrate "<server.flag[pfx_sterling]><&f> You'll get arms of steel in no time!"
                 - else:
-                    - narrate "<server.flag[pfx_sterling]><&f> Would you like to join the core and work as a Smith? <&hover[<&9>[Become a Smith]]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover>"
+                    - narrate "<server.flag[pfx_sterling]><&f> Would you like to join the Society of Innovation as an Artificer? <&hover[<&9>[Become a Smith]]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover>"
 
             chat trigger:
                 1:
@@ -54,9 +54,9 @@ sterling_main:
                     show as normal chat: false
                     script:
                     - if <placeholder[jobsr_user_joinedjobcount]> >= <placeholder[jobsr_maxjobs]>:
-                        - narrate "<server.flag[pfx_sterling]><&f> You must leave a job before you can become a Smith <&hover[<&8>/jobs leave]><&8><element[/jobs leave].on_click[/jobs leave ].type[SUGGEST_COMMAND]><&end_hover>"
+                        - narrate "<server.flag[pfx_sterling]><&f> You must leave a job before you can become a Artificer <&hover[<&8>[/jobs leave]]><&8><element[/jobs leave].on_click[/jobs leave ].type[SUGGEST_COMMAND]><&end_hover>"
                     - else:
                         - jobs join Smith
-                        - narrate "<&9>You have been employed as a Smith."
+                        - narrate "<&9>You have been employed as a Artificer. Welcome to the Society of Innovation!"
                         - wait 2s
-                        - narrate "<server.flag[pfx_sterling]><&f> Ha ha! Welcome another to the forge!"
+                        - narrate "<server.flag[pfx_sterling]><&f> Ha ha! Another to the Society of Innovation!"
