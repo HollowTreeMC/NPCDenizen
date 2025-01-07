@@ -18,4 +18,4 @@ astra_portal_main:
                 - random:
                     - narrate "<server.flag[pfx_astra]><&f> We got a big haul this time!"
                     - narrate "<server.flag[pfx_astra]><&f> <player.name>? I'll remember you for next time."
-                    - narrate "<server.flag[pfx_astra]><&f> An explosion? Probably just the sorcerer's guild having some fun."
+                    - narrate "<server.flag[pfx_astra]><&f> An explosion? Probably just the Runeweavers having some fun."
