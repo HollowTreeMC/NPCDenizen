@@ -34,4 +34,4 @@ npc_handler:
         # NPC SETUPS
         #   Xur NPC
         - if <util.time_now.day_of_week> == 1 || <util.time_now.day_of_week> == 6:
-        - run xur_shop
+            - run xur_shop
