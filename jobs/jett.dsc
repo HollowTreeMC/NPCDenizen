@@ -44,23 +44,39 @@ jett_main:
         4:
             click trigger:
                 script:
-                - cooldown 3s
                 # this jobs PAPI returns True with a color tag instead of a boolean, so here's the workaround
                 - if <placeholder[jobsr_user_isin_Quartermaster].contains_text[True]>:
                     - narrate "<server.flag[pfx_jett]><&f> Give a go at brewing when you have the time."
                 - else:
-                    - narrate "<server.flag[pfx_jett]><&f> Would you like to become a Quartermaster? <server.flag[npc_dialouge_yes]>"
+                    - narrate "<server.flag[pfx_jett]><&f> Would you like to become a Quartermaster? <server.flag[npc_dialouge_yesno]>"
 
+        # main's chat trigger
+        5:
             chat trigger:
                 1:
                     trigger: /ye|ok/
                     hide trigger message: true
                     show as normal chat: false
                     script:
+                    - flag player npc_chatted expire:15s
+
+                    # join the player to the job
                     - if <placeholder[jobsr_user_joinedjobcount]> >= <placeholder[jobsr_maxjobs]>:
                         - narrate "<server.flag[pfx_jett]><&f> You must leave a job before you can become a Quartermaster <server.flag[npc_dialouge_leavejob]>"
                     - else:
                         - jobs join Quartermaster
                         - narrate "<&9>You have been employed as a Quartermaster. Welcome to the Keepers of the Vault!"
-                        - wait 2s
                         - narrate "<server.flag[pfx_jett]><&f> The Vault awaits you, Quartermaster."
+                2:
+                    trigger: /no|na/
+                    hide trigger message: true
+                    show as normal chat: false
+                    script:
+                    - flag player npc_chatted expire:15s
+                    - narrate "<server.flag[pfx_jett]><&f> See you around."
+                3:
+                    trigger: /*/
+                    hide trigger message: true
+                    show as normal chat: false
+                    script:
+                    - narrate "<server.flag[pfx_jett]><&f> What's that?"

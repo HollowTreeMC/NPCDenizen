@@ -44,19 +44,30 @@ cogsworth_main:
         4:
             click trigger:
                 script:
-                - cooldown 3s
                 # this jobs PAPI returns True with a color tag instead of a boolean, so here's the workaround
                 - if <placeholder[jobsr_user_isin_Tinkerer].contains_text[True]>:
                     - narrate "<server.flag[pfx_cogsworth]><&f> What did the differential gear tell the spigot? Hahahaha!"
                 - else:
-                    - narrate "<server.flag[pfx_cogsworth]><&f> Come, let me take you into my employ <server.flag[npc_dialouge_yes]>"
+                    - narrate "<server.flag[pfx_cogsworth]><&f> Come, let me take you into my employ <server.flag[npc_dialouge_yesno]>"
 
+                    # activate chat trigger, response if the player hasn't selected a response - this acts as a cooldown
+                    - zap 5
+                    - wait 15s
+                    - zap 4
+                    - if !<player.has_flag[npc_chatted]>:
+                        - narrate "<server.flag[pfx_cogsworth]><&f> Aha there's my compass!"
+
+        # main's chat trigger
+        5:
             chat trigger:
                 1:
                     trigger: /ye|ok/
                     hide trigger message: true
                     show as normal chat: false
                     script:
+                    - flag player npc_chatted expire:15s
+
+                    # join the player to the job
                     - if <placeholder[jobsr_user_joinedjobcount]> >= <placeholder[jobsr_maxjobs]>:
                         - narrate "<server.flag[pfx_cogsworth]><&f> Dearie me, you're too involved to become a Tinkerer <server.flag[npc_dialouge_leavejob]>"
                     - else:
@@ -64,3 +75,16 @@ cogsworth_main:
                         - narrate "<&9>You have been employed as a Tinkerer. Welcome to The Clockwork Assembly!"
                         - wait 2s
                         - narrate "<server.flag[pfx_cogsworth]><&f> I know you'll make wonderful contraptions!"
+                2:
+                    trigger: /no|na/
+                    hide trigger message: true
+                    show as normal chat: false
+                    script:
+                    - flag player npc_chatted expire:15s
+                    - narrate "<server.flag[pfx_cogsworth]><&f> Ah, a shame but it's alright."
+                3:
+                    trigger: /*/
+                    hide trigger message: true
+                    show as normal chat: false
+                    script:
+                    - narrate "<server.flag[pfx_cogsworth]><&f> I didn't quite get that, could you repeat it?"

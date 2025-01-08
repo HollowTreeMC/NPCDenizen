@@ -1,4 +1,4 @@
-#Sterling is the Smith job NPC
+#Sterling is the Artificer job NPC
 sterling:
     type: assignment
     actions:
@@ -41,23 +41,46 @@ sterling_main:
         4:
             click trigger:
                 script:
-                - cooldown 3s
                 # this jobs PAPI returns True with a color tag instead of a boolean, so here's the workaround
                 - if <placeholder[jobsr_user_isin_Smith].contains_text[True]>:
                     - narrate "<server.flag[pfx_sterling]><&f> You'll get arms of steel in no time!"
                 - else:
-                    - narrate "<server.flag[pfx_sterling]><&f> Would you like to join the Society of Innovation as an Artificer? <server.flag[npc_dialouge_yes]>"
+                    - narrate "<server.flag[pfx_sterling]><&f> Would you like to join the Society of Innovation as an Artificer? <server.flag[npc_dialouge_yesno]>"
 
+                    # activate chat trigger, response if the player hasn't selected a response - this acts as a cooldown
+                    - zap 5
+                    - wait 15s
+                    - zap 4
+                    - if !<player.has_flag[npc_chatted]>:
+                        - narrate "<server.flag[pfx_sterling]><&f> Oh look! Astra has another shipment of Gold for me!"
+
+        # main's chat trigger
+        5:
             chat trigger:
                 1:
                     trigger: /ye|ok/
                     hide trigger message: true
                     show as normal chat: false
                     script:
+                    - flag player npc_chatted expire:15s
+
+                    # join the player to the job
                     - if <placeholder[jobsr_user_joinedjobcount]> >= <placeholder[jobsr_maxjobs]>:
                         - narrate "<server.flag[pfx_sterling]><&f> You must leave a job before you can become a Artificer <server.flag[npc_dialouge_leavejob]>"
                     - else:
-                        - jobs join Smith
+                        - jobs join Artificer
                         - narrate "<&9>You have been employed as a Artificer. Welcome to the Society of Innovation!"
-                        - wait 2s
                         - narrate "<server.flag[pfx_sterling]><&f> Ha ha! Another to the Society of Innovation!"
+                2:
+                    trigger: /no|na/
+                    hide trigger message: true
+                    show as normal chat: false
+                    script:
+                    - flag player npc_chatted expire:15s
+                    - narrate "<server.flag[pfx_sterling]><&f> A shame, your forging shows potential."
+                3:
+                    trigger: /*/
+                    hide trigger message: true
+                    show as normal chat: false
+                    script:
+                    - narrate "<server.flag[pfx_sterling]><&f> Hmmm?"

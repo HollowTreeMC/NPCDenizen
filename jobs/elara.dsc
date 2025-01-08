@@ -1,4 +1,4 @@
-#Elara is the NPC which hands out the Fighter job, located on the PVP Island.
+#Elara is the NPC which hands out the Bladewarden job, located on the PVP Island.
 elara:
     type: assignment
     actions:
@@ -42,23 +42,46 @@ elara_main:
         4:
             click trigger:
                 script:
-                - cooldown 3s
                 # this jobs PAPI returns True with a color tag instead of a boolean, so here's the workaround
-                - if <placeholder[jobsr_user_isin_Fighter].contains_text[True]>:
+                - if <placeholder[jobsr_user_isin_Bladewarden].contains_text[True]>:
                     - narrate "<server.flag[pfx_elara]><&f> Bested anyone in combat recently?"
                 - else:
-                    - narrate "<server.flag[pfx_elara]><&f> Wanna join the Bladewarden Guard? <server.flag[npc_dialouge_yes]>"
+                    - narrate "<server.flag[pfx_elara]><&f> Wanna join the Bladewarden Guard? <server.flag[npc_dialouge_yesno]>"
 
+                    # activate chat trigger, response if the player hasn't selected a response - this acts as a cooldown
+                    - zap 5
+                    - wait 15s
+                    - zap 4
+                    - if !<player.has_flag[npc_chatted]>:
+                        - narrate "<server.flag[pfx_elara]><&f> Hmm I wonder the weakspot of the Ender Dragon..."
+
+        # main's chat trigger
+        5:
             chat trigger:
                 1:
                     trigger: /ye|ok/
                     hide trigger message: true
                     show as normal chat: false
                     script:
+                    - flag player npc_chatted expire:15s
+
+                    # join the player to the job
                     - if <placeholder[jobsr_user_joinedjobcount]> >= <placeholder[jobsr_maxjobs]>:
                         - narrate "<server.flag[pfx_elara]><&f> You must leave a job before you can become a Bladewarden <server.flag[npc_dialouge_leavejob]>"
                     - else:
-                        - jobs join Fighter
+                        - jobs join Bladewarden
                         - narrate "<&9>You have been employed as a Bladewarden. Welcome to the Bladewarden Guard!"
-                        - wait 2s
                         - narrate "<server.flag[pfx_elara]><&f> Auriel's blessings be with you, Bladewarden."
+                2:
+                    trigger: /no|na/
+                    hide trigger message: true
+                    show as normal chat: false
+                    script:
+                    - flag player npc_chatted expire:15s
+                    - narrate "<server.flag[pfx_elara]><&f> Auriel's blessings be with you nonetheless."
+                3:
+                    trigger: /*/
+                    hide trigger message: true
+                    show as normal chat: false
+                    script:
+                    - narrate "<server.flag[pfx_elara]><&f> It's a simple question."
