@@ -14,7 +14,7 @@ dummy_explorer_main:
         1:
             click trigger:
                 script:
-                - ratelimit <player> 5s
+                - cooldown 3s
                 - if <util.random_chance[90]>:
                     - narrate "<&8>You think to yourself, <&f>'Why am I trying to talk to a dummy?'"
                 - else:

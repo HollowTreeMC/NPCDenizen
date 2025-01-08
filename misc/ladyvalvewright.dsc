@@ -37,7 +37,7 @@ ladyvalvewright_main:
                     - if <player.has_permission[group.chronarch]> || <player.money> > 1000000:
                         - narrate "<server.flag[pfx_ladyvalvewright]><&f> Wonderful! With your status, you may purchase a temporary emporium pass!"
                         - wait 2
-                        - narrate "<server.flag[pfx_ladyvalvewright]><&f> Would like to purchase a pass? For 5,000 coins, you can purchase a 1-week pass! <&hover[<&6>Purchase Pass]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover> <&hover[Do not purchase]><&8><element[[No]].on_click[/denizenclickable chat No]><&end_hover>"
+                        - narrate "<server.flag[pfx_ladyvalvewright]><&f> Would like to purchase a pass? For 5,000 coins, you can purchase a 1-week pass! <n><&8><&o>Respond with: <&8><&hover[<&6>Purchase Pass]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover> <&hover[Do not purchase]><&8><element[[No]].on_click[/denizenclickable chat No]><&end_hover>"
                     # player does not meet the requisite to purchase the pass
                     - else:
                         - narrate "<server.flag[pfx_ladyvalvewright]><&f> Ugh, you lack <&hover[<&a>Achieve the Chronarch rank]><&6>status and wealth<&end_hover><&f>! Return once you have progressed through the echelon!"

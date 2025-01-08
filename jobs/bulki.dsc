@@ -16,6 +16,7 @@ bulki_main:
         1:
             click trigger:
                 script:
+                - cooldown 3s
                 - narrate "<server.flag[pfx_bulki]><&f> Greetings! I'm Bulki, of The Scrapclad Collective! Let me know if you're interested in learning more about us."
                 - zap 2
 
@@ -23,6 +24,7 @@ bulki_main:
         2:
             click trigger:
                 script:
+                - cooldown 3s
                 - narrate "<server.flag[pfx_bulki]><&f> If you'd like to join The Scrapclad Collective as a Scrapper, you'll need to <&hover[<&a>[Obtain an Iron Nugget]]><&6>bring me an iron nugget<&end_hover><&f>..."
                 - zap 3
 
@@ -30,7 +32,7 @@ bulki_main:
         3:
             click trigger:
                 script:
-                - ratelimit <player> 5s
+                - cooldown 3s
                 - if <player.inventory.contains_item[iron_nugget]>:
                     - narrate "<server.flag[pfx_bulki]><&f> That Iron Nugget looks nice! You've completed my quest. Impressive work!"
                     - zap 4
@@ -41,12 +43,12 @@ bulki_main:
         4:
             click trigger:
                 script:
-                - ratelimit <player> 5s
+                - cooldown 3s
                 # this jobs PAPI returns True with a color tag instead of a boolean, so here's the workaround
                 - if <placeholder[jobsr_user_isin_Scrapper].contains_text[True]>:
                     - narrate "<server.flag[pfx_bulki]><&f> Hiya fellow Scrapper. We can scrap all kinds of tools and gear for materials!"
                 - else:
-                    - narrate "<server.flag[pfx_bulki]><&f> Wanna finally join The Scrapclad Collective and become a Scrapper? <&hover[<&9>[Become a Scrapper]]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover>"
+                    - narrate "<server.flag[pfx_bulki]><&f> Wanna join The Scrapclad Collective and become a Scrapper? <server.flag[npc_dialouge_yes]>"
 
             chat trigger:
                 1:
@@ -55,7 +57,7 @@ bulki_main:
                     show as normal chat: false
                     script:
                     - if <placeholder[jobsr_user_joinedjobcount]> >= <placeholder[jobsr_maxjobs]>:
-                        - narrate "<server.flag[pfx_bulki]><&f> You have too many jobs! Leave one to become a Scrapper <&hover[<&8>[/jobs leave]]><&8><element[/jobs leave].on_click[/jobs leave].type[SUGGEST_COMMAND]><&end_hover>"
+                        - narrate "<server.flag[pfx_bulki]><&f> You have too many jobs! Leave one to become a Scrapper <server.flag[npc_dialouge_leavejob]>"
                     - else:
                         - jobs join Scrapper
                         - narrate "<&9>You have been employed as a Scrapper. Welcome to The Scrapclad Collective!"

@@ -12,8 +12,8 @@ vacuus_main:
         1:
             click trigger:
                 script:
-                - ratelimit <player> 10s
-                - narrate "<server.flag[pfx_vacuus]><&f> For only 250 coins, I'll make it a random teleport. Want to? <&8><element[[Yes]].on_click[/denizenclickable chat Yes]>"
+                - cooldown 3s
+                - narrate "<server.flag[pfx_vacuus]><&f> For only 250 coins, I'll make it a random teleport. Want to? <server.flag[npc_dialouge_yesno]>"
 
             chat trigger:
                 1:

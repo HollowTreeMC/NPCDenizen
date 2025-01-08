@@ -12,21 +12,18 @@ ender_main:
         1:
             click trigger:
                 script:
-                - ratelimit <player> 10s
-                - narrate "<server.flag[pfx_ender]><&f> Dare to face combat trials <player.name>?"
-                - wait 1s
-                - narrate "<server.flag[pfx_ender]><&f> There is no fee, say the word and I'll take you. <&8><element[[Okay]].on_click[/denizenclickable chat Yes]>"
+                - cooldown 3s
+                - narrate "<server.flag[pfx_ender]><&f> Dare to face combat trials <player.name>? There is no fee, say the word and I'll take you. <server.flag[npc_dialouge_okay]>"
 
             chat trigger:
                 1:
                     trigger: /*/
                     hide trigger message: true
                     script:
-                    - narrate "<server.flag[pfx_ender]><&f> Never a dull day."
                     - execute as_server "/effect <player.name> Blindness 2 255"
                     - wait 1s
                     - execute as_server "/warp <player.name> PvPIsland"
-                    - wait 2s
+                    - wait 1s
                     - random:
                         - narrate "<server.flag[pfx_ender]><&f> I wonder what the statue is made of..."
                         - narrate "<server.flag[pfx_ender]><&f> I took an arrow to the knee once..."
