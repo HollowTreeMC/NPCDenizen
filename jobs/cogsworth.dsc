@@ -47,7 +47,7 @@ cogsworth_main:
                 - if <placeholder[jobsr_user_isin_Tinkerer].contains_text[True]>:
                     - narrate "<server.flag[pfx_cogsworth]><&f> What did the differential gear tell the spigot? Hahahaha!"
                 - else:
-                    - narrate "<server.flag[pfx_cogsworth]><&f> Come, let me take you into my employ <&hover[<&9>[Become a Tinkerer]]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover>"
+                    - narrate "<server.flag[pfx_cogsworth]><&f> Come, let me take you into my employ \n<&8><&o>Respond with: <&hover[<&9>[Become a Tinkerer]]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover>"
 
             chat trigger:
                 1:

@@ -46,7 +46,7 @@ bulki_main:
                 - if <placeholder[jobsr_user_isin_Scrapper].contains_text[True]>:
                     - narrate "<server.flag[pfx_bulki]><&f> Hiya fellow Scrapper. We can scrap all kinds of tools and gear for materials!"
                 - else:
-                    - narrate "<server.flag[pfx_bulki]><&f> Wanna finally join The Scrapclad Collective and become a Scrapper? <&hover[<&9>[Become a Scrapper]]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover>"
+                    - narrate "<server.flag[pfx_bulki]><&f> Wanna finally join The Scrapclad Collective and become a Scrapper? \n<&8><&o>Respond with: <&hover[<&9>[Become a Scrapper]]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover>"
 
             chat trigger:
                 1:

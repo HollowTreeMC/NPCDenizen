@@ -47,7 +47,7 @@ jett_main:
                 - if <placeholder[jobsr_user_isin_Quartermaster].contains_text[True]>:
                     - narrate "<server.flag[pfx_jett]><&f> Give a go at brewing when you have the time."
                 - else:
-                    - narrate "<server.flag[pfx_jett]><&f> Would you like to become a Quartermaster? <&hover[<&a>[Become a Quartermaster]]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover>"
+                    - narrate "<server.flag[pfx_jett]><&f> Would you like to become a Quartermaster? \n<&8><&o>Respond with: <&hover[<&a>[Become a Quartermaster]]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover>"
 
             chat trigger:
                 1:

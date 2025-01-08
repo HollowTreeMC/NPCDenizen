@@ -15,7 +15,7 @@ ender_main:
                 - ratelimit <player> 10s
                 - narrate "<server.flag[pfx_ender]><&f> Dare to face combat trials <player.name>?"
                 - wait 1s
-                - narrate "<server.flag[pfx_ender]><&f> There is no fee, say the word and I'll take you. <&8><element[[Okay]].on_click[/denizenclickable chat Yes]>"
+                - narrate "<server.flag[pfx_ender]><&f> There is no fee, say the word and I'll take you. \n<&8><&o>Respond with: <&8><element[[Okay]].on_click[/denizenclickable chat Yes]>"
 
             chat trigger:
                 1:

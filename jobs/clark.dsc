@@ -46,7 +46,7 @@ clark_main:
                 - if <placeholder[jobsr_user_isin_Explorer].contains_text[True]>:
                     - narrate "<server.flag[pfx_clark]><&f> Perhaps, one day, all of the lands will be explored, Trailblazer."
                 - else:
-                    - narrate "<server.flag[pfx_clark]><&f> Would you like to join the Trailblazer Corps? <&hover[<&9>[Become a Trailblazer]]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover>"
+                    - narrate "<server.flag[pfx_clark]><&f> Would you like to join the Trailblazer Corps? \n<&8><&o>Respond with: <&hover[<&9>[Become a Trailblazer]]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover>"
 
             chat trigger:
                 1:

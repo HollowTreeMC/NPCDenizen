@@ -25,7 +25,7 @@ ignis_main:
             click trigger:
                 script:
                 - ratelimit <player> 10s
-                - narrate "<server.flag[pfx_ignis]><&f> I can take you a bit farther out in the Nether for a small fee, only 250 coins. <&8><element[[Yes]].on_click[/denizenclickable chat Yes]> <&8><element[[No]].on_click[/denizenclickable chat No]>"
+                - narrate "<server.flag[pfx_ignis]><&f> I can take you a bit farther out in the Nether for a small fee, only 250 coins. \n<&8><&o>Respond with: <&8><element[[Yes]].on_click[/denizenclickable chat Yes]> <&8><element[[No]].on_click[/denizenclickable chat No]>"
 
             chat trigger:
                 1:

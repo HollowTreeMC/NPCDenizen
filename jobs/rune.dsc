@@ -48,7 +48,7 @@ rune_main:
                 - if <placeholder[jobsr_user_isin_Sorcerer].contains_text[True]>:
                     - narrate "<server.flag[pfx_rune]><&f> Fellow Runeweaver. We should discuss potion brewing sometime."
                 - else:
-                    - narrate "<server.flag[pfx_rune]><&f> Would you like to join The Order of Runes, as a Runeweaver? <&hover[<&9>Become a Sorcerer]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover>"
+                    - narrate "<server.flag[pfx_rune]><&f> Would you like to join The Order of Runes, as a Runeweaver? \n<&8><&o>Respond with: <&hover[<&9>Become a Sorcerer]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover>"
 
             chat trigger:
                 1:

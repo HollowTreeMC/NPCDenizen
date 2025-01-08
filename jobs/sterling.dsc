@@ -45,7 +45,7 @@ sterling_main:
                 - if <placeholder[jobsr_user_isin_Smith].contains_text[True]>:
                     - narrate "<server.flag[pfx_sterling]><&f> You'll get arms of steel in no time!"
                 - else:
-                    - narrate "<server.flag[pfx_sterling]><&f> Would you like to join the Society of Innovation as an Artificer? <&hover[<&9>[Become a Smith]]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover>"
+                    - narrate "<server.flag[pfx_sterling]><&f> Would you like to join the Society of Innovation as an Artificer? \n<&8><&o>Respond with: <&hover[<&9>[Become a Smith]]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover>"
 
             chat trigger:
                 1:

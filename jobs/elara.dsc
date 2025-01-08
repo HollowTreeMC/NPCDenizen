@@ -44,7 +44,7 @@ elara_main:
                 - if <placeholder[jobsr_user_isin_Fighter].contains_text[True]>:
                     - narrate "<server.flag[pfx_elara]><&f> Bested anyone in combat recently?"
                 - else:
-                    - narrate "<server.flag[pfx_elara]><&f> Wanna join the Bladewarden Guard? <&hover[<&9>[Become a fighter]]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover>"
+                    - narrate "<server.flag[pfx_elara]><&f> Wanna join the Bladewarden Guard? \n<&8><&o>Respond with: <&hover[<&9>[Become a fighter]]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover>"
 
             chat trigger:
                 1:
