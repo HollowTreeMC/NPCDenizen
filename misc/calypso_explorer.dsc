@@ -14,6 +14,6 @@ calypso_explorer_main:
         1:
             click trigger:
                 script:
-                - ratelimit <player> 5s
+                - cooldown 3s
                 - random:
                     - narrate "<server.flag[pfx_calypso]><&f> Land Ho! The Explorer's Guild"

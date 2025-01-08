@@ -14,6 +14,7 @@ ignis_main:
         1:
             click trigger:
                 script:
+                - cooldown 9s
                 - narrate "<server.flag[pfx_ignis]><&f> Well hello! I'm Ignis, Roamer of this realm."
                 - wait 2
                 - narrate "<server.flag[pfx_ignis]><&f> Adventuring through this realm for the first time are you?"
@@ -24,8 +25,8 @@ ignis_main:
         2:
             click trigger:
                 script:
-                - ratelimit <player> 10s
-                - narrate "<server.flag[pfx_ignis]><&f> I can take you a bit farther out in the Nether for a small fee, only 250 coins. \n<&8><&o>Respond with: <&8><element[[Yes]].on_click[/denizenclickable chat Yes]> <&8><element[[No]].on_click[/denizenclickable chat No]>"
+                - cooldown 3s
+                - narrate "<server.flag[pfx_ignis]><&f> I can take you a bit farther out in the Nether for a small fee, only 250 coins. <server.flag[npc_dialouge_yesno]>"
 
             chat trigger:
                 1:

@@ -16,20 +16,22 @@ calypso_main:
         1:
             click trigger:
                 script:
+                - cooldown 16s
                 - narrate "<server.flag[pfx_calypso]><&f> Hello Trailblazer! Welcome aboard!"
                 - wait 2
                 - narrate "<server.flag[pfx_calypso]><&f> I'm Calypso, the captain of the Coldest Hot Air Balloon! <player.name> is it?"
                 - wait 6
                 - narrate "<server.flag[pfx_calypso]><&f> I'm on a gold run, heading to the Windspire Cove; home of the March of Progress!"
                 - wait 5
-                - narrate "<server.flag[pfx_calypso]><&f> We're leaving now, you're welcome to join if you'd like. \n<&8><&o>Respond with: <&8><element[[Yes]].on_click[/denizenclickable chat Yes]>"
+                - narrate "<server.flag[pfx_calypso]><&f> We're leaving now, you're welcome to join if you'd like. <server.flag[npc_dialouge_yes]>"
                 - zap 2
 
         #free warp script
         2:
             click trigger:
                 script:
-                - narrate "<server.flag[pfx_calypso]><&f> We're leaving to the Windspire Cove now, want to come along? \n<&8><&o>Respond with: <&8><element[[Yes]].on_click[/denizenclickable chat Yes]>"
+                - cooldown 3s
+                - narrate "<server.flag[pfx_calypso]><&f> We're leaving to the Windspire Cove now, want to come along? <server.flag[npc_dialouge_yes]>"
 
             chat trigger:
                 1:
@@ -44,10 +46,10 @@ calypso_main:
         3:
             click trigger:
                 script:
-                - ratelimit <player> 10s
+                - cooldown 4s
                 - narrate "<server.flag[pfx_calypso]><&f> <player.name>! You've the air of a Trailblazer. Come venture to the beyond with us!"
                 - wait 1s
-                - narrate "<server.flag[pfx_calypso]><&f> The fare is a mere 500 coins, would you like to depart? \n<&8><&o>Respond with: <&8><element[[Yes]].on_click[/denizenclickable chat Yes]> <&8><element[[No]].on_click[/denizenclickable chat No]>"
+                - narrate "<server.flag[pfx_calypso]><&f> The fare is a mere 500 coins, would you like to depart? <server.flag[npc_dialouge_yesno]>"
 
             chat trigger:
                 1:

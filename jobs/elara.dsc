@@ -15,6 +15,7 @@ elara_main:
         1:
             click trigger:
                 script:
+                - cooldown 3s
                 - narrate "<server.flag[pfx_elara]><&f> I'm the strongest Bladewarden here, making me the Commander of the Bladewarden Guard. Stop by if you want in."
                 - zap 2
 
@@ -22,6 +23,7 @@ elara_main:
         2:
             click trigger:
                 script:
+                - cooldown 3s
                 - narrate "<server.flag[pfx_elara]><&f> Want to become a Bladewarden? Prove yourself by giving a pillager a <&hover[<&a>[Kill a pillager with a crossbow]]><&6>taste of their own medicine<&end_hover><&f>."
                 - zap 3
 
@@ -29,7 +31,7 @@ elara_main:
         3:
             click trigger:
                 script:
-                - ratelimit <player> 10s
+                - cooldown 3s
                 - if <player.has_advancement[minecraft:adventure/whos_the_pillager_now]>:
                     - narrate "<server.flag[pfx_elara]><&f> Well done <player.name>! I knew you had the chops."
                     - zap 4
@@ -40,11 +42,12 @@ elara_main:
         4:
             click trigger:
                 script:
+                - cooldown 3s
                 # this jobs PAPI returns True with a color tag instead of a boolean, so here's the workaround
                 - if <placeholder[jobsr_user_isin_Fighter].contains_text[True]>:
                     - narrate "<server.flag[pfx_elara]><&f> Bested anyone in combat recently?"
                 - else:
-                    - narrate "<server.flag[pfx_elara]><&f> Wanna join the Bladewarden Guard? \n<&8><&o>Respond with: <&hover[<&9>[Become a fighter]]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover>"
+                    - narrate "<server.flag[pfx_elara]><&f> Wanna join the Bladewarden Guard? <server.flag[npc_dialouge_yes]>"
 
             chat trigger:
                 1:
@@ -53,7 +56,7 @@ elara_main:
                     show as normal chat: false
                     script:
                     - if <placeholder[jobsr_user_joinedjobcount]> >= <placeholder[jobsr_maxjobs]>:
-                        - narrate "<server.flag[pfx_elara]><&f> You must leave a job before you can become a Bladewarden <&hover[<&8>[/jobs leave]]><&8><element[/jobs leave].on_click[/jobs leave ].type[SUGGEST_COMMAND]><&end_hover>"
+                        - narrate "<server.flag[pfx_elara]><&f> You must leave a job before you can become a Bladewarden <server.flag[npc_dialouge_leavejob]>"
                     - else:
                         - jobs join Fighter
                         - narrate "<&9>You have been employed as a Bladewarden. Welcome to the Bladewarden Guard!"

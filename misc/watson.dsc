@@ -19,7 +19,7 @@ watson_main:
                 - flag player npc_engaged expire:10s
                 - narrate "<server.flag[pfx_watson]><&f> Hello <placeholder[cmi_user_rank]>. Welcome to the library. There is much knowledge to be gained here. Even the leaderboard is here!"
                 - wait 3
-                - narrate "<server.flag[pfx_watson]><&f> I'd be shocked if you weren't here to a purchase a book. I have many novels available. Would you like to take a look? \n<&8><&o>Respond with: <&8><element[[Yes]].on_click[/denizenclickable chat yes]> <&8><element[[No]].on_click[/denizenclickable chat no]>"
+                - narrate "<server.flag[pfx_watson]><&f> I'd be shocked if you weren't here to a purchase a book. I have many novels available. Would you like to take a look? <n><&8><&o>Respond with: <&8><element[[Yes]].on_click[/denizenclickable chat yes]> <&8><element[[No]].on_click[/denizenclickable chat no]>"
 
             chat trigger:
                 1:

@@ -15,6 +15,7 @@ astra_main:
         1:
             click trigger:
                 script:
+                - cooldown 16s
                 - narrate "<server.flag[pfx_astra]><&f> Hello! Welcome aboard!"
                 - wait 2
                 - narrate "<server.flag[pfx_astra]><&f> I'm Astra, Captain of the Guilded, whose deck you're standing on. <player.name> is it?"
@@ -22,13 +23,14 @@ astra_main:
                 - narrate "<server.flag[pfx_astra]><&f> We've got precious cargo today, bound for the smeltery on the Portal Island."
                 - wait 5
                 - clickable astra_tp for<player> until:1m
-                - narrate "<server.flag[pfx_astra]><&f> We're leaving now, you're welcome to join if you'd like. \n<&8><&o>Respond with: <&8><element[[Okay]].on_click[/denizenclickable chat Yes]>"
+                - narrate "<server.flag[pfx_astra]><&f> We're leaving now, you're welcome to join if you'd like. <server.flag[npc_dialouge_okay]>"
                 - zap 2
         #free warp script, if a player does not TP initially, they possess 1 free TP
         2:
             click trigger:
                 script:
-                - narrate "<server.flag[pfx_astra]><&f> We're leaving to the Portal Island now, want to come along? \n<&8><&o>Respond with: <&8><element[[Yes]].on_click[/denizenclickable chat Yes]>"
+                - cooldown 3s
+                - narrate "<server.flag[pfx_astra]><&f> We're leaving to the Portal Island now, want to come along? <server.flag[npc_dialouge_yes]>"
 
             chat trigger:
                 1:
@@ -42,7 +44,8 @@ astra_main:
         3:
             click trigger:
                 script:
-                - narrate "<server.flag[pfx_astra]><&f> <player.name>! Want to go to the portal island? I can take you for 500 coins. \n<&8><&o>Respond with: <&8><element[[Yes]].on_click[/denizenclickable chat Yes]> <&8><element[[No]].on_click[/denizenclickable chat No]>"
+                - cooldown 3s
+                - narrate "<server.flag[pfx_astra]><&f> <player.name>! Want to go to the portal island? I can take you for 500 coins. <server.flag[npc_dialouge_yesno]>"
 
             chat trigger:
                 1:

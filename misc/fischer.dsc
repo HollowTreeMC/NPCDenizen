@@ -14,7 +14,7 @@ fischer_main:
         1:
             click trigger:
                 script:
-                - cooldown 10s
+                - cooldown 3s
                 - random:
                     - narrate "<server.flag[pfx_fischer]><&f> It's a looong way down..."
                     - narrate "<server.flag[pfx_fischer]><&f> The whole world is down there..."

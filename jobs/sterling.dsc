@@ -22,7 +22,7 @@ sterling_main:
         2:
             click trigger:
                 script:
-                - ratelimit <player> 10s
+                - cooldown 3s
                 - narrate "<server.flag[pfx_sterling]><&f> Who's there? We need more hands at the forge, <&hover[<&a>[Craft an Iron Chestplate]]><&6>forge an iron chestplate<&end_hover><&f> to prove your mettle."
                 - zap 3
 
@@ -30,7 +30,7 @@ sterling_main:
         3:
             click trigger:
                 script:
-                - ratelimit <player> 10s
+                - cooldown 7s
                 - if <player.has_advancement[minecraft:story/obtain_armor]>:
                     - narrate "<server.flag[pfx_sterling]><&f> Ah! A robust armour plate. Rough around the edges, but it'll do..."
                     - zap 4
@@ -41,11 +41,12 @@ sterling_main:
         4:
             click trigger:
                 script:
+                - cooldown 3s
                 # this jobs PAPI returns True with a color tag instead of a boolean, so here's the workaround
                 - if <placeholder[jobsr_user_isin_Smith].contains_text[True]>:
                     - narrate "<server.flag[pfx_sterling]><&f> You'll get arms of steel in no time!"
                 - else:
-                    - narrate "<server.flag[pfx_sterling]><&f> Would you like to join the Society of Innovation as an Artificer? \n<&8><&o>Respond with: <&hover[<&9>[Become a Smith]]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover>"
+                    - narrate "<server.flag[pfx_sterling]><&f> Would you like to join the Society of Innovation as an Artificer? <server.flag[npc_dialouge_yes]>"
 
             chat trigger:
                 1:
@@ -54,7 +55,7 @@ sterling_main:
                     show as normal chat: false
                     script:
                     - if <placeholder[jobsr_user_joinedjobcount]> >= <placeholder[jobsr_maxjobs]>:
-                        - narrate "<server.flag[pfx_sterling]><&f> You must leave a job before you can become a Artificer <&hover[<&8>[/jobs leave]]><&8><element[/jobs leave].on_click[/jobs leave ].type[SUGGEST_COMMAND]><&end_hover>"
+                        - narrate "<server.flag[pfx_sterling]><&f> You must leave a job before you can become a Artificer <server.flag[npc_dialouge_leavejob]>"
                     - else:
                         - jobs join Smith
                         - narrate "<&9>You have been employed as a Artificer. Welcome to the Society of Innovation!"
