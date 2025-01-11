@@ -15,6 +15,7 @@ jett_main:
         1:
             click trigger:
                 script:
+                - cooldown 6s
                 - narrate "<server.flag[pfx_jett]><&f> Hey there, I'm Jett, master Brewer and Quartermaster."
                 - wait 3
                 - narrate "<server.flag[pfx_jett]><&f> Give me a holla if you'd like to join the Keepers of the Vault as a Quartermaster."
@@ -24,7 +25,7 @@ jett_main:
         2:
             click trigger:
                 script:
-                - ratelimit <player> 10s
+                - cooldown 3s
                 - narrate "<server.flag[pfx_jett]><&f> A good Quartermaster needs to know how to <&hover[<&a>[Gently harvest honey with a campfire]]><&6>harvest honey safely<&end_hover><&f>."
                 - zap 3
 
@@ -32,7 +33,7 @@ jett_main:
         3:
             click trigger:
                 script:
-                - ratelimit <player> 10s
+                - cooldown 3s
                 - if <player.has_advancement[minecraft:husbandry/safely_harvest_honey]>:
                     - narrate "<server.flag[pfx_jett]><&f> Well done! I can see you're a busy bee."
                     - zap 4
@@ -47,18 +48,35 @@ jett_main:
                 - if <placeholder[jobsr_user_isin_Quartermaster].contains_text[True]>:
                     - narrate "<server.flag[pfx_jett]><&f> Give a go at brewing when you have the time."
                 - else:
-                    - narrate "<server.flag[pfx_jett]><&f> Would you like to become a Quartermaster? <&hover[<&a>[Become a Quartermaster]]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover>"
+                    - narrate "<server.flag[pfx_jett]><&f> Would you like to become a Quartermaster? <server.flag[npc_dialouge_yesno]>"
 
+        # main's chat trigger
+        5:
             chat trigger:
                 1:
                     trigger: /ye|ok/
                     hide trigger message: true
                     show as normal chat: false
                     script:
+                    - flag player npc_chatted expire:15s
+
+                    # join the player to the job
                     - if <placeholder[jobsr_user_joinedjobcount]> >= <placeholder[jobsr_maxjobs]>:
-                        - narrate "<server.flag[pfx_jett]><&f> You must leave a job before you can become a Quartermaster <&hover[[<&8>/jobs leave]]><&8><element[/jobs leave].on_click[/jobs leave ].type[SUGGEST_COMMAND]><&end_hover>"
+                        - narrate "<server.flag[pfx_jett]><&f> You must leave a job before you can become a Quartermaster <server.flag[npc_dialouge_leavejob]>"
                     - else:
                         - jobs join Quartermaster
                         - narrate "<&9>You have been employed as a Quartermaster. Welcome to the Keepers of the Vault!"
-                        - wait 2s
                         - narrate "<server.flag[pfx_jett]><&f> The Vault awaits you, Quartermaster."
+                2:
+                    trigger: /no|na/
+                    hide trigger message: true
+                    show as normal chat: false
+                    script:
+                    - flag player npc_chatted expire:15s
+                    - narrate "<server.flag[pfx_jett]><&f> See you around."
+                3:
+                    trigger: /*/
+                    hide trigger message: true
+                    show as normal chat: false
+                    script:
+                    - narrate "<server.flag[pfx_jett]><&f> What's that?"

@@ -14,7 +14,7 @@ astra_portal_main:
         1:
             click trigger:
                 script:
-                - ratelimit <player> 5s
+                - cooldown 3s
                 - random:
                     - narrate "<server.flag[pfx_astra]><&f> We got a big haul this time!"
                     - narrate "<server.flag[pfx_astra]><&f> <player.name>? I'll remember you for next time."

@@ -14,6 +14,7 @@ cali_main:
             proximity trigger:
                 entry:
                     script:
+                    - cooldown 3s
                     - narrate "<server.flag[pfx_cali]><&f> Hi <player.name>! Welcome to Hollowtree! I'm Cali, your guide! Get started by <&e>right clicking <&f>NPCs such as myself!"
                     - wait 5s
                     - narrate "<server.flag[pfx_cali]><&f> I offer many guides, and if this is your first time here, I recommend viewing our <&e>Introduction to Hollowtree Guide! <&f>You'll be rewarded with coins for viewing any of these guides!"

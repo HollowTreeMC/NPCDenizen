@@ -1,4 +1,4 @@
-#Sterling is the Smith job NPC
+#Sterling is the Artificer job NPC
 sterling:
     type: assignment
     actions:
@@ -22,7 +22,7 @@ sterling_main:
         2:
             click trigger:
                 script:
-                - ratelimit <player> 10s
+                - cooldown 3s
                 - narrate "<server.flag[pfx_sterling]><&f> Who's there? We need more hands at the forge, <&hover[<&a>[Craft an Iron Chestplate]]><&6>forge an iron chestplate<&end_hover><&f> to prove your mettle."
                 - zap 3
 
@@ -30,7 +30,7 @@ sterling_main:
         3:
             click trigger:
                 script:
-                - ratelimit <player> 10s
+                - cooldown 7s
                 - if <player.has_advancement[minecraft:story/obtain_armor]>:
                     - narrate "<server.flag[pfx_sterling]><&f> Ah! A robust armour plate. Rough around the edges, but it'll do..."
                     - zap 4
@@ -45,18 +45,42 @@ sterling_main:
                 - if <placeholder[jobsr_user_isin_Smith].contains_text[True]>:
                     - narrate "<server.flag[pfx_sterling]><&f> You'll get arms of steel in no time!"
                 - else:
-                    - narrate "<server.flag[pfx_sterling]><&f> Would you like to join the Society of Innovation as an Artificer? <&hover[<&9>[Become a Smith]]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover>"
+                    - narrate "<server.flag[pfx_sterling]><&f> Would you like to join the Society of Innovation as an Artificer? <server.flag[npc_dialouge_yesno]>"
 
+                    # activate chat trigger, response if the player hasn't selected a response - this acts as a cooldown
+                    - zap 5
+                    - wait 15s
+                    - zap 4
+                    - if !<player.has_flag[npc_chatted]>:
+                        - narrate "<server.flag[pfx_sterling]><&f> Oh look! Astra has another shipment of Gold for me!"
+
+        # main's chat trigger
+        5:
             chat trigger:
                 1:
                     trigger: /ye|ok/
                     hide trigger message: true
                     show as normal chat: false
                     script:
+                    - flag player npc_chatted expire:15s
+
+                    # join the player to the job
                     - if <placeholder[jobsr_user_joinedjobcount]> >= <placeholder[jobsr_maxjobs]>:
-                        - narrate "<server.flag[pfx_sterling]><&f> You must leave a job before you can become a Artificer <&hover[<&8>[/jobs leave]]><&8><element[/jobs leave].on_click[/jobs leave ].type[SUGGEST_COMMAND]><&end_hover>"
+                        - narrate "<server.flag[pfx_sterling]><&f> You must leave a job before you can become a Artificer <server.flag[npc_dialouge_leavejob]>"
                     - else:
-                        - jobs join Smith
+                        - jobs join Artificer
                         - narrate "<&9>You have been employed as a Artificer. Welcome to the Society of Innovation!"
-                        - wait 2s
                         - narrate "<server.flag[pfx_sterling]><&f> Ha ha! Another to the Society of Innovation!"
+                2:
+                    trigger: /no|na/
+                    hide trigger message: true
+                    show as normal chat: false
+                    script:
+                    - flag player npc_chatted expire:15s
+                    - narrate "<server.flag[pfx_sterling]><&f> A shame, your forging shows potential."
+                3:
+                    trigger: /*/
+                    hide trigger message: true
+                    show as normal chat: false
+                    script:
+                    - narrate "<server.flag[pfx_sterling]><&f> Hmmm?"
