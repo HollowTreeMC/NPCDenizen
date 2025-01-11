@@ -46,7 +46,7 @@ elara_main:
                 - if <placeholder[jobsr_user_isin_Bladewarden].contains_text[True]>:
                     - narrate "<server.flag[pfx_elara]><&f> Bested anyone in combat recently?"
                 - else:
-                    - narrate "<server.flag[pfx_elara]><&f> Wanna join the Bladewarden Guard? <server.flag[npc_dialouge_yesno]>"
+                    - narrate "<server.flag[pfx_elara]><&f> Wanna join the Bladewarden Guard? <server.flag[npc_dialogue_yesno]>"
 
                     # activate chat trigger, response if the player hasn't selected a response - this acts as a cooldown
                     - zap 5
@@ -67,7 +67,7 @@ elara_main:
 
                     # join the player to the job
                     - if <placeholder[jobsr_user_joinedjobcount]> >= <placeholder[jobsr_maxjobs]>:
-                        - narrate "<server.flag[pfx_elara]><&f> You must leave a job before you can become a Bladewarden <server.flag[npc_dialouge_leavejob]>"
+                        - narrate "<server.flag[pfx_elara]><&f> You must leave a job before you can become a Bladewarden <server.flag[npc_dialogue_leavejob]>"
                     - else:
                         - jobs join Bladewarden
                         - narrate "<&9>You have been employed as a Bladewarden. Welcome to the Bladewarden Guard!"

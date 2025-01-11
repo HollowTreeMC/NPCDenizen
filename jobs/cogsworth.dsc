@@ -48,7 +48,7 @@ cogsworth_main:
                 - if <placeholder[jobsr_user_isin_Tinkerer].contains_text[True]>:
                     - narrate "<server.flag[pfx_cogsworth]><&f> What did the differential gear tell the spigot? Hahahaha!"
                 - else:
-                    - narrate "<server.flag[pfx_cogsworth]><&f> Come, let me take you into my employ <server.flag[npc_dialouge_yesno]>"
+                    - narrate "<server.flag[pfx_cogsworth]><&f> Come, let me take you into my employ <server.flag[npc_dialogue_yesno]>"
 
                     # activate chat trigger, response if the player hasn't selected a response - this acts as a cooldown
                     - zap 5
@@ -69,7 +69,7 @@ cogsworth_main:
 
                     # join the player to the job
                     - if <placeholder[jobsr_user_joinedjobcount]> >= <placeholder[jobsr_maxjobs]>:
-                        - narrate "<server.flag[pfx_cogsworth]><&f> Dearie me, you're too involved to become a Tinkerer <server.flag[npc_dialouge_leavejob]>"
+                        - narrate "<server.flag[pfx_cogsworth]><&f> Dearie me, you're too involved to become a Tinkerer <server.flag[npc_dialogue_leavejob]>"
                     - else:
                         - jobs join Tinkerer
                         - narrate "<&9>You have been employed as a Tinkerer. Welcome to The Clockwork Assembly!"

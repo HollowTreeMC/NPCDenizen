@@ -37,7 +37,7 @@ ladyvalvewright_main:
                     - if <player.has_permission[group.chronarch]> || <player.money> > 1000000:
                         - narrate "<server.flag[pfx_ladyvalvewright]><&f> Wonderful! With your status, you may purchase a temporary emporium pass!"
                         - wait 2
-                        - narrate "<server.flag[pfx_ladyvalvewright]><&f> Would like to purchase a pass? For 5,000 coins, you can purchase a 1-week pass! <server.flag[npc_dialouge_yesno]>"
+                        - narrate "<server.flag[pfx_ladyvalvewright]><&f> Would like to purchase a pass? For 5,000 coins, you can purchase a 1-week pass! <server.flag[npc_dialogue_yesno]>"
 
                         # chat trigger entry
                         - zap 3

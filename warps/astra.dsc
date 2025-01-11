@@ -23,14 +23,14 @@ astra_main:
                 - narrate "<server.flag[pfx_astra]><&f> We've got precious cargo today, bound for the smeltery on the Portal Island."
                 - wait 5
                 - clickable astra_tp for<player> until:1m
-                - narrate "<server.flag[pfx_astra]><&f> We're leaving now, you're welcome to join if you'd like. <server.flag[npc_dialouge_okay]>"
+                - narrate "<server.flag[pfx_astra]><&f> We're leaving now, you're welcome to join if you'd like. <server.flag[npc_dialogue_okay]>"
                 - zap 2
         #free warp script, if a player does not TP initially, they possess 1 free TP
         2:
             click trigger:
                 script:
                 - cooldown 3s
-                - narrate "<server.flag[pfx_astra]><&f> We're leaving to the Portal Island now, want to come along? <server.flag[npc_dialouge_yes]>"
+                - narrate "<server.flag[pfx_astra]><&f> We're leaving to the Portal Island now, want to come along? <server.flag[npc_dialogue_yes]>"
 
             chat trigger:
                 1:
@@ -45,7 +45,7 @@ astra_main:
             click trigger:
                 script:
                 - cooldown 3s
-                - narrate "<server.flag[pfx_astra]><&f> <player.name>! Want to go to the portal island? I can take you for 500 coins. <server.flag[npc_dialouge_yesno]>"
+                - narrate "<server.flag[pfx_astra]><&f> <player.name>! Want to go to the portal island? I can take you for 500 coins. <server.flag[npc_dialogue_yesno]>"
 
             chat trigger:
                 1:
