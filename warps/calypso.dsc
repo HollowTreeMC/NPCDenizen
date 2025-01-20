@@ -23,7 +23,7 @@ calypso_main:
                 - wait 6
                 - narrate "<server.flag[pfx_calypso]><&f> I'm on a gold run, heading to the Windspire Cove; home of the March of Progress!"
                 - wait 5
-                - narrate "<server.flag[pfx_calypso]><&f> We're leaving now, you're welcome to join if you'd like. <server.flag[npc_dialouge_yes]>"
+                - narrate "<server.flag[pfx_calypso]><&f> We're leaving now, you're welcome to join if you'd like. <server.flag[npc_dialogue_yes]>"
                 - zap 2
 
         #free warp script
@@ -31,7 +31,7 @@ calypso_main:
             click trigger:
                 script:
                 - cooldown 3s
-                - narrate "<server.flag[pfx_calypso]><&f> We're leaving to the Windspire Cove now, want to come along? <server.flag[npc_dialouge_yes]>"
+                - narrate "<server.flag[pfx_calypso]><&f> We're leaving to the Windspire Cove now, want to come along? <server.flag[npc_dialogue_yes]>"
 
             chat trigger:
                 1:
@@ -49,7 +49,7 @@ calypso_main:
                 - cooldown 4s
                 - narrate "<server.flag[pfx_calypso]><&f> <player.name>! You've the air of a Trailblazer. Come venture to the beyond with us!"
                 - wait 1s
-                - narrate "<server.flag[pfx_calypso]><&f> The fare is a mere 500 coins, would you like to depart? <server.flag[npc_dialouge_yesno]>"
+                - narrate "<server.flag[pfx_calypso]><&f> The fare is a mere 500 coins, would you like to depart? <server.flag[npc_dialogue_yesno]>"
 
             chat trigger:
                 1:

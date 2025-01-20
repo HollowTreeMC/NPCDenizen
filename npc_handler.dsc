@@ -32,10 +32,10 @@ npc_handler:
         - flag server pfx_ladyvalvewright:<server.flag[pfx_chronarch]><&sp><&6>Lady<&sp>Valvewright<&f>:<&f>
 
         # NPC SETUPS
-        - flag server npc_dialouge_okay:<n><&7><&o><&sp>→<&sp>Respond<&sp>with<&sp><&hover[<&7>click to respond]><element[[<&e>Okay<&7>]].on_click[/denizenclickable chat Yes]><&end_hover>
-        - flag server npc_dialouge_yes:<n><&7><&o><&sp>→<&sp>Respond<&sp>with<&sp><&hover[<&7>click to respond]><element[[<&e>Yes<&7>]].on_click[/denizenclickable chat Yes]><&end_hover>
-        - flag server npc_dialouge_yesno:<n><&7><&o><&sp>→<&sp>Respond<&sp>with<&sp><&hover[<&7>click to respond]><element[[<&e>Yes<&7>]].on_click[/denizenclickable chat Yes]><&end_hover><&sp><&hover[<&7>click to respond]><element[[<&e>No<&7>]].on_click[/denizenclickable chat No]><&end_hover>
-        - flag server npc_dialouge_leavejob:<&7><&o>→<&sp><&hover[<&7>autofill command]><element[/jobs leave ].on_click[/jobs leave ].type[SUGGEST_COMMAND]><&end_hover>
+        - flag server npc_dialogue_okay:<n><&7><&o><&sp>→<&sp>Respond<&sp>with<&sp><&hover[<&7>click to respond]><element[[<&e>Okay<&7>]].on_click[/denizenclickable chat Yes]><&end_hover>
+        - flag server npc_dialogue_yes:<n><&7><&o><&sp>→<&sp>Respond<&sp>with<&sp><&hover[<&7>click to respond]><element[[<&e>Yes<&7>]].on_click[/denizenclickable chat Yes]><&end_hover>
+        - flag server npc_dialogue_yesno:<n><&7><&o><&sp>→<&sp>Respond<&sp>with<&sp><&hover[<&7>click to respond]><element[[<&e>Yes<&7>]].on_click[/denizenclickable chat Yes]><&end_hover><&sp><&hover[<&7>click to respond]><element[[<&e>No<&7>]].on_click[/denizenclickable chat No]><&end_hover>
+        - flag server npc_dialogue_leavejob:<&7><&o>→<&sp><&hover[<&7>autofill command]><element[/jobs leave ].on_click[/jobs leave ].type[SUGGEST_COMMAND]><&end_hover>
 
         #   Xur NPC
         - if <util.time_now.day_of_week> == 1 || <util.time_now.day_of_week> == 6:

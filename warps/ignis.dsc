@@ -26,7 +26,7 @@ ignis_main:
             click trigger:
                 script:
                 - cooldown 3s
-                - narrate "<server.flag[pfx_ignis]><&f> I can take you a bit farther out in the Nether for a small fee, only 250 coins. <server.flag[npc_dialouge_yesno]>"
+                - narrate "<server.flag[pfx_ignis]><&f> I can take you a bit farther out in the Nether for a small fee, only 250 coins. <server.flag[npc_dialogue_yesno]>"
 
             chat trigger:
                 1:

@@ -27,7 +27,7 @@ ladyvalvewright_main:
         2:
             click trigger:
                 script:
-                - cooldown 5s
+                - cooldown 3s
                 # player already has the pass
                 - if <player.has_permission[cmi.command.portal.adminshop]>:
                     - narrate "<server.flag[pfx_ladyvalvewright]><&f> Your pass is valid. Enjoy the Emporium!"
@@ -37,17 +37,26 @@ ladyvalvewright_main:
                     - if <player.has_permission[group.chronarch]> || <player.money> > 1000000:
                         - narrate "<server.flag[pfx_ladyvalvewright]><&f> Wonderful! With your status, you may purchase a temporary emporium pass!"
                         - wait 2
-                        - narrate "<server.flag[pfx_ladyvalvewright]><&f> Would like to purchase a pass? For 5,000 coins, you can purchase a 1-week pass! <n><&8><&o>Respond with: <&8><&hover[<&6>Purchase Pass]><&8><element[[Yes]].on_click[/denizenclickable chat Yes]><&end_hover> <&hover[Do not purchase]><&8><element[[No]].on_click[/denizenclickable chat No]><&end_hover>"
+                        - narrate "<server.flag[pfx_ladyvalvewright]><&f> Would like to purchase a pass? For 5,000 coins, you can purchase a 1-week pass! <server.flag[npc_dialogue_yesno]>"
+
+                        # chat trigger entry
+                        - zap 3
+                        - wait 15s
+                        - zap 2
+                        - if !<player.has_flag[npc_chatted]>:
+                            - narrate "<server.flag[pfx_ladyvalvewright]><&f> I've business matters to attend to."
                     # player does not meet the requisite to purchase the pass
                     - else:
                         - narrate "<server.flag[pfx_ladyvalvewright]><&f> Ugh, you lack <&hover[<&a>Achieve the Chronarch rank]><&6>status and wealth<&end_hover><&f>! Return once you have progressed through the echelon!"
 
-            chat trigger:
-                1:
-                    trigger: /ye/ok/
-                    hide trigger message: true
-                    show as normal chat: false
-                    script:
+            3:
+                chat trigger:
+                    1:
+                        trigger: /ye/ok/
+                        hide trigger message: true
+                        show as normal chat: false
+                        script:
+                        - flag player npc_chatted expire:15s
                         - if <player.has_permission[group.chronarch]> || <player.money> > 1000000:
                             - if <player.money> >= 5000:
                                 - money take quantity:5000 players:<player>
@@ -57,10 +66,16 @@ ladyvalvewright_main:
                             - else:
                                 - define temp 5000
                                 - narrate "<server.flag[pfx_ladyvalvewright]><&f> Your esteemed self, another <[temp].sub[<player.money>].round_up> coins are required."
-
-                2:
-                    trigger: /no|na/
-                    hide trigger message: true
-                    show as normal chat: false
-                    script:
-                    - narrate "<server.flag[pfx_ladyvalvewright]><&f> Be sure to purchase your pass to enjoy our emporium!"
+                    2:
+                        trigger: /no|na/
+                        hide trigger message: true
+                        show as normal chat: false
+                        script:
+                        - flag player npc_chatted expire:15s
+                        - narrate "<server.flag[pfx_ladyvalvewright]><&f> Be sure to purchase your pass to enjoy our emporium!"
+                    3:
+                        trigger: /*/
+                        hide trigger message: true
+                        show as normal chat: false
+                        script:
+                        - narrate "<server.flag[pfx_ladyvalvewright]><&f> I don't understand"

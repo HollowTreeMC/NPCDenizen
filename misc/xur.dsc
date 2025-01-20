@@ -26,7 +26,7 @@ xur_main:
                 # is the shop active?
                 - if !<server.has_flag[xur_quest]>:
                     # shop is inactive, return dialouge:
-                    - if <util.random_chance[1]>:
+                    - if <util.random_chance[10]>:
                         - narrate "<server.flag[pfx_xur]><&f> Wait, why am I blocky?"
                     - else:
                         - random:
@@ -106,10 +106,30 @@ xur_shop:
                 - flag server xur_location:<location[86.5,142,-47.5,0,0,Void]>
                 # Spawn - Next to waterfall
                 - flag server xur_location:<location[54.5,130.0,42.5,0,0,Void]>
-                # Explorer - Under the large decorative house in the back of the island
+                # Explorer Island - Under the large decorative house in the back of the island
                 - flag server xur_location:<location[-1033.5,170.0,111.5,0,0,Void]>
-                # Portal - On the resource world teleport island
+                # Portal Island - On the resource world teleport island
                 - flag server xur_location:<location[-1903.5,38.0,1066.5,0,0,Void]>
+
+                # REMOVE OLD LOCATIONS AND ADD THESE ON FULL RELEASE OF 1.21.X
+
+                # Portal Island - Down the flowing water into a hidden room
+                # - flag server xur_location:<location[1941.5,29.0,1058.5,0,0,Void]>
+                # Portal Island - Inside large cooling tube next to end portal
+                # - flag server xur_location:<location[2066.5,47.0,1035.5,0,0,Void]>
+                # Spawn Island - Climb up the big tree at the back of the island
+                # - flag server xur_location:<location[67.5,169.0,-23.5,0,0,Void]>
+                # Spawn Island - Secret room behind Discovery Lounge
+                # - flag server xur_location:<location[-64.5,139.0,-24.5,0,0,Void]>
+                # PvP Island - Inside green airship
+                # - flag server xur_location:<location[1737.5,90.0,134.5,0,0,Void]>
+                # PvP Island - Inside copper chimney
+                # - flag server xur_location:<location[1688.5,96.0,198.5,0,0,Void]>
+                # Explorer Island - Side of the main island
+                # - flag server xur_location:<location[-983.5,178.0,95.5,0,0,Void]>
+                # Explorer Island - Inside yellow balloon
+                # - flag server xur_location:<location[-982.5,217.0,76.5,0,0,Void]>
+
 
         # teleports xur to the correct location
         - teleport <npc[28]> <server.flag[xur_location]>

@@ -1,4 +1,4 @@
-#Rune is the NPC which hands out the Sorcerer job, located on the portal island inside the brewery hall.
+#Rune is the NPC which hands out the Runweaver job, located on the portal island inside the brewery hall.
 rune:
     type: assignment
     actions:
@@ -44,23 +44,46 @@ rune_main:
         4:
             click trigger:
                 script:
-                - cooldown 3s
                 # this jobs PAPI returns True with a color tag instead of a boolean, so here's the workaround
-                - if <placeholder[jobsr_user_isin_Sorcerer].contains_text[True]>:
+                - if <placeholder[jobsr_user_isin_Runeweaver].contains_text[True]>:
                     - narrate "<server.flag[pfx_rune]><&f> Fellow Runeweaver. We should discuss potion brewing sometime."
                 - else:
-                    - narrate "<server.flag[pfx_rune]><&f> Would you like to join The Order of Runes, as a Runeweaver? <server.flag[npc_dialouge_yes]>"
+                    - narrate "<server.flag[pfx_rune]><&f> Would you like to join The Order of Runes, as a Runeweaver? <server.flag[npc_dialogue_yesno]>"
 
+                    # activate chat trigger, response if the player hasn't selected a response - this acts as a cooldown
+                    - zap 5
+                    - wait 15s
+                    - zap 4
+                    - if !<player.has_flag[npc_chatted]>:
+                        - narrate "<server.flag[pfx_rune]><&f> This complex weavve demands my attention."
+
+        # main's chat trigger
+        5:
             chat trigger:
                 1:
                     trigger: /ye|ok/
                     hide trigger message: true
                     show as normal chat: false
                     script:
+                    - flag player npc_chatted expire:15s
+
+                    # join the player to the job
                     - if <placeholder[jobsr_user_joinedjobcount]> >= <placeholder[jobsr_maxjobs]>:
-                        - narrate "<server.flag[pfx_rune]><&f> You must leave a job before you can become a Runeweaver <server.flag[npc_dialouge_leavejob]>"
+                        - narrate "<server.flag[pfx_rune]><&f> You must leave a job before you can become a Runeweaver <server.flag[npc_dialogue_leavejob]>"
                     - else:
-                        - jobs join Sorcerer
+                        - jobs join Runeweaver
                         - narrate "<&9>You have been employed as a Runeweaver."
-                        - wait 2s
                         - narrate "<server.flag[pfx_rune]><&f> Do you feel the arcane?"
+                2:
+                    trigger: /no|na/
+                    hide trigger message: true
+                    show as normal chat: false
+                    script:
+                    - flag player npc_chatted expire:15s
+                    - narrate "<server.flag[pfx_rune]><&f> I'll be here if you change your mind!"
+                3:
+                    trigger: /*/
+                    hide trigger message: true
+                    show as normal chat: false
+                    script:
+                    - narrate "<server.flag[pfx_rune]><&f> Hm? I didn't get that."
