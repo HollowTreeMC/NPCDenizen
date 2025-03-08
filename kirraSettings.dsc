@@ -12,24 +12,32 @@ WeatherOff:
   description: Weather Removeith
   name: weatheroff
   permission: godLordOfAll
-  usage: /weatheroff
+  debug: false
+  usage: /weatheroff <&lt>true<&gt> | <&lt>cancel<&gt>
   script:
-    - ratelimit <player> 10s
+    - ratelimit <player> 2s
     - choose <context.args.get[1]>:
       - case always:
-        - if <player.has_permission[godLordOfAll.always]>:
+        - flag player autoWeatheroffOff
+        - execute as_op "pweather clear"
+        - narrate "<&3>[<&b><&l>!<&3>]<&r> No more rain time ever!"
+      - case cancel:
+        - flag player autoWeatheroffoff:!
+        - execute as_op "pweather reset"
+        - narrate "<&3>[<&b><&l>!<&3>]<&r> Weather is back on. Idk why though, seems questionable to me."
+      - default:
+        - if <player.has_flag[autoWeatheroffOff]>:
+          - flag player autoWeatheroffoff:!
+          - execute as_op "pweather reset"
+          - narrate "<&3>[<&b><&l>!<&3>]<&r> Weather is back on. Idk why though, seems questionable to me."
+        - else:
           - flag player autoWeatheroffOff
           - execute as_op "pweather clear"
-          - narrate "<&3>[<&b><&l>!<&3>]<&r> No more rain time ever<&lt>3"
-      - case once:
-        - execute as_op "pweather clear"
-        - narrate "<&3>[<&b><&l>!<&3>]<&r> Weather off for right now, toggle it permenantly with /weatheroff always."
-      - case off:
-        - flag player autoWeatheroffoff:!
-        - narrate "<&3>[<&b><&l>!<&3>]<&r> Weather is back on. Idk why though, seems questionable to me."
+          - narrate "<&3>[<&b><&l>!<&3>]<&r> No more rain time ever!"
 #checkjob (job)
 CheckJob:
   type: command
+  debug: false
   description: Use /checkjob (job)
   name: checkjob
   permission: godLordOfAll
