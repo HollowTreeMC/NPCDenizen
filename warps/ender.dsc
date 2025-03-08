@@ -13,7 +13,7 @@ ender_main:
             click trigger:
                 script:
                 - cooldown 3s
-                - narrate "<server.flag[pfx_ender]><&f> Dare to face combat trials <player.name>? There is no fee, say the word and I'll take you. <server.flag[npc_dialouge_okay]>"
+                - narrate "<server.flag[pfx_ender]><&f> Dare to face combat trials <player.name>? There is no fee, say the word and I'll take you. <server.flag[npc_dialogue_okay]>"
 
             chat trigger:
                 1:

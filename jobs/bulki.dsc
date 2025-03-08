@@ -47,7 +47,7 @@ bulki_main:
                 - if <placeholder[jobsr_user_isin_Scrapper].contains_text[True]>:
                     - narrate "<server.flag[pfx_bulki]><&f> Hiya fellow Scrapper. We can scrap all kinds of tools and gear for materials!"
                 - else:
-                    - narrate "<server.flag[pfx_bulki]><&f> Wanna join The Scrapclad Collective and become a Scrapper? <server.flag[npc_dialouge_yesno]>"
+                    - narrate "<server.flag[pfx_bulki]><&f> Wanna join The Scrapclad Collective and become a Scrapper? <server.flag[npc_dialogue_yesno]>"
 
                     # activate chat trigger, response if the player hasn't selected a response - this acts as a cooldown
                     - zap 5
@@ -68,7 +68,7 @@ bulki_main:
 
                     # join the player to the job
                     - if <placeholder[jobsr_user_joinedjobcount]> >= <placeholder[jobsr_maxjobs]>:
-                        - narrate "<server.flag[pfx_bulki]><&f> You have too many jobs! Leave one to become a Scrapper <server.flag[npc_dialouge_leavejob]>"
+                        - narrate "<server.flag[pfx_bulki]><&f> You have too many jobs! Leave one to become a Scrapper <server.flag[npc_dialogue_leavejob]>"
                     - else:
                         - jobs join Scrapper
                         - narrate "<&9>You have been employed as a Scrapper. Welcome to The Scrapclad Collective!"

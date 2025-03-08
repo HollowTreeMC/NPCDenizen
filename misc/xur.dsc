@@ -26,7 +26,7 @@ xur_main:
                 # is the shop active?
                 - if !<server.has_flag[xur_quest]>:
                     # shop is inactive, return dialouge:
-                    - if <util.random_chance[1]>:
+                    - if <util.random_chance[10]>:
                         - narrate "<server.flag[pfx_xur]><&f> Wait, why am I blocky?"
                     - else:
                         - random:

@@ -48,7 +48,7 @@ jett_main:
                 - if <placeholder[jobsr_user_isin_Quartermaster].contains_text[True]>:
                     - narrate "<server.flag[pfx_jett]><&f> Give a go at brewing when you have the time."
                 - else:
-                    - narrate "<server.flag[pfx_jett]><&f> Would you like to become a Quartermaster? <server.flag[npc_dialouge_yesno]>"
+                    - narrate "<server.flag[pfx_jett]><&f> Would you like to become a Quartermaster? <server.flag[npc_dialogue_yesno]>"
 
         # main's chat trigger
         5:
@@ -62,7 +62,7 @@ jett_main:
 
                     # join the player to the job
                     - if <placeholder[jobsr_user_joinedjobcount]> >= <placeholder[jobsr_maxjobs]>:
-                        - narrate "<server.flag[pfx_jett]><&f> You must leave a job before you can become a Quartermaster <server.flag[npc_dialouge_leavejob]>"
+                        - narrate "<server.flag[pfx_jett]><&f> You must leave a job before you can become a Quartermaster <server.flag[npc_dialogue_leavejob]>"
                     - else:
                         - jobs join Quartermaster
                         - narrate "<&9>You have been employed as a Quartermaster. Welcome to the Keepers of the Vault!"

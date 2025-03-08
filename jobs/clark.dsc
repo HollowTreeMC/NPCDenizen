@@ -47,7 +47,7 @@ clark_main:
                 - if <placeholder[jobsr_user_isin_Trailblazer].contains_text[True]>:
                     - narrate "<server.flag[pfx_clark]><&f> Perhaps, one day, all of the lands will be explored, Trailblazer."
                 - else:
-                    - narrate "<server.flag[pfx_clark]><&f> Would you like to join the Trailblazer Corps? <server.flag[npc_dialouge_yesno]>"
+                    - narrate "<server.flag[pfx_clark]><&f> Would you like to join the Trailblazer Corps? <server.flag[npc_dialogue_yesno]>"
 
                     # activate chat trigger, response if the player hasn't selected a response - this acts as a cooldown
                     - wait 15s
@@ -67,7 +67,7 @@ clark_main:
 
                     # join the player to the job
                     - if <placeholder[jobsr_user_joinedjobcount]> >= <placeholder[jobsr_maxjobs]>:
-                        - narrate "<server.flag[pfx_clark]><&f> You have too many jobs! Leave one to become a Trailblazer <server.flag[npc_dialouge_leavejob]>"
+                        - narrate "<server.flag[pfx_clark]><&f> You have too many jobs! Leave one to become a Trailblazer <server.flag[npc_dialogue_leavejob]>"
                     - else:
                         - jobs join Trailblazer
                         - narrate "<&9>You have been employed as a Trailblaze. Welcome to the Trailblazer Corps!"

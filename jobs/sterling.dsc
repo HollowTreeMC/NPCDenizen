@@ -45,7 +45,7 @@ sterling_main:
                 - if <placeholder[jobsr_user_isin_Smith].contains_text[True]>:
                     - narrate "<server.flag[pfx_sterling]><&f> You'll get arms of steel in no time!"
                 - else:
-                    - narrate "<server.flag[pfx_sterling]><&f> Would you like to join the Society of Innovation as an Artificer? <server.flag[npc_dialouge_yesno]>"
+                    - narrate "<server.flag[pfx_sterling]><&f> Would you like to join the Society of Innovation as an Artificer? <server.flag[npc_dialogue_yesno]>"
 
                     # activate chat trigger, response if the player hasn't selected a response - this acts as a cooldown
                     - zap 5
@@ -66,7 +66,7 @@ sterling_main:
 
                     # join the player to the job
                     - if <placeholder[jobsr_user_joinedjobcount]> >= <placeholder[jobsr_maxjobs]>:
-                        - narrate "<server.flag[pfx_sterling]><&f> You must leave a job before you can become a Artificer <server.flag[npc_dialouge_leavejob]>"
+                        - narrate "<server.flag[pfx_sterling]><&f> You must leave a job before you can become a Artificer <server.flag[npc_dialogue_leavejob]>"
                     - else:
                         - jobs join Artificer
                         - narrate "<&9>You have been employed as a Artificer. Welcome to the Society of Innovation!"
