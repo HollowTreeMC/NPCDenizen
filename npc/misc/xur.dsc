@@ -74,17 +74,17 @@ xur_shop:
         - flag server xur_location:<location[83.5,150,-11.8,-5,-64,Void]>
 
     # Saturday Configuration
-    - if <util.time_now.day_of_week> == 6:
+    - if <util.time_now.day_of_week> == 5:
         # Oi! has Xur has already been configured?
         - if !<server.has_flag[xur_quest]>:
 
             # select the quest for the week
             - random:
-                - flag server xur_quest:<list[beacon|"that which shines..."|"Ah... it shines so brightly..."]> expire:2d
-                - flag server xur_quest:<list[golden_apple|"perhaps you possess this delicacy... there is power in that fruit..."|"This fruits power is fleeting..."]> expire:2d
-                - flag server xur_quest:<list[diamond_horse_armor|"the gleam, the shine, the promise of premier protection for your steed — such a magnificent treasure I seek..."|"Ahhh, how it glitters, how it protects..."]> expire:2d
-                - flag server xur_quest:<list[recovery_compass|"I seek a device designed to guide the lost, the wounded... the weary... The compass I seek is no normal compass..."|"Recovery has a price..."]> expire:2d
-                - flag server xur_quest:<list[end_crystal|"this crystal you must bring me, it calls to the darkness. It has the power to summon a great dragon..."|"Unimagineable power..."]> expire:2d
+                - flag server xur_quest:<list[beacon|"that which shines..."|"Ah... it shines so brightly..."]> expire:3d
+                - flag server xur_quest:<list[golden_apple|"perhaps you possess this delicacy... there is power in that fruit..."|"This fruits power is fleeting..."]> expire:3d
+                - flag server xur_quest:<list[diamond_horse_armor|"the gleam, the shine, the promise of premier protection for your steed — such a magnificent treasure I seek..."|"Ahhh, how it glitters, how it protects..."]> expire:3d
+                - flag server xur_quest:<list[recovery_compass|"I seek a device designed to guide the lost, the wounded... the weary... The compass I seek is no normal compass..."|"Recovery has a price..."]> expire:3d
+                - flag server xur_quest:<list[end_crystal|"this crystal you must bring me, it calls to the darkness. It has the power to summon a great dragon..."|"Unimagineable power..."]> expire:3d
                 # the format for this listag goes: xur_quest:<list[ITEM]||"item hint"|"Upon quest completion"> expire:2d
 
             # select the items for this week's shop
@@ -111,28 +111,8 @@ xur_shop:
                 # Portal Island - On the resource world teleport island
                 - flag server xur_location:<location[-1903.5,38.0,1066.5,0,0,Void]>
 
-                # REMOVE OLD LOCATIONS AND ADD THESE ON FULL RELEASE OF 1.21.X
-
-                # Portal Island - Down the flowing water into a hidden room
-                # - flag server xur_location:<location[1941.5,29.0,1058.5,0,0,Void]>
-                # Portal Island - Inside large cooling tube next to end portal
-                # - flag server xur_location:<location[2066.5,47.0,1035.5,0,0,Void]>
-                # Spawn Island - Climb up the big tree at the back of the island
-                # - flag server xur_location:<location[67.5,169.0,-23.5,0,0,Void]>
-                # Spawn Island - Secret room behind Discovery Lounge
-                # - flag server xur_location:<location[-64.5,139.0,-24.5,0,0,Void]>
-                # PvP Island - Inside green airship
-                # - flag server xur_location:<location[1737.5,90.0,134.5,0,0,Void]>
-                # PvP Island - Inside copper chimney
-                # - flag server xur_location:<location[1688.5,96.0,198.5,0,0,Void]>
-                # Explorer Island - Side of the main island
-                # - flag server xur_location:<location[-983.5,178.0,95.5,0,0,Void]>
-                # Explorer Island - Inside yellow balloon
-                # - flag server xur_location:<location[-982.5,217.0,76.5,0,0,Void]>
-
-
-        # teleports xur to the correct location
-        - teleport <npc[28]> <server.flag[xur_location]>
+    # teleports xur to the correct location
+    - teleport <npc[28]> <server.flag[xur_location]>
 
 # Contains all the black market items
 xur_tier1:
