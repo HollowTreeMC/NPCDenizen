@@ -13,6 +13,7 @@ npc_handler:
         - flag server pfx_jett:<&8>{<&f>Quartermaster<&8>}<&sp><&6>Jett<&f>:<&f>
         - flag server pfx_rune:<&8>{<&f>Runeweaver<&8>}<&sp><&6>Rune<&f>:<&f>
         - flag server pfx_sterling:<&8>{<&f>Artificer<&8>}<&sp><&6>Sterling<&f>:<&f>
+
         #   Warp NPCs
         - flag server pfx_astra:<&8>{<&f>Aeronaut<&8>}<&sp><&6>Astra<&f>:<&f>
         - flag server pfx_calypso:<&8>{<&f>Trailblazer<&8>}<&sp><&6>Calypso<&f>:<&f>
@@ -20,6 +21,7 @@ npc_handler:
         - flag server pfx_ignis:<&8>{<&f>Aeronaut<&8>}<&sp><&6>Ignis<&f>:<&f>
         - flag server pfx_lewis:<&8>{<&f>Aeronaut<&8>}<&sp><&6>Lewis<&f>:<&f>
         - flag server pfx_vacuus:<&8>{<&f>Aeronaut<&8>}<&sp><&6>Vacuus<&f>:<&f>
+
         #   Tutorial NPCs
         - flag server pfx_tutorial:<&7>[<&f>Tutorial<&7>]<&sp>
         - flag server pfx_cali:<&8>{<&f>Aeronaut<&8>}<&sp><&6>Cali<&f>:<&f>
@@ -30,8 +32,9 @@ npc_handler:
         - flag server pfx_juniper:<&8>{<&f>Aeronaut<&8>}<&sp><&6>Juniper<&f>:<&f>
         - flag server pfx_xur:<&8>{<&f>Black<&sp>Marketeer<&8>}<&sp><&6>Xûr<&f>:<&f>
         - flag server pfx_ladyvalvewright:<server.flag[pfx_chronarch]><&sp><&6>Lady<&sp>Valvewright<&f>:<&f>
+        - flag server pfx_ladymarina:<server.flag[pfx_chronarch]><&sp><&6>Lady<&sp>Marina<&f>:<&f>
 
-        # NPC SETUPS
+        # NPC HELPERS
         - flag server npc_dialogue_okay:<n><&7><&o><&sp>→<&sp>Respond<&sp>with<&sp><&hover[<&7>click to respond]><element[[<&e>Okay<&7>]].on_click[/denizenclickable chat Yes]><&end_hover>
         - flag server npc_dialogue_yes:<n><&7><&o><&sp>→<&sp>Respond<&sp>with<&sp><&hover[<&7>click to respond]><element[[<&e>Yes<&7>]].on_click[/denizenclickable chat Yes]><&end_hover>
         - flag server npc_dialogue_yesno:<n><&7><&o><&sp>→<&sp>Respond<&sp>with<&sp><&hover[<&7>click to respond]><element[[<&e>Yes<&7>]].on_click[/denizenclickable chat Yes]><&end_hover><&sp><&hover[<&7>click to respond]><element[[<&e>No<&7>]].on_click[/denizenclickable chat No]><&end_hover>
