@@ -10,6 +10,7 @@ jett:
 
 jett_main:
     type: interact
+    debug: false
     steps:
         # npc intro
         1:

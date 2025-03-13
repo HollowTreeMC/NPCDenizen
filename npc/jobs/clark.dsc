@@ -5,12 +5,12 @@ clark:
         on assignment:
         - trigger name:click state:true
         - trigger name:chat state:true cooldown:false radius:5
-
     interact scripts:
     - clark_main
 
 clark_main:
     type: interact
+    debug: false
     steps:
         # npc intro
         1:
@@ -50,6 +50,7 @@ clark_main:
                     - narrate "<server.flag[pfx_clark]><&f> Would you like to join the Trailblazer Corps? <server.flag[npc_dialogue_yesno]>"
 
                     # activate chat trigger, response if the player hasn't selected a response - this acts as a cooldown
+                    - zap 5
                     - wait 15s
                     - zap 4
                     - if !<player.has_flag[npc_chatted]>:
