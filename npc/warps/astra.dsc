@@ -10,6 +10,7 @@ astra:
 
 astra_main:
     type: interact
+    debug: false
     steps:
         #first time meeting the NPC, Intro + Option to TP for free
         1:
