@@ -6,7 +6,7 @@ checkVotePending:
       - define tag <dark_aqua>[<aqua>!<dark_aqua>]<white>
       - define countrewards 0
       - foreach <server.flag[rewardtype]>:
-          - if <player.flag[<[value]>]> > 0:
+          - if <player.has_flag[<[value]>]>:
             - define countrewards:+:<player.flag[<[value]>]>
       - if <[countrewards]> > 0:
         - narrate "<[tag]> <gray><italic>You have unclaimed <[countrewards]> vote rewards. /vote claim or /vote manual to claim them."

@@ -50,6 +50,13 @@ jett_main:
                 - else:
                     - narrate "<server.flag[pfx_jett]><&f> Would you like to become a Quartermaster? <server.flag[npc_dialogue_yesno]>"
 
+                    # activate chat trigger, response if the player hasn't selected a response - this acts as a cooldown
+                    - zap 5
+                    - wait 15s
+                    - zap 4
+                    - if !<player.has_flag[npc_chatted]>:
+                        - narrate "<server.flag[pfx_jett]><&f> Haha! Well Met!"
+
         # main's chat trigger
         5:
             chat trigger:
