@@ -10,6 +10,7 @@ sterling:
 
 sterling_main:
     type: interact
+    debug: false
     steps:
         # npc intro
         1:
@@ -42,7 +43,7 @@ sterling_main:
             click trigger:
                 script:
                 # this jobs PAPI returns True with a color tag instead of a boolean, so here's the workaround
-                - if <placeholder[jobsr_user_isin_Smith].contains_text[True]>:
+                - if <placeholder[jobsr_user_isin_Artificer].contains_text[True]>:
                     - narrate "<server.flag[pfx_sterling]><&f> You'll get arms of steel in no time!"
                 - else:
                     - narrate "<server.flag[pfx_sterling]><&f> Would you like to join the Society of Innovation as an Artificer? <server.flag[npc_dialogue_yesno]>"

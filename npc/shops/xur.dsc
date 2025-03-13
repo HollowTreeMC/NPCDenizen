@@ -10,6 +10,7 @@ xur:
 
 xur_main:
     type: interact
+    debug: false
     steps:
         # introductory script
         1:
@@ -164,3 +165,33 @@ xur_tier2:
         - flag server <[slot_flag]>:<server.flag[gearlord_water_treads]>
         - flag server <[slot_flag]>:<server.flag[gearlord_jetpack]>
         - flag server <[slot_flag]>:<server.flag[platypus]>
+
+        # More efficient way to store & call flags by adding a main flag and adding all items to the main flag
+        # def count 0
+        # foreach <server.flag[testXur]>:
+          # count:++
+        # flag randIndex <util.random.int[1].to[count]>
+        # flag server <[slot_flag]>:<server.flag[testXur].get[randIndex]]>
+
+# Flag the shop with /ex flag server xurph:xur_shop_ & /ex flag server gearlordph:gearlord_
+BMISet:
+   type: command
+   description: Set xur items
+   name: BMISet
+   permission: developerLords.BM.Items
+   debug: false
+   usage: /BMISet
+   tab completions:
+        1: xur|gearlord
+   script:
+   - if <context.args.get[1]> == xur:
+     - define name <server.flag[xurph]><player.item_in_hand.display.to_lowercase.strip_color.replace[ ].with[].replace['].with[]>
+     - narrate "<[name]> was added!"
+     - flag server <[name]>:<player.item_in_hand>
+   - if <context.args.get[1]> == gearlord:
+     - define name <player.item_in_hand.display.to_lowercase.strip_color.replace[ ].with[_].replace['].with[]>
+     - narrate "<[name]> was added!"
+     - flag server <[name]>:<player.item_in_hand>
+
+   # More efficent way to to flag items for xur replace with
+   # - flag server testXur:->:<player.item_in_hand>

@@ -9,6 +9,7 @@ calypso_explorer:
 
 calypso_explorer_main:
     type: interact
+    debug: false
     steps:
         #first time meeting the NPC
         1:

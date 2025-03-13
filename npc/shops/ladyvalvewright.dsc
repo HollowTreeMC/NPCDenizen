@@ -10,6 +10,7 @@ ladyvalvewright:
 
 ladyvalvewright_main:
     type: interact
+    debug: false
     steps:
         # NPC intro
         1:

@@ -9,6 +9,7 @@ astra_portal:
 
 astra_portal_main:
     type: interact
+    debug: false
     steps:
         #first time meeting the NPC
         1:

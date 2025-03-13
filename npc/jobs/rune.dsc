@@ -10,6 +10,7 @@ rune:
 
 rune_main:
     type: interact
+    debug: false
     steps:
         # npc intro
         1:

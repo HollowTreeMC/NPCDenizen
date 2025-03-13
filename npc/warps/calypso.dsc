@@ -72,8 +72,8 @@ calypso_main:
 
 
 calypso_tp:
-    debug: false
     type: task
+    debug: false
     script:
         - playsound <player> sound:item_elytra_flying
         - execute as_server "/effect <player.name> Blindness 5 255"

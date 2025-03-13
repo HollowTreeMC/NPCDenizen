@@ -41,5 +41,5 @@ npc_handler:
         - flag server npc_dialogue_leavejob:<&7><&o>→<&sp><&hover[<&7>autofill command]><element[/jobs leave ].on_click[/jobs leave ].type[SUGGEST_COMMAND]><&end_hover>
 
         #   Xur NPC
-        - if <util.time_now.day_of_week> == 1 || <util.time_now.day_of_week> == 6:
+        - if <util.time_now.day_of_week> == 1 || <util.time_now.day_of_week> == 5:
             - run xur_shop

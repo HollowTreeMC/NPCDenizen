@@ -10,6 +10,7 @@ cogsworth:
 
 cogsworth_main:
     type: interact
+    debug: false
     steps:
         # npc introduction
         1:
