@@ -70,6 +70,7 @@ astra_main:
 
 astra_tp:
     type: task
+    debug: false
     script:
         - playsound <player> sound:item_elytra_flying
         - execute as_server "/effect <player.name> Blindness 5 255"
