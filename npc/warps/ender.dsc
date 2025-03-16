@@ -8,6 +8,7 @@ ender:
 
 ender_main:
     type: interact
+    debug: false
     steps:
         1:
             click trigger:

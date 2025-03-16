@@ -5,12 +5,12 @@ bulki:
         on assignment:
         - trigger name:click state:true
         - trigger name:chat state:true cooldown:false radius:5
-
     interact scripts:
     - bulki_main
 
 bulki_main:
     type: interact
+    debug: false
     steps:
         # npc intro
         1:

@@ -9,6 +9,7 @@ ignis:
 
 ignis_main:
     type: interact
+    debug: false
     steps:
     	#first time meeting the NPC
         1:
@@ -54,6 +55,7 @@ ignis_main:
 
 Ignis_tp:
     type: task
+    debug: false
     script:
         - playsound <player> sound:item_elytra_flying
         - execute as_server "/effect <player.name> Blindness 5 255"
