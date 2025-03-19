@@ -33,6 +33,7 @@ npc_handler:
         - flag server pfx_xur:<&8>{<&f>Black<&sp>Marketeer<&8>}<&sp><&6>Xûr<&f>:<&f>
         - flag server pfx_ladyvalvewright:<server.flag[pfx_chronarch]><&sp><&6>Lady<&sp>Valvewright<&f>:<&f>
         - flag server pfx_ladymarina:<server.flag[pfx_chronarch]><&sp><&6>Lady<&sp>Marina<&f>:<&f>
+        - flag server pfx_lordwestwood:<server.flag[pfx_chronarch]><&sp><&6>Lord<&sp>Westwood<&f>:<&f>
 
         # NPC HELPERS
         - flag server npc_dialogue_okay:<n><&7><&o><&sp>→<&sp>Respond<&sp>with<&sp><&hover[<&7>click to respond]><element[[<&e>Okay<&7>]].on_click[/denizenclickable chat Yes]><&end_hover>
