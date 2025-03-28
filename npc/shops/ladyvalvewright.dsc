@@ -44,39 +44,41 @@ ladyvalvewright_main:
                         - zap 3
                         - wait 15s
                         - zap 2
+
+                        # player does not respond to the chat
                         - if !<player.has_flag[npc_chatted]>:
                             - narrate "<server.flag[pfx_ladyvalvewright]><&f> I've business matters to attend to."
                     # player does not meet the requisite to purchase the pass
                     - else:
                         - narrate "<server.flag[pfx_ladyvalvewright]><&f> Ugh, you lack <&hover[<&a>Achieve the Chronarch rank]><&6>status and wealth<&end_hover><&f>! Return once you have progressed through the echelon!"
 
-            3:
-                chat trigger:
-                    1:
-                        trigger: /ye/ok/
-                        hide trigger message: true
-                        show as normal chat: false
-                        script:
-                        - flag player npc_chatted expire:15s
-                        - if <player.has_permission[group.chronarch]> || <player.money> > 1000000:
-                            - if <player.money> >= 5000:
-                                - money take quantity:5000 players:<player>
-                                - execute as_server "/lp user <player.name> permission settemp cmi.command.portal.adminshop 7d replace hollowtreeproject"
-                                - wait 5
-                                - narrate "<server.flag[pfx_ladyvalvewright]><&f> Your pass is now valid. Enjoy the Emporium!"
-                            - else:
-                                - define temp 5000
-                                - narrate "<server.flag[pfx_ladyvalvewright]><&f> Your esteemed self, another <[temp].sub[<player.money>].round_up> coins are required."
-                    2:
-                        trigger: /no|na/
-                        hide trigger message: true
-                        show as normal chat: false
-                        script:
-                        - flag player npc_chatted expire:15s
-                        - narrate "<server.flag[pfx_ladyvalvewright]><&f> Be sure to purchase your pass to enjoy our emporium!"
-                    3:
-                        trigger: /*/
-                        hide trigger message: true
-                        show as normal chat: false
-                        script:
-                        - narrate "<server.flag[pfx_ladyvalvewright]><&f> I don't understand"
+        3:
+            chat trigger:
+                1:
+                    trigger: /ye/ok/
+                    hide trigger message: true
+                    show as normal chat: false
+                    script:
+                    - flag player npc_chatted expire:15s
+
+                    - if <player.money> >= 5000:
+                        - money take quantity:5000 players:<player>
+                        - execute as_server "/lp user <player.name> permission settemp cmi.command.portal.adminshop 7d replace hollowtreeproject"
+                        - wait 5
+                        - narrate "<server.flag[pfx_ladyvalvewright]><&f> Your pass is now valid. Enjoy the Emporium!"
+                    - else:
+                        - define temp 5000
+                        - narrate "<server.flag[pfx_ladyvalvewright]><&f> Your esteemed self, another <[temp].sub[<player.money>].round_up> coins are required."
+                2:
+                    trigger: /no|na/
+                    hide trigger message: true
+                    show as normal chat: false
+                    script:
+                    - flag player npc_chatted expire:15s
+                    - narrate "<server.flag[pfx_ladyvalvewright]><&f> Be sure to purchase your pass to enjoy our emporium!"
+                3:
+                    trigger: /*/
+                    hide trigger message: true
+                    show as normal chat: false
+                    script:
+                    - narrate "<server.flag[pfx_ladyvalvewright]><&f> I don't understand"
