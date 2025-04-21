@@ -81,7 +81,7 @@ xur_shop:
 
             # select the quest for the week
             - random:
-                - flag server xur_quest:<list[beacon|"that which shines..."|"Ah... it shines so brightly..."]> expire:3d
+                - flag server xur_quest:<list[beacon|"that which lights the skies..."|"Ah... it shines so brightly..."]> expire:3d
                 - flag server xur_quest:<list[golden_apple|"perhaps you possess this delicacy... there is power in that fruit..."|"This fruits power is fleeting..."]> expire:3d
                 - flag server xur_quest:<list[diamond_horse_armor|"the gleam, the shine, the promise of premier protection for your steed — such a magnificent treasure I seek..."|"Ahhh, how it glitters, how it protects..."]> expire:3d
                 - flag server xur_quest:<list[recovery_compass|"I seek a device designed to guide the lost, the wounded... the weary... The compass I seek is no normal compass..."|"Recovery has a price..."]> expire:3d
@@ -110,7 +110,7 @@ xur_shop:
                 # Explorer Island - Under the large decorative house in the back of the island
                 - flag server xur_location:<location[-1033.5,170.0,111.5,0,0,Void]>
                 # Portal Island - On the resource world teleport island
-                - flag server xur_location:<location[-1903.5,38.0,1066.5,0,0,Void]>
+                - flag server xur_location:<location[1903.5,38.0,1066.5,0,0,Void]>
 
     # teleports xur to the correct location
     - teleport <npc[28]> <server.flag[xur_location]>

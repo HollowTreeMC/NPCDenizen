@@ -28,7 +28,7 @@ vacuus_main:
                             - narrate "<server.flag[pfx_vacuus]><&f> Oh the places you can go! You chose here I guess..."
                             - narrate "<server.flag[pfx_vacuus]><&f> Can you hear the dragon roar?"
                         - execute as_server "/effect <player.name> Blindness 3 255"
-                        - execute as_server "/rt <player.name> Hollowtree_the_end"
+                        - execute as_server "cmi rt <player.name> Hollowtree_the_end"
                     - else:
                         - define temp 250
                         - narrate "<server.flag[pfx_vacuus]><&f> Sorry, you need another <[temp].sub[<player.money>].round_up> coins."

@@ -206,11 +206,12 @@ experienceRun:
       - define tag <dark_aqua>[<aqua>!<dark_aqua>]<white>
       - random:
         - execute as_server "broadcast &d&lEXP!&r Exps for the peeps!"
-        - execute as_server "broadcast &d&lEXP!&r Just some experience. Better luck next roll."
+        - execute as_server "broadcast &d&lEXP!&r Exp finally working? Someone needs to fire the boss."
         - execute as_server "broadcast &d&lEXP!&r Exp for thee."
+        - execute as_server "broadcast &d&lEXP!&r Oh good exp finally works."
       - foreach <server.online_players>:
-          - define amount <util.random.int[2].to[15]>
-          - experience give <[amount]> player:<[value]>
+          - define amount <util.random.int[1].to[8]>
+          - experience give level <[amount]> player:<[value]>
           - narrate "<[tag]> You got <[amount]> experience levels!" target:<[value]>
 claimBlockClaim:
     type: task
@@ -255,4 +256,4 @@ discordannounce:
   permission: developerLords.discordannounce
   usage: /discordannounce player
   Script:
-    - execute as_server "discordsrv:discord bcast #496872659125010452 🪅 Vote Party! 🪅<&nl>～~～~～~～~～~～~～~～~～~～~～~～~～~～~<&nl>💰 ✨ 💰  Good Luck! 💰 ✨ 💰<&nl>～~～~～~～~～~～~～~～~～~～~～~～~～~～~<&nl>Starting in 3 minutes<&nl>@Keys"
+    - execute as_server "discordsrv:discord bcast #1178874250891907142 🪅 Vote Party! 🪅<&nl>～~～~～~～~～~～~～~～~～~～~～~～~～~～~<&nl>💰 ✨ 💰  Good Luck! 💰 ✨ 💰<&nl>～~～~～~～~～~～~～~～~～~～~～~～~～~～~<&nl>Starting in 3 minutes<&nl>"

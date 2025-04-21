@@ -21,6 +21,7 @@ npc_handler:
         - flag server pfx_ignis:<&8>{<&f>Aeronaut<&8>}<&sp><&6>Ignis<&f>:<&f>
         - flag server pfx_lewis:<&8>{<&f>Aeronaut<&8>}<&sp><&6>Lewis<&f>:<&f>
         - flag server pfx_vacuus:<&8>{<&f>Aeronaut<&8>}<&sp><&6>Vacuus<&f>:<&f>
+        - flag server pfx_the_duke:<&l><&Color[#5c4466]>T<&Color[#80708f]>h<&Color[#a0a0a0]>e<&sp><&Color[#b0b0b0]>D<&Color[#a0a0a0]>u<&Color[#80708f]>k<&Color[#6e567a]>e<&f>:<&f>
 
         #   Tutorial NPCs
         - flag server pfx_tutorial:<&7>[<&f>Tutorial<&7>]<&sp>
@@ -33,6 +34,7 @@ npc_handler:
         - flag server pfx_xur:<&8>{<&f>Black<&sp>Marketeer<&8>}<&sp><&6>Xûr<&f>:<&f>
         - flag server pfx_ladyvalvewright:<server.flag[pfx_chronarch]><&sp><&6>Lady<&sp>Valvewright<&f>:<&f>
         - flag server pfx_ladymarina:<server.flag[pfx_chronarch]><&sp><&6>Lady<&sp>Marina<&f>:<&f>
+        - flag server pfx_Nara:<&6>Mechanic<&sp>Nara<&f>:<&f>
         - flag server pfx_lordwestwood:<server.flag[pfx_chronarch]><&sp><&6>Lord<&sp>Westwood<&f>:<&f>
 
         # NPC HELPERS
@@ -44,3 +46,7 @@ npc_handler:
         #   Xur NPC
         - if <util.time_now.day_of_week> == 1 || <util.time_now.day_of_week> == 5:
             - run xur_shop
+        # Event
+        - flag server eventTag:<&7>[<&3>Event<&7>]<&b>
+        # Info
+        - flag server infoTag:<&b>[<&3>!<&7><&b>]<&r><&sp>
