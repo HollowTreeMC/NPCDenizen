@@ -1,4 +1,4 @@
-#this script is for astra the arlo clone
+#this script is for arlo, the bard at the brewery
 arlo:
     type: assignment
     actions:
@@ -29,7 +29,7 @@ arlo_main:
                         - flag player arlo_plays:5
                         - zap 2
                     - else:
-                        - narrate "<server.flag[pfx_arlo]><&f> The notes don't come out of thin air ya'know."
+                        - narrate "<server.flag[pfx_arlo]><&f> Maintaining these jukeboxes isn't free, y'know. Come back when you can afford more plays"
         # Player has purchased plays
         2:
             click trigger:
@@ -37,17 +37,17 @@ arlo_main:
                 # player is out of plays
                 - if <player.flag[arlo_plays]> <= 0:
                     - cooldown 3s
-                    - narrate "<server.flag[pfx_arlo]><&f> Songs for sigils! One sigil for five plays! Just say the word. <server.flag[npc_dialogue_okay]>"
+                    - narrate "<server.flag[pfx_arlo]><&f> Songs for sigils! One sigil for five plays! <server.flag[npc_dialogue_okay]>"
                     - zap 1
                 # player has plays remaining
                 - else:
-                    - narrate "<server.flag[pfx_arlo]><&f> What can I play for you? You have <player.flag[arlo_plays]> plays"
-                    - narrate "<&7><&o> → Respond in chat with a music disc name"
+                    - narrate "<server.flag[pfx_arlo]><&f> What can I play for you? You have <player.flag[arlo_plays]> plays left"
+                    - narrate "<&7><&o> → Respond in chat with the name of a music disc"
                     - zap 3
                     - wait 15s
                     - zap 2
                 - if !<player.has_flag[npc_chatted]>:
-                    - narrate "<server.flag[pfx_arlo]><&f> Hmm what's a midi?"
+                    - narrate "<server.flag[pfx_arlo]><&f> Not sure yet? Come back when you're ready to pick a song!"
         # Arlo's chat trigger
         3:
             chat trigger:
@@ -62,12 +62,12 @@ arlo_main:
                         - zap 1
 
                     - if <server.has_flag[arlo_playing]>:
-                        - narrate "<server.flag[pfx_arlo]><&f> <context.keyword> coming right up!"
+                        - narrate "..."
 
                     # success, playing song
                     - random:
                         - narrate "<server.flag[pfx_arlo]><&f> <context.keyword> coming right up!"
-                        - narrate "<server.flag[pfx_arlo]><&f> I like your style, <context.keyword> it is"
+                        - narrate "<server.flag[pfx_arlo]><&f> Good choice lad, <context.keyword> it is"
                     - playsound <npc.location> sound:music_disc_<context.keyword>
 
                     # timeout handler to prevent players from playing a song over another
@@ -118,4 +118,4 @@ arlo_main:
                     script:
                     - flag player npc_chatted expire:15s
 
-                    - narrate "<server.flag[pfx_arlo]><&f> Sorry I don't know that one"
+                    - narrate "<server.flag[pfx_arlo]><&f> Don't think we have that one here, I'm afraid..."
