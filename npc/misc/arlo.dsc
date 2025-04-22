@@ -10,7 +10,7 @@ arlo:
 
 arlo_main:
     type: interact
-    debug: false
+    debug: true
     steps:
         #first time meeting the NPC
         1:
@@ -72,11 +72,14 @@ arlo_main:
                     - if <server.has_flag[arlo_playing]>:
                         - narrate "<server.flag[pfx_arlo]><&f> Currently playing <server.flag[arlo_queue].get[2]> for another <server.flag_expiration[arlo_playing].from_now.in_seconds.round_up> seconds"
                     - else:
-                        # Arlo is not playing a song, playing new song
+                        # Arlo is not playing a song, playing new song, announce the new song to nearby players
                         - random:
-                            - narrate "<server.flag[pfx_arlo]><&f> <context.keyword> coming right up!" range:20
-                            - narrate "<server.flag[pfx_arlo]><&f> Good choice, <context.keyword> it is" range:20
-                            - narrate "<server.flag[pfx_arlo]><&f> Jett, if I have to play <context.keyword>...\n<server.flag[pfx_arlo]><&f> Oh <player.name>! Happy to play <context.keyword>"
+                            - narrate "<server.flag[pfx_arlo]><&f> Alright <player.name>, <context.keyword> coming right up!" targets:<npc.location.find_players_within[30]>
+                            - narrate "<server.flag[pfx_arlo]><&f> Good choice <player.name>, <context.keyword> it is" targets:<npc.location.find_players_within[30]>
+                            - if true:
+                                - narrate "<server.flag[pfx_arlo]><&f> Jett, if I have to play <context.keyword>..." targets:<npc.location.find_players_within[30]>
+                                - wait 1s
+                                - narrate "<server.flag[pfx_arlo]><&f> Oh <player.name>! Happy to play <context.keyword>" targets:<npc.location.find_players_within[30]>
                         - playsound <npc.location> sound:music_disc_<context.keyword>
 
                         # timeout handler to prevent players from playing a song over another
