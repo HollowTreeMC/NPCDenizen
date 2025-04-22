@@ -30,7 +30,7 @@ npc_handler:
         #   Misc NPCs
         - flag server pfx_fischer:<&8>{<&f>Aeronaut<&8>}<&sp><&6>Fischer<&f>:<&f>
         - flag server pfx_juniper:<&8>{<&f>Aeronaut<&8>}<&sp><&6>Juniper<&f>:<&f>
-        - flag server pfx_arlo:<&8>{<&f>Aeronaut<&8>}<&sp><&6>Arlo<&f>:<&f>
+        - flag server pfx_arlo:<&8>{<&f>Bard<&8>}<&sp><&6>Arlo<&f>:<&f>
 
         - flag server pfx_xur:<&8>{<&f>Black<&sp>Marketeer<&8>}<&sp><&6>Xûr<&f>:<&f>
         - flag server pfx_ladyvalvewright:<server.flag[pfx_chronarch]><&sp><&6>Lady<&sp>Valvewright<&f>:<&f>

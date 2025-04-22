@@ -39,15 +39,21 @@ arlo_main:
                     - cooldown 3s
                     - narrate "<server.flag[pfx_arlo]><&f> Songs for sigils! One sigil for five plays! <server.flag[npc_dialogue_okay]>"
                     - zap 1
+
                 # player has plays remaining
                 - else:
-                    - narrate "<server.flag[pfx_arlo]><&f> What can I play for you? You have <player.flag[arlo_plays]> plays left"
-                    - narrate "<&7><&o> → Respond in chat with the name of a music disc"
-                    - zap 3
-                    - wait 15s
-                    - zap 2
-                - if !<player.has_flag[npc_chatted]>:
-                    - narrate "<server.flag[pfx_arlo]><&f> Not sure yet? Come back when you're ready to pick a song!"
+                    # Check to see if arlo is currently playing a song
+                    - if <server.has_flag[arlo_playing]>:
+                        - narrate "<server.flag[pfx_arlo]><&f> Currently playing <server.flag[arlo_queue].get[2]> for another <server.flag_expiration[arlo_playing].from_now.in_seconds.round_up> seconds"
+                    - else:
+                        - narrate "<server.flag[pfx_arlo]><&f> What can I play for you? <&o>(<player.flag[arlo_plays]> plays left)"
+                        - narrate "<&7><&o> → Respond in chat with the name of a music disc"
+                        - zap 3
+                        - wait 15s
+                        - zap 2
+                        - if !<player.has_flag[npc_chatted]>:
+                            - narrate "<server.flag[pfx_arlo]><&f> Not sure yet? Come back when you pick one!"
+
         # Arlo's chat trigger
         3:
             chat trigger:
@@ -58,58 +64,56 @@ arlo_main:
                     script:
                     - flag player npc_chatted expire:15s
 
+                    # Player is out of plays
                     - if <player.flag[arlo_plays]> <= 0:
                         - zap 1
 
+                    # Check to see if arlo is currently playing a song
                     - if <server.has_flag[arlo_playing]>:
-                        - narrate "..."
+                        - narrate "<server.flag[pfx_arlo]><&f> Currently playing <server.flag[arlo_queue].get[2]> for another <server.flag_expiration[arlo_playing].from_now.in_seconds.round_up> seconds"
+                    - else:
+                        # Arlo is not playing a song, playing new song
+                        - random:
+                            - narrate "<server.flag[pfx_arlo]><&f> <context.keyword> coming right up!" range:20
+                            - narrate "<server.flag[pfx_arlo]><&f> Good choice, <context.keyword> it is" range:20
+                            - narrate "<server.flag[pfx_arlo]><&f> Jett, if I have to play <context.keyword>...\n<server.flag[pfx_arlo]><&f> Oh <player.name>! Happy to play <context.keyword>"
+                        - playsound <npc.location> sound:music_disc_<context.keyword>
 
-                    # success, playing song
-                    - random:
-                        - narrate "<server.flag[pfx_arlo]><&f> <context.keyword> coming right up!"
-                        - narrate "<server.flag[pfx_arlo]><&f> Good choice lad, <context.keyword> it is"
-                    - playsound <npc.location> sound:music_disc_<context.keyword>
-
-                    # timeout handler to prevent players from playing a song over another
-                    - if <context.keyword> == Blocks:
-                        - define duration <list[343|Blocks]>
-                    - if <context.keyword> == Cat:
-                        - define duration <list[185|Cat]>
-                    - if <context.keyword> == Chirp:
-                        - define duration <list[185|Chirp]>
-                    - if <context.keyword> == Creator:
-                        - define duration <list[176|Creator]>
-                    - if <context.keyword> == Far:
-                        - define duration <list[174|Far]>
-                    - if <context.keyword> == Mall:
-                        - define duration <list[197|Mall]>
-                    - if <context.keyword> == Mellohi:
-                        - define duration <list[96|Mellohi]>
-                    - if <context.keyword> == Otherside:
-                        - define duration <list[195|Otherside]>
-                    - if <context.keyword> == Pigstep:
-                        - define duration <list[148|Pigstep]>
-                    - if <context.keyword> == Precipice:
-                        - define duration <list[299|Precipice]>
-                    - if <context.keyword> == Relic:
-                        - define duration <list[219|Relic]>
-                    - if <context.keyword> == Stal:
-                        - define duration <list[150|Stal]>
-                    - if <context.keyword> == Strad:
-                        - define duration <list[189|Strad]>
-                    - if <context.keyword> == Wait:
-                        - define duration <list[237|Wait]>
-                    - if <context.keyword> == Ward:
-                        - define duration <list[251|Ward]>
-
-                    - flag server arlo_playing expire:duration[1]
-
-
-                        # play this effect in a seperate function as an async function ~
-                        # effect:NOTE at:<npc[19].location>
-
-
-                    - flag player arlo_plays:--
+                        # timeout handler to prevent players from playing a song over another
+                        - if <context.keyword> == Blocks:
+                            - flag server arlo_queue:<list[343|Blocks]>
+                        - if <context.keyword> == Cat:
+                            - flag server arlo_queue:<list[185|Cat]>
+                        - if <context.keyword> == Chirp:
+                            - flag server arlo_queue:<list[185|Chirp]>
+                        - if <context.keyword> == Creator:
+                            - flag server arlo_queue:<list[176|Creator]>
+                        - if <context.keyword> == Far:
+                            - flag server arlo_queue:<list[174|Far]>
+                        - if <context.keyword> == Mall:
+                            - flag server arlo_queue:<list[197|Mall]>
+                        - if <context.keyword> == Mellohi:
+                            - flag server arlo_queue:<list[96|Mellohi]>
+                        - if <context.keyword> == Otherside:
+                            - flag server arlo_queue:<list[195|Otherside]>
+                        - if <context.keyword> == Pigstep:
+                            - flag server arlo_queue:<list[148|Pigstep]>
+                        - if <context.keyword> == Precipice:
+                            - flag server arlo_queue:<list[299|Precipice]>
+                        - if <context.keyword> == Relic:
+                            - flag server arlo_queue:<list[219|Relic]>
+                        - if <context.keyword> == Stal:
+                            - flag server arlo_queue:<list[150|Stal]>
+                        - if <context.keyword> == Strad:
+                            - flag server arlo_queue:<list[189|Strad]>
+                        - if <context.keyword> == Wait:
+                            - flag server arlo_queue:<list[237|Wait]>
+                        - if <context.keyword> == Ward:
+                            - flag server arlo_queue:<list[251|Ward]>
+                        # set currently playing flag, decriment player's plays left, and run effects
+                        - flag server arlo_playing expire:<server.flag[arlo_queue].get[1]>s
+                        - flag player arlo_plays:--
+                        - ~run arlo_effects
 
                 2:
                     trigger: /*/
@@ -119,3 +123,11 @@ arlo_main:
                     - flag player npc_chatted expire:15s
 
                     - narrate "<server.flag[pfx_arlo]><&f> Don't think we have that one here, I'm afraid..."
+
+arlo_effects:
+    type: task
+    debug: false
+    script:
+    - while <server.has_flag[arlo_playing]>:
+        - playeffect effect:Note at:<npc[19].location.add[0,1,0]>
+        - wait 0.3s
