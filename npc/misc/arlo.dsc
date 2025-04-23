@@ -77,7 +77,7 @@ arlo_main:
                             - narrate "<server.flag[pfx_arlo]><&f> Alright <player.name>, <context.keyword> coming right up!" targets:<npc.location.find_players_within[30]>
                             - narrate "<server.flag[pfx_arlo]><&f> Good choice <player.name>, <context.keyword> it is" targets:<npc.location.find_players_within[30]>
                             - if true:
-                                - narrate "<server.flag[pfx_arlo]><&f> Jett, if I have to play <context.keyword>..." targets:<npc.location.find_players_within[30]>
+                                - narrate "<server.flag[pfx_arlo]><&f> Jett, if I have to play <context.keyword> one more time..." targets:<npc.location.find_players_within[30]>
                                 - wait 1s
                                 - narrate "<server.flag[pfx_arlo]><&f> Oh <player.name>! Happy to play <context.keyword>" targets:<npc.location.find_players_within[30]>
                         - playsound <npc.location> sound:music_disc_<context.keyword>
