@@ -37,6 +37,10 @@ npc_handler:
         - flag server pfx_Nara:<&6>Mechanic<&sp>Nara<&f>:<&f>
         - flag server pfx_lordwestwood:<server.flag[pfx_chronarch]><&sp><&6>Lord<&sp>Westwood<&f>:<&f>
 
+        #   Trial NPCs
+        - flag server pfx_roland:<&8>{<&f>Aeronaut<&8>}<&sp><&6>Roland<&f>:<&f>
+
+
         # NPC HELPERS
         - flag server npc_dialogue_okay:<n><&7><&o><&sp>→<&sp>Respond<&sp>with<&sp><&hover[<&7>click to respond]><element[[<&e>Okay<&7>]].on_click[/denizenclickable chat Yes]><&end_hover>
         - flag server npc_dialogue_yes:<n><&7><&o><&sp>→<&sp>Respond<&sp>with<&sp><&hover[<&7>click to respond]><element[[<&e>Yes<&7>]].on_click[/denizenclickable chat Yes]><&end_hover>
