@@ -47,30 +47,43 @@ roland_dungeon_runtime:
         - define loc_4:<[loc_main].add[-85,27,128]>
         - define loc_5:<[loc_main].add[-85,27,158]>
 
+        # define play cuboid coordinates
+        - define play_left_bot:<[loc_main].add[-1,11,1]>
+        - define play_right_top:<[loc_main].add[-169,72,228]>
+        - define play_field:<cuboid[Utility,<[play_left_bot].x>,<[play_left_bot].y>,<[play_left_bot].z>,<[play_right_top].x>,<[play_right_top].y>,<[play_right_top].z>]>
+
+        # define acid cuboid coordinates
+        - define acid_left_bot:<[loc_main].add[-1,12,1]>
+        - define acid_right_top:<[loc_main].add[-169,13,228]>
+        - define play_field:<cuboid[Utility,<[acid_left_bot].x>,<[acid_left_bot].y>,<[acid_left_bot].z>,<[acid_right_top].x>,<[acid_right_top].y>,<[acid_right_top].z>]>
+
         # define spawner NBTs - vscode denizen is angyy but we don't care - paste these in from the google sheet
         - define nbt_1:trial_spawner{id:"minecraft:trial_spawner",required_player_range:7,target_cooldown_length:36000,normal_config:{spawn_range:4,total_mobs:20,simultaneous_mobs:10,ticks_between_spawn:1,spawn_potentials:[{data:{entity:{id:"minecraft:zombie"}},weight:3},{data:{entity:{id:"minecraft:husk"}},weight:1}]}}
-        - define nbt_2:trial_spawner{id:"minecraft:trial_spawner",required_player_range:7,target_cooldown_length:36000,normal_config:{spawn_range:4,total_mobs:20,simultaneous_mobs:8,ticks_between_spawn:1,spawn_potentials:[{data:{entity:{id:"minecraft:zombie"}},weight:2},{data:{entity:{id:"minecraft:husk"}},weight:1},{data:{entity:{id:"minecraft:spider"}},weight:1}]},spawn_potentials:[{data:{entity:{id:"minecraft:zombie"}},weight:2},{data:{entity:{id:"minecraft:husk"}},weight:1},{data:{entity:{id:"minecraft:spider"}},weight:1}]}
-        - define nbt_3:trial_spawner{id:"minecraft:trial_spawner",required_player_range:7,target_cooldown_length:36000,normal_config:{spawn_range:4,total_mobs:16,simultaneous_mobs:8,ticks_between_spawn:2,spawn_potentials:[{data:{entity:{id:"minecraft:spider"}},weight:3},{data:{entity:{id:"minecraft:cave_spider"}},weight:1}]},spawn_potentials:[{data:{entity:{id:"minecraft:spider"}},weight:3},{data:{entity:{id:"minecraft:cave_spider"}},weight:1}]}
-        - define nbt_4:trial_spawner{id:"minecraft:trial_spawner",required_player_range:7,target_cooldown_length:36000,normal_config:{spawn_range:4,total_mobs:12,simultaneous_mobs:4,ticks_between_spawn:2,spawn_potentials:[{data:{entity:{id:"minecraft:cave_spider"}},weight:1},{data:{entity:{id:"minecraft:witch"}},weight:1}]},spawn_potentials:[{data:{entity:{id:"minecraft:cave_spider"}},weight:1},{data:{entity:{id:"minecraft:witch"}},weight:1}]}
-        - define nbt_5:trial_spawner{id:"minecraft:trial_spawner",required_player_range:7,target_cooldown_length:36000,normal_config:{spawn_range:4,total_mobs:15,simultaneous_mobs:4,ticks_between_spawn:10,spawn_potentials:[{data:{entity:{id:"minecraft:witch"}},weight:4},{data:{entity:{id:"minecraft:vindicator"}},weight:4},{data:{entity:{id:"minecraft:ravager"}},weight:1},{data:{entity:{id:"minecraft:creeper"}},weight:1}]},spawn_potentials:[{data:{entity:{id:"minecraft:witch"}},weight:4},{data:{entity:{id:"minecraft:vindicator"}},weight:4},{data:{entity:{id:"minecraft:ravager"}},weight:1},{data:{entity:{id:"minecraft:creeper"}},weight:1}]}
+        - define nbt_2:trial_spawner{id:"minecraft:trial_spawner",required_player_range:16,target_cooldown_length:120000,normal_config:{spawn_range:4,total_mobs:20,simultaneous_mobs:8,ticks_between_spawn:1,spawn_potentials:[{data:{entity:{id:"minecraft:zombie"}},weight:2},{data:{entity:{id:"minecraft:husk"}},weight:1},{data:{entity:{id:"minecraft:spider"}},weight:1}]}}
+        - define nbt_3:trial_spawner{id:"minecraft:trial_spawner",required_player_range:16,target_cooldown_length:120000,normal_config:{spawn_range:4,total_mobs:16,simultaneous_mobs:8,ticks_between_spawn:2,spawn_potentials:[{data:{entity:{id:"minecraft:spider"}},weight:3},{data:{entity:{id:"minecraft:cave_spider"}},weight:1}]}}
+        - define nbt_4:trial_spawner{id:"minecraft:trial_spawner",required_player_range:16,target_cooldown_length:120000,normal_config:{spawn_range:4,total_mobs:12,simultaneous_mobs:4,ticks_between_spawn:2,spawn_potentials:[{data:{entity:{id:"minecraft:cave_spider"}},weight:1},{data:{entity:{id:"minecraft:witch"}},weight:1}]}}
+        - define nbt_5:trial_spawner{id:"minecraft:trial_spawner",required_player_range:4,target_cooldown_length:120000,normal_config:{spawn_range:4,total_mobs:15,simultaneous_mobs:3,ticks_between_spawn:20,spawn_potentials:[{data:{entity:{id:"minecraft:witch"}},weight:4},{data:{entity:{id:"minecraft:vindicator"}},weight:8},{data:{entity:{id:"minecraft:ravager"}},weight:1},{data:{entity:{id:"minecraft:creeper"}},weight:2}]}}
 
-        # set spawners - vscode denizen is angerey, but still executes this command
+        # set spawners - vscode denizen is angerey, but still executes this command - first set the block to stone to avoid errors
         - foreach 1|2|3|4|5:
+            - modifyblock <[loc_<[loop_index]>]> STONE
             - execute as_server 'minecraft:execute in minecraft:utility run minecraft:setblock <[loc_<[loop_index]>].x> <[loc_<[loop_index]>].y> <[loc_<[loop_index]>].z> minecraft:<[nbt_<[loop_index]>]>
 
         # begin trial
         - teleport <player> <[loc_start]>
 
-        ## RUNTIME
-        - define while_loop False
-        - while <[while_Loop]>:
-            # check to see if the player dies
-
-            # count remaining spawners
-            - define spawner_states:<list[]>
-
-            - define spawner_1 <definition[loc_spawner_1].block>
-            - define spawner_1_dat <definition[spawner_1].nbt_to_map>
+#        ## RUNTIME
+#        - define timer 500
+#        - while <[timer]> > 0:
+#            # check to see if the player dies
+#
+#            # count remaining spawners
+#            - define spawner_states:<list[]>
+#
+#            - define spawner_1 <definition[loc_spawner_1].block>
+#            - define spawner_1_dat <definition[spawner_1].nbt_to_map>
+#
+#            - ex <[timer]>--
 #
 #        ## COMPLETE
 #        # entry conditions: death, spawners defeated, player leaves
