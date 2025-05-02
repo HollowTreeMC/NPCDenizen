@@ -16,8 +16,9 @@ arlo_main:
         1:
             click trigger:
                 script:
-                - cooldown 3s
-                - narrate "<server.flag[pfx_arlo]><&f> Songs for sigils! One sigil for five plays! <server.flag[npc_dialogue_okay]>"
+                - flag <player> npc_chatted expire:3s
+                - if !<player.has_flag[npc-chatted]>:
+                    - narrate "<server.flag[pfx_arlo]><&f> Songs for sigils! One sigil for five plays! <server.flag[npc_dialogue_okay]>"
             chat trigger:
                 1:
                     trigger: /ye|ok/
@@ -78,8 +79,8 @@ arlo_main:
                             - narrate "<server.flag[pfx_arlo]><&f> Good choice <player.name>, <context.keyword> it is" targets:<npc.location.find_players_within[30]>
                             - if true:
                                 - narrate "<server.flag[pfx_arlo]><&f> Jett, if I have to play <context.keyword> one more time..." targets:<npc.location.find_players_within[30]>
-                                - wait 1s
-                                - narrate "<server.flag[pfx_arlo]><&f> Oh <player.name>! Happy to play <context.keyword>" targets:<npc.location.find_players_within[30]>
+                                - wait 2s
+                                - narrate "<server.flag[pfx_arlo]><&f> Oh hey <player.name>! Happy to play <context.keyword> (〜￣▽￣)〜" targets:<npc.location.find_players_within[30]>
                         - playsound <npc.location> sound:music_disc_<context.keyword>
 
                         # timeout handler to prevent players from playing a song over another
@@ -113,6 +114,7 @@ arlo_main:
                             - flag server arlo_queue:<list[237|Wait]>
                         - if <context.keyword> == Ward:
                             - flag server arlo_queue:<list[251|Ward]>
+
                         # set currently playing flag, decriment player's plays left, and run effects
                         - flag server arlo_playing expire:<server.flag[arlo_queue].get[1]>s
                         - flag player arlo_plays:--
