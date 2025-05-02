@@ -10,7 +10,7 @@ arlo:
 
 arlo_main:
     type: interact
-    debug: true
+    debug: false
     steps:
         #first time meeting the NPC
         1:
@@ -27,7 +27,7 @@ arlo_main:
                     script:
                     - if <placeholder[tne_currency_Sigils]> >= 1:
                         - execute as_server "money take <player.name> 1 Sigils"
-                        - flag player arlo_plays:5
+                        - flag <player> arlo_plays:5
                         - zap 2
                     - else:
                         - narrate "<server.flag[pfx_arlo]><&f> Maintaining these jukeboxes isn't free, y'know. Come back when you can afford more plays"
@@ -63,7 +63,7 @@ arlo_main:
                     hide trigger message: true
                     show as normal chat: false
                     script:
-                    - flag player npc_chatted expire:15s
+                    - flag <player> npc_chatted expire:15s
 
                     # Player is out of plays
                     - if <player.flag[arlo_plays]> <= 0:
@@ -117,7 +117,7 @@ arlo_main:
 
                         # set currently playing flag, decriment player's plays left, and run effects
                         - flag server arlo_playing expire:<server.flag[arlo_queue].get[1]>s
-                        - flag player arlo_plays:--
+                        - flag <player> arlo_plays:--
                         - ~run arlo_effects
 
                 2:
@@ -125,7 +125,7 @@ arlo_main:
                     hide trigger message: true
                     show as normal chat: false
                     script:
-                    - flag player npc_chatted expire:15s
+                    - flag <player> npc_chatted expire:15s
 
                     - narrate "<server.flag[pfx_arlo]><&f> Don't think we have that one here, I'm afraid..."
 
