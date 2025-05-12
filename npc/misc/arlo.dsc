@@ -17,7 +17,7 @@ arlo_main:
             click trigger:
                 script:
                 - flag <player> npc_chatted expire:3s
-                - if !<player.has_flag[npc-chatted]>:
+                - if !<player.has_flag[npc_chatted]>:
                     - narrate "<server.flag[pfx_arlo]><&f> Songs for sigils! One sigil for five plays! <server.flag[npc_dialogue_okay]>"
             chat trigger:
                 1:
