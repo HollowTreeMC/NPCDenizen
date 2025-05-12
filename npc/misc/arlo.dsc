@@ -16,9 +16,10 @@ arlo_main:
         1:
             click trigger:
                 script:
-                - flag <player> npc_chatted expire:3s
+                # check for cooldown. structured so players can still respond to chat trigger.
                 - if !<player.has_flag[npc_chatted]>:
                     - narrate "<server.flag[pfx_arlo]><&f> Songs for sigils! One sigil for five plays! <server.flag[npc_dialogue_okay]>"
+                - flag <player> npc_chatted expire:3s
             chat trigger:
                 1:
                     trigger: /ye|ok/
@@ -29,6 +30,7 @@ arlo_main:
                         - execute as_server "money take <player.name> 1 Sigils"
                         - flag <player> arlo_plays:5
                         - zap 2
+
                     - else:
                         - narrate "<server.flag[pfx_arlo]><&f> Maintaining these jukeboxes isn't free, y'know. Come back when you can afford more plays"
         # Player has purchased plays
@@ -40,6 +42,7 @@ arlo_main:
                     - cooldown 3s
                     - narrate "<server.flag[pfx_arlo]><&f> Songs for sigils! One sigil for five plays! <server.flag[npc_dialogue_okay]>"
                     - zap 1
+                    - flag <player> npc_chatted expire:1s
 
                 # player has plays remaining
                 - else:
@@ -68,6 +71,7 @@ arlo_main:
                     # Player is out of plays
                     - if <player.flag[arlo_plays]> <= 0:
                         - zap 1
+                        - flag <player> npc_chatted expire:1s
 
                     # Check to see if arlo is currently playing a song
                     - if <server.has_flag[arlo_playing]>:
