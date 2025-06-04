@@ -1,3 +1,4 @@
+# Sends a message to players upon login to notify additional rewards.
 checkVotePending:
    type: world
    debug: false
@@ -10,6 +11,7 @@ checkVotePending:
             - define countrewards:+:<player.flag[<[value]>]>
       - if <[countrewards]> > 0:
         - narrate "<[tag]> <gray><italic>You have unclaimed <[countrewards]> vote rewards. /vote claim or /vote manual to claim them."
+
 votereward:
    type: command
    description: Start or stop vote rewards!
@@ -132,6 +134,8 @@ Spiller:
     - narrate "<[tag]> Loot was given for all players! (if it failed, check the caps on your command.)"
     - flag server pendingLoot:!
 
+#Vote Party Script, not meant to be triggerable, but instead run by the voting plugin
+#could this be rewritten as a script not a command? to be /ex run VoteParty -Andrew
 VoteRewardGiver:
   type: command
   description: Start random vote rewards
@@ -140,16 +144,16 @@ VoteRewardGiver:
   debug: false
   usage: /VoteRewardGiver
   script:
-      - define amountRewards <util.random.int[4].to[9]>
-      - execute as_server "broadcast Determining vote reward amount...."
+      - define amountRewards <util.random.int[3].to[5]>
+      - announce "<server.flag[voteTag]> Determining vote reward amount...."
       - wait 3s
-      - execute as_server "broadcast Server has decided on...."
+      - announce "<server.flag[voteTag]> Server has decided on...."
       - wait 3s
-      - execute as_server "broadcast <bold><[amountrewards]> Vote Rewards to give!"
+      - announce "<server.flag[voteTag]> <bold><[amountrewards]> Vote Rewards to give!"
       - wait 4s
       - flag server count:0
       - flag server countDown:<[amountRewards]>
-      - execute as_server "broadcast &9🎲 🎲 &fRolling a dice to see what we get.&9 🎲 🎲"
+      - announce "<server.flag[voteTag]> <&9>🎲 🎲 &fRolling a dice to see what we get.<&9> 🎲 🎲"
       - wait 4s
       - while <server.flag[count]> < <[amountRewards]>:
         - if !<server.has_flag[pendingLoot]>:
@@ -166,15 +170,13 @@ VoteRewardGiver:
             - run experienceRun
           - wait 6s
           - if <server.flag[countDown]> > 2:
-            - execute as_server "broadcast <bold><server.flag[countDown]> Rounds To Go!"
-            - wait 2s
-            - execute as_server "broadcast &9🎲 🎲 &fRolling....&9 🎲 🎲"
-            - wait 2s
-            - execute as_server "broadcast &9🎲 🎲 &fWe got...&9 🎲 🎲"
+            - announce "<server.flag[voteTag]> <bold><server.flag[countDown]> Rounds To Go!"
+            - wait 1s
+            - announce "<server.flag[voteTag]> <&9>🎲 🎲 &fRolling....<&9> 🎲 🎲"
           - if <server.flag[countDown]> == 1:
-            - execute as_server "broadcast <bold><server.flag[countDown]> Last Round!!!!"
+            - announce "<server.flag[voteTag]> <bold><server.flag[countDown]> Last Round!!!!"
             - wait 3s
-            - execute as_server "broadcast &9🎲 🎲 &fFinal Roll....&9 🎲 🎲"
+            - announce "<server.flag[voteTag]> <&9>🎲 🎲 &fFinal Roll....<&9> 🎲 🎲"
           - if <server.flag[countdown]> < 1:
             - stop
         - wait 5s
@@ -184,11 +186,11 @@ moneyRun:
     debug: false
     script:
       - random:
-        - execute as_server "broadcast &a&lMoney!&r Show em' the mooneyy!"
-        - execute as_server "broadcast &a&lMoney!&r Lets see how much cash you get this time..."
-        - execute as_server "broadcast &a&lMoney!&r Ooo coins."
-        - execute as_server "broadcast &a&lMoney!&r Lets see those monies"
-        - execute as_server "broadcast &a&lMoney!&r Caching!"
+        - announce "<server.flag[voteTag]> &a&lMoney!&r Show em' the mooneyy!"
+        - announce "<server.flag[voteTag]> &a&lMoney!&r Lets see how much cash you get this time..."
+        - announce "<server.flag[voteTag]> &a&lMoney!&r Ooo coins."
+        - announce "<server.flag[voteTag]> &a&lMoney!&r Lets see those monies"
+        - announce "<server.flag[voteTag]> &a&lMoney!&r Caching!"
       - random:
           - foreach <server.online_players>:
             - random:
@@ -205,13 +207,19 @@ experienceRun:
     script:
       - define tag <dark_aqua>[<aqua>!<dark_aqua>]<white>
       - random:
+<<<<<<< Updated upstream
         - execute as_server "broadcast &d&lEXP!&r Exps for the peeps!"
-        - execute as_server "broadcast &d&lEXP!&r Exp finally working? Someone needs to fire the boss."
+        - execute as_server "broadcast &d&lEXP!&r Just some experience. Better luck next roll."
         - execute as_server "broadcast &d&lEXP!&r Exp for thee."
-        - execute as_server "broadcast &d&lEXP!&r Oh good exp finally works."
+=======
+        - announce "<server.flag[voteTag]> &d&lEXP!&r Exps for the peeps!"
+        - announce "<server.flag[voteTag]> &d&lEXP!&r Exp finally working? Someone needs to fire the boss."
+        - announce "<server.flag[voteTag]> &d&lEXP!&r Exp for thee."
+        - announce "<server.flag[voteTag]> &d&lEXP!&r Oh good exp finally works."
+>>>>>>> Stashed changes
       - foreach <server.online_players>:
-          - define amount <util.random.int[1].to[8]>
-          - experience give level <[amount]> player:<[value]>
+          - define amount <util.random.int[2].to[15]>
+          - experience give <[amount]> player:<[value]>
           - narrate "<[tag]> You got <[amount]> experience levels!" target:<[value]>
 claimBlockClaim:
     type: task
@@ -219,9 +227,9 @@ claimBlockClaim:
     script:
       - define tag <dark_aqua>[<aqua>!<dark_aqua>]<white>
       - random:
-        - execute as_server "broadcast &a&lClaimblocks!&r Lets go claim blocks!"
-        - execute as_server "broadcast &a&lClaimblocks!&r Claimin' the blocks!"
-        - execute as_server "broadcast &a&lClaimblocks!&r Block claiming randomizer power on..."
+        - announce "<server.flag[voteTag]> &a&lClaimblocks!&r Lets go claim blocks!"
+        - announce "<server.flag[voteTag]> &a&lClaimblocks!&r Claimin' the blocks!"
+        - announce "<server.flag[voteTag]> &a&lClaimblocks!&r Block claiming randomizer power on..."
       - foreach <server.online_players>:
         - define amount <util.random.int[25].to[300]>
         - execute as_server 'acb <[value].name> <[amount]>'
@@ -231,13 +239,14 @@ spillerRun:
     debug: false
     script:
       - random:
-        - execute as_server "broadcast {#5c8be6}&lLoot Rewards!&r Random goodies!"
-        - execute as_server "broadcast {#5c8be6}&lLoot Rewards!&r Oooo spill those rewards out for me!"
-        - execute as_server "broadcast {#5c8be6}&lLoot Rewards!&r LOOT!! I Loaf Loot. Good luck on your bread head."
+        - announce "<server.flag[voteTag]> {#5c8be6}&lLoot Rewards!&r Random goodies!"
+        - announce "<server.flag[voteTag]> {#5c8be6}&lLoot Rewards!&r Oooo spill those rewards out for me!"
+        - announce "<server.flag[voteTag]> {#5c8be6}&lLoot Rewards!&r LOOT!! I Loaf Loot. Good luck on your bread head."
       - random:
         - execute as_server 'Spiller Vote'
         - execute as_server 'Spiller Daily'
 
+#Send a message when a player has voted. Sends message displaying the player's all-time total number of votes
 voteannounce:
   type: command
   description: narrate player vote
@@ -246,8 +255,9 @@ voteannounce:
   permission: developerLords.voteannounce
   usage: /voteannounce player
   Script:
-    - announce "<gray><italic><context.args.get[1]> voted! votes: <placeholder[votingplugin_total].player[<server.match_player[<context.args.get[1]>]>]>"
+    - announce "<gray><italic><context.args.get[1]> voted! (<placeholder[votingplugin_alltimetotal].player[<server.match_player[<context.args.get[1]>]>]>)"
 
+#Send a message in Discord when the vote party is occuring
 discordannounce:
   type: command
   description: narrate player vote
@@ -256,4 +266,4 @@ discordannounce:
   permission: developerLords.discordannounce
   usage: /discordannounce player
   Script:
-    - execute as_server "discordsrv:discord bcast #1178874250891907142 🪅 Vote Party! 🪅<&nl>～~～~～~～~～~～~～~～~～~～~～~～~～~～~<&nl>💰 ✨ 💰  Good Luck! 💰 ✨ 💰<&nl>～~～~～~～~～~～~～~～~～~～~～~～~～~～~<&nl>Starting in 3 minutes<&nl>"
+    - execute as_server "discordsrv:discord bcast #496872659125010452 🪅 Vote Party! 🪅<&nl>～~～~～~～~～~～~～~～~～~～~～~～~～~～~<&nl>💰 ✨ 💰  Good Luck! 💰 ✨ 💰<&nl>～~～~～~～~～~～~～~～~～~～~～~～~～~～~<&nl>Starting in 3 minutes<&nl>@Keys"

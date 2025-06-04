@@ -54,3 +54,5 @@ npc_handler:
         - flag server eventTag:<&7>[<&3>Event<&7>]<&b>
         # Info
         - flag server infoTag:<&b>[<&3>!<&7><&b>]<&r><&sp>
+
+        - flag server voteTag:<&7>[<&b>✨<&7>]<&f>
