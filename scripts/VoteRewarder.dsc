@@ -48,23 +48,23 @@ VoteRewardGiver:
   debug: false
   usage: /VoteRewardGiver
   script:
-      # Select the number of rewards, announce in chat
+      # Select the number of rounds
       - define numRewards <util.random.int[3].to[5]>
       - announce "<server.flag[voteTag]> Rolling for the number of rewards... <&b><magic>!<reset>🎲<&b><magic>!"
-      - wait 2s
-      - announce "<server.flag[voteTag]> <bold><[numRewards]> <&f> rewards to be given!"
-      - wait 3s
-
+      - wait 5s
+      # Announce number of rounds in chat
+      - random:
+        - announce "<server.flag[voteTag]> On this fine day there are <&b><bold><[numRewards]> <&f>rewards to be given!"
+        - announce "<server.flag[voteTag]> Phew, a whole <&b><bold><[numRewards]> <&f>rewards to be given!"
+        - announce "<server.flag[voteTag]> What's another <&b><bold><[numRewards]> <&f>rewards? Let's do this."
+      - wait 5s
       # Iterate through the rounds to select and distribute rewards
       - repeat <[numRewards]> as:i:
-
-        # Is this flag necessary? I placed a long 30s pause in the loop instead of this check
-        # - if <server.has_flag[pendingLoot]>:
-        #   - wait 5s
 
         # Announce round & roll
         - if <[i]> < <[numRewards]>:
           - announce "<server.flag[voteTag]> Round <[i]> of <[numRewards]>! "
+          - wait 5s
           - random:
             - announce "<server.flag[voteTag]> Rolling a dice to see what we get! <&b><magic>!<reset>🎲<&b><magic>!"
             - announce "<server.flag[voteTag]> Are you feeling lucky? Let's roll, <&b><magic>!<reset>🎲<&b><magic>!"
@@ -77,10 +77,11 @@ VoteRewardGiver:
           - wait 4s
           - random:
             - announce "<server.flag[voteTag]> I can't look! Oh man what is it?"
-            - announce "<server.flag[voteTag]> I bet the suspense is killing you...CREEPER!"
+            - announce "<server.flag[voteTag]> I bet the suspense is killing you..."
             - announce "<server.flag[voteTag]> How much wood could a wood chuck chuck?"
             - announce "<server.flag[voteTag]> I'm feeling lucky..."
 
+        - wait 4s
         # Queue component script
         - random:
           - run VoteRewardCoins
@@ -100,10 +101,11 @@ VoteRewardCoins:
       - define amount <util.random.int[100].to[1500]>
       # Announces the reward
       - random:
-        - announce "<server.flag[voteTag]> &a&lCoins!&r Show em' the coinnns!"
-        - announce "<server.flag[voteTag]> &a&lCoins!&r Lets see how much cash you get this time..."
-        - announce "<server.flag[voteTag]> &a&lCoins!&r Ooo coins."
-        - announce "<server.flag[voteTag]> &a&lCoins!&r Lets see those monies"
+        - announce "<server.flag[voteTag]> <&a><[amount]> Coins!<&r> Show em' the coinnns!"
+        - announce "<server.flag[voteTag]> <&a><[amount]> Coins!<&r> Lets see how much cash you get this time..."
+        - announce "<server.flag[voteTag]> <&a><[amount]> Coins!<&r> Ooo coins."
+        - announce "<server.flag[voteTag]> <&a><[amount]> Coins!<&r> Lets see those monies!"
+      - wait 3s
       # Distributes the reward
       - random:
           - foreach <server.online_players>:
@@ -118,10 +120,11 @@ VoteRewardExp:
       - define amount <util.random.int[2].to[15]>
       # Announces the reward
       - random:
-        - announce "<server.flag[voteTag]> &d&lEXP!&r Exps for the peeps!"
-        - announce "<server.flag[voteTag]> &d&lEXP!&r Exp finally working? Someone needs to fire the boss."
-        - announce "<server.flag[voteTag]> &d&lEXP!&r Exp for thee."
-        - announce "<server.flag[voteTag]> &d&lEXP!&r Oh good exp finally works."
+        - announce "<server.flag[voteTag]> <&d><[amount]> EXP levels!<&r> Exps for the peeps!"
+        - announce "<server.flag[voteTag]> <&d><[amount]> EXP levels!<&r> Exp finally working? Someone needs to fire the boss."
+        - announce "<server.flag[voteTag]> <&d><[amount]> EXP levels!<&r> Exp for thee."
+        - announce "<server.flag[voteTag]> <&d><[amount]> EXP levels!<&r> Oh good exp finally works."
+      - wait 3s
       # Distributes the reward
       - foreach <server.online_players>:
           - experience give <[amount]> level player:<[value]>
@@ -136,9 +139,10 @@ VoteRewardClaim:
       - define amount <util.random.int[25].to[300]>
       # Announces the reward
       - random:
-        - announce "<server.flag[voteTag]> &a&lClaimblocks!&r Lets go claim blocks!"
-        - announce "<server.flag[voteTag]> &a&lClaimblocks!&r Claimin' the blocks!"
-        - announce "<server.flag[voteTag]> &a&lClaimblocks!&r Block claiming randomizer power on..."
+        - announce "<server.flag[voteTag]> <&e><[amount]> Claimblocks!<&r> Lets go claim blocks!"
+        - announce "<server.flag[voteTag]> <&e><[amount]> Claimblocks!<&r> Claimin' the blocks!"
+        - announce "<server.flag[voteTag]> <&e><[amount]> Claimblocks!<&r> Block claiming randomizer power on..."
+      - wait 3s
       # Distributes the reward
       - foreach <server.online_players>:
         - execute as_server 'acb <[value].name> <[amount]>'
@@ -151,9 +155,9 @@ VoteRewardSpiller:
     script:
       # Announces the reward
       - random:
-        - announce "<server.flag[voteTag]> {#5c8be6}&lLoot Rewards!&r Random goodies!"
-        - announce "<server.flag[voteTag]> {#5c8be6}&lLoot Rewards!&r Oooo spill those rewards out for me!"
-        - announce "<server.flag[voteTag]> {#5c8be6}&lLoot Rewards!&r LOOT!! I Loaf Loot. Good luck on your bread head."
+        - announce "<server.flag[voteTag]> <&b>Loot Rewards<&r> Random goodies!"
+        - announce "<server.flag[voteTag]> <&b>Loot Rewards<&r> Oooo spill those rewards out for me!"
+        - announce "<server.flag[voteTag]> <&b>Loot Rewards<&r> LOOT!! I Loaf Loot. Good luck on your bread head."
       # Distributes the reward
       - random:
         - execute as_server 'Spiller Vote'

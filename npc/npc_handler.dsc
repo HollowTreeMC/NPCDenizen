@@ -29,6 +29,7 @@ npc_handler:
         - flag server pfx_kirra:<&f>[<&3>Ki<&b>rr<&f>a]:<&f>
 
         #   Misc NPCs
+        - flag server pfx_arlo:<&8>{<&f>Bard<&8>}<&sp><&6>Arlo<&f>:<&f>
         - flag server pfx_fischer:<&8>{<&f>Aeronaut<&8>}<&sp><&6>Fischer<&f>:<&f>
         - flag server pfx_juniper:<&8>{<&f>Aeronaut<&8>}<&sp><&6>Juniper<&f>:<&f>
         - flag server pfx_xur:<&8>{<&f>Black<&sp>Marketeer<&8>}<&sp><&6>Xûr<&f>:<&f>
@@ -55,4 +56,4 @@ npc_handler:
         # Info
         - flag server infoTag:<&b>[<&3>!<&7><&b>]<&r><&sp>
 
-        - flag server voteTag:<&7>[<&b>✨<&7>]<&f>
+        - flag server voteTag:<&hover[<&7>/vote]><element[<&7>[<&b>✨<&7>]].on_click[/vote ].type[SUGGEST_COMMAND]><&f><&end_hover>
