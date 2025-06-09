@@ -1,3 +1,4 @@
+# Listens for the player damaging the ender dragon
 Dragon_Listener_World:
   type: world
   debug: false
@@ -29,6 +30,8 @@ Dragon_Listener_World:
         - if <player.flag[damage_dealt_<context.entity>]> > <[highestDMGER].flag[damage_dealt_<context.entity>]>:
           - define highestDMGER <player>
           - flag <context.entity> highestDamager:<player>
+
+#Listens for dragon dying
 Dragon_Death_Listener_World:
   type: world
   debug: false
@@ -77,10 +80,9 @@ CheckTop:
     - run Sidebar_handler
     - wait 60s
     - sidebar remove
+
 #Listener for dragon kills
-
 #Once the players take their places on the top 5, the scoreboard is updated for everyone with the flag that they enable when they use the command /hollowevent sidebar
-
 #Placeholder handler to set each player to the proper place on the top 5 chart
 Set1stPlace:
   type: task
