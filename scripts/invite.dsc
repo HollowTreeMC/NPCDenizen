@@ -16,7 +16,7 @@ invite:
     - if <context.args.first> == view || <context.args.first.if_null[].equals[]>:
         - narrate "<&8>[<&a>🌲<&8>] <&2>HollowTree Invitations"
         # display the inviter
-        - narrate " <&e>E<&color[#f1f150]>n<&color[#c9c942]>t<&7>: <player.flag[inviteEnt].if_null[/invite accept]>"
+        - narrate " <&e>E<&color[#f1f150]>n<&color[#c9c942]>t<&7>: <player.flag[inviteEnt].name.if_null[/invite accept]>"
         # display the three invites a player can create, create the invites for them if they haven't already been created
         - narrate " <&color[#86c96e]>S<&color[#76bf5f]>a<&color[#66b550]>p<&color[#55ab41]>l<&color[#42a232]>i<&color[#2c9821]>n<&color[#068e0a]>g<&color[#068e0a]>s<&7>: (3)"
         # look through all the player's sapling tags
@@ -53,16 +53,24 @@ invite:
     ## accepts an invite
     - if <context.args.first> == accept:
         # search for the invitation code in the server flag
+        - define exists:False
         - foreach <server.flag[inviteList]> as:invite:
-            - if <[invite].conatins_match[<context.args.get[2]>]>:
-              - narrate "<&8>[<&a>🌲<&8>] <&f>The code"
+            - if <[invite].get[1].equals[<context.args.get[2]>]>:
+              # the code is found
+              - define ent:<[invite].get[2]>
+              - define exists:True
 
-        # if the code is found:
-          # set the player to be the sapling of the Ent
-          # set the Ent to be the Ent of this player
+              # if the ent has less than 3 saplings, add to each
+              - if <player.flag[<[ent]>].length> < 3:
+                # add the ent
+                - flag <player> inviteEnt:<[ent]>
+                # add the sapling
+                - define old_list:<player.flag[<[ent]>]>
+                - flag <[ent]> inviteSaplings:<[old_list].include_single[<player>]>
+                - narrate "<&8>[<&a>🌲<&8>] <&f>You have accepted <[ent].name>'s invitation!"
 
-        # else:
-        - narrate "<&8>[<&a>🌲<&8>] <&f>The code <&c><context.args.get[2]> <&f>is invalid!"
+        - if !<[exists]>:
+          - narrate "<&8>[<&a>🌲<&8>] <&f>The code <&c><context.args.get[2]> <&f>could not be found!"
 
         # run the vote rewarder for the first rank
 
