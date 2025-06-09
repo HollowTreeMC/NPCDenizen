@@ -52,23 +52,25 @@ invite:
 
     ## accepts an invite
     - if <context.args.first> == accept:
-        # search for the invitation code in the server flag
+        # search for the invitation code in the server flag list
         - define exists:False
         - foreach <server.flag[inviteList]> as:invite:
             - if <[invite].get[1].equals[<context.args.get[2]>]>:
-              # the code is found
+              # the existing invite is found
               - define ent:<[invite].get[2]>
               - define exists:True
 
-              # if the ent has less than 3 saplings, add to each
+              # if the ent has less than 3 saplings, add ent and sapling
               - if <player.flag[<[ent]>].length> < 3:
                 # add the ent
                 - flag <player> inviteEnt:<[ent]>
                 # add the sapling
                 - define old_list:<player.flag[<[ent]>]>
                 - flag <[ent]> inviteSaplings:<[old_list].include_single[<player>]>
+
                 - narrate "<&8>[<&a>🌲<&8>] <&f>You have accepted <[ent].name>'s invitation!"
 
+        # invite not in the server flag list
         - if !<[exists]>:
           - narrate "<&8>[<&a>🌲<&8>] <&f>The code <&c><context.args.get[2]> <&f>could not be found!"
 
@@ -83,9 +85,5 @@ invite:
       - narrate "/invite <&a>view <&f>to view your saplings(invited players)"
       - narrate "/invite <&a>accept <code><&f>to view your saplings(invited players)"
 
-
-
-## checks to see if an invite exists
-# return the invite listtag, li@code|<player>, else return null
 
 ## distributes the reward
