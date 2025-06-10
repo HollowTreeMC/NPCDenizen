@@ -7,9 +7,9 @@ invite:
   description: invite a sapling (friend) to HollowTree
   usage: /invite
   tab completions:
-    1: list|create|accept|help
+    1: list|create|accept|help|claim
     2: <context.args.first.equals[accept].if_true[code].if_false[]>
-  debug: true
+  debug: false
 
   script:
     ## return the status of the panel
@@ -88,7 +88,7 @@ invite:
         - narrate "<&8>[<&a>🌲<&8>] <&f>The code <&c><context.args.get[2]> <&f>could not be found!"
       # run the vote rewarder for the initial invite
       - narrate "<&8>[<&a>🌲<&8>] <&f>Here are the initial invitation rewards!"
-      - run invite_reward <player.uuid> sapling
+      - run invite_reward def:<player.uuid>|sapling
 
       - stop
 
@@ -126,7 +126,7 @@ invite_reward:
     - foreach <[sapling]>|<[ent]> as:user:
       # check to see if the player is online
       - if <[user].is_online>:
-        - narrate "<&8>[<&a>🌲<&8>] <&f>Rewards are being given for <[sapling].name> reaching <&a><[milestone]><&f>!"
+        - narrate targets:<[user]> "<&8>[<&a>🌲<&8>] <&f>Rewards are being given for <[sapling].name> reaching <&a><[milestone]><&f>!"
         - if <[milestone]> == sapling:
           - execute as_server 'money give <[user].name> 1500 coins'
           - execute as_server 'acb <[user].name> 200'
