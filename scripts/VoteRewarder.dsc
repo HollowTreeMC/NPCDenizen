@@ -1,4 +1,8 @@
 # This file contains the scripts relevant to the VotingPlugin & Vote Party Scripts
+## Flags used in this file:
+# <server.flag[rewardtype]> used for ?
+# <player.flag[<[value]>]> used for ?
+
 
 ## Misc. Vote Functions, Check votes, Announces votes, Vote party announcer
 # Sends a message to player upon login to notify additional rewards.
@@ -23,7 +27,13 @@ voteannounce:
   permission: developerLords.voteannounce
   usage: /voteannounce player
   Script:
-    - announce "<server.flag[voteTag]> <gray><italic><context.args.get[1]> voted (<placeholder[votingplugin_alltimetotal].player[<server.match_player[<context.args.get[1]>]>]>)"
+    - define player_obj:<server.match_player[<context.args.get[1]>]>
+    - flag <[player_obj]> voteCooldown:+:1 expire:5m
+    - if <[player_obj].flag[voteCooldown].if_null[0]> < 9:
+      - announce "<server.flag[voteTag]> <gray><italic><context.args.get[1]> voted (<placeholder[votingplugin_alltimetotal].player[<[player_obj]>]>)"
+      - execute as_server 'crates givekey votinator <[player_obj].name> 1'
+      - execute as_server 'money give <[player_obj].name> 250 Coins'
+      - execute as_server 'money give <[player_obj].name> 1 Sigils'
 
 #Sends a message in Discord when the vote party is occuring
 discordannounce:
@@ -139,9 +149,9 @@ VoteRewardClaim:
       - define amount <util.random.int[25].to[300]>
       # Announces the reward
       - random:
-        - announce "<server.flag[voteTag]> <&e><[amount]> Claimblocks!<&r> Lets go claim blocks!"
-        - announce "<server.flag[voteTag]> <&e><[amount]> Claimblocks!<&r> Claimin' the blocks!"
-        - announce "<server.flag[voteTag]> <&e><[amount]> Claimblocks!<&r> Block claiming randomizer power on..."
+        - announce "<server.flag[voteTag]> <&r>Lets go claim blocks! <&e><[amount]> Claimblocks!<&r>"
+        - announce "<server.flag[voteTag]> <&r>Claimin' the blocks! <&e><[amount]> Claimblocks!<&r>"
+        - announce "<server.flag[voteTag]> <&r> Block claiming randomizer power on... <&e><[amount]> Claimblocks!"
       - wait 3s
       # Distributes the reward
       - foreach <server.online_players>:

@@ -1,5 +1,10 @@
-## maintence
-# to reset the invite list, run: /ex flag server inviteList:<list[]>
+# This file contains the the script which handles the /invite commands
+
+## Flags used in this file:
+# <server.flag[inviteList]> ListTag of <list[<code|<playerTag>]> - to store generated invite codes and player objects
+# <player.flag[inviteEnt]> a <playerTag> - to store the player's Ents aka inviter
+# <player.flag[inviteSaplings]> a ListTag of <playerTag> - to store a player's invitees
+# <player.flag[inviteRewards]> a ListTag of string elements - to store a player's pending rewards
 
 invite:
   type: command
@@ -75,27 +80,24 @@ invite:
               # add the sapling
               - if !<[ent].flag[inviteSaplings].exists>:
                 - flag <[ent]> inviteSaplings:<list[]>
-
               - define old_list:<[ent].flag[inviteSaplings]>
               - flag <[ent]> inviteSaplings:<[old_list].include_single[<player>]>
-
-              - narrate "<&8>[<&a>🌲<&8>] <&f>You have accepted <[ent].name>'s invitation!"
+              # run the vote rewarder for the initial invite
+              - narrate "<&8>[<&a>🌲<&8>] <&f>You have accepted <[ent].name>'s invitation! Here are the initial rewards!"
+              - run invite_reward def:<player.uuid>|sapling
             - else:
               - narrate "<&8>[<&a>🌲<&8>] <&f><[ent].name> cannot accept you as a sapling!"
 
       # invite not in the server flag list
       - if !<[exists]>:
         - narrate "<&8>[<&a>🌲<&8>] <&f>The code <&c><context.args.get[2]> <&f>could not be found!"
-      # run the vote rewarder for the initial invite
-      - narrate "<&8>[<&a>🌲<&8>] <&f>Here are the initial invitation rewards!"
-      - run invite_reward def:<player.uuid>|sapling
 
       - stop
 
     ## runs reward script if player holds flags
     # this could probably be further extended to notify players upon login
     - if <context.args.first> == claim:
-      - if !<player.flag[inviteRewards].exists>:
+      - if <player.flag[inviteRewards].exists>:
         - narrate "<&8>[<&a>🌲<&8>] <&f>Your rewards will be meted out!"
         - wait 2s
         - foreach <player.flag[inviteRewards]> as:milestone:
@@ -114,6 +116,8 @@ invite:
       - narrate "<&a>/invite view <&f>to view your saplings(invited players)"
       - narrate "<&a>/invite accept <&2>[code] <&f>to accept an invite"
       - narrate "<&a>/invite claim <&f>to claim outstanding rewards"
+
+      - stop
 
 ## reward distribution script
 invite_reward:
