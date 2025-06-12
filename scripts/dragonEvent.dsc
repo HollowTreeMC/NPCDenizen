@@ -1,30 +1,64 @@
+# This file contains the the scripts for the Dragon Slayer event on HollowTree
+
+## Flags used in this file:
+# <server.flag[eventTag]> is a string element - used as the prefix for event messages
+# <server.flag[dragonEvent]> is a TYPE - to store ?
+
+# <player.flag[nohollowevent]> is a TYPE - to store ?
+# <player.flag[notiAttackCD]> is a TYPE - to store ?
+
+# <entity.flag[attackingPlayers]> is a ListTag storing <playerTag> - used to note who is attacking the dragon
+
+
 # Listens for the player damaging the ender dragon
 Dragon_Listener_World:
   type: world
   debug: false
   events:
     on player damages ender_dragon:
-    - if <server.has_flag[hollow_event]>:
+    # check to see if the event is enabled
+    - if <server.has_flag[dragonEvent]>:
+
+      # check to see if the player has joined the event
+      ## wait why are we asking this? maybe just hand out the flag to the player upon this initial hitting of the dragon
       - if <player.has_flag[nohollowevent]>:
         - narrate "If you wish to rejoin the dragon hunt, use command /HollowEvent join!"
+
+        ## this is probably unnecessary, we can add everyone who fights the dragon to the event leaderboard I think
         - if !<player.has_flag[notiAttackCD]>:
           - narrate "<dark_aqua>[<dark_red>!<dark_aqua>] <reset>You've hit the dragon but you are not currently part of the event, if you wish to join, use command /HollowEvent join!"
           - flag player notiAttackCD 5m
         - stop
+
+      # if the ender dragon has not attacked players, give the flag notating the fight starting, then announce the fight to all online players
       - if !<context.entity.has_flag[attackingPlayers]>:
-        - foreach <server.online_player:
-          - if !<player.has_flag[nohollowevent]>:
-            - narrate "<server.flag[eventTag]> &rA Dragon fight has started! Get your points by attacking the dragon too!"
         - flag <context.entity> attackingPlayers:->:<player>
+        # announce fight to all online players
+        - foreach <server.online_players>:
+          ## ah so we don't want other players to be disturbed? I figure it's fine to bother them for a couple of weeks to join in the festivities
+          - if !<player.has_flag[nohollowevent]>:
+            - narrate "<server.flag[eventTag]> &rA Dragon fight has started! Get your points by attacking the dragon!"
+
+        # give the player who attacked a flag which does ?
+        ## rewrite - resets upon the dragon's death
         - narrate "<server.flag[eventTag]> <reset>You've hit the dragon. You are flagged as an attacking player. Kill the dragon to get points toward the event!"
         - flag player notiAttackCD duration:5m
+
+      # if the dragon does not have the player as an attacker and the player is part of the event OR the entity has the attacking player listTag, add the player to the attacking player listTag
       - if !<context.entity.flag[attackingPlayers].contains[<player>]> && !<player.has_flag[nohollowevent]> || <context.entity.has_flag[attackingPlayers]>:
         - flag <context.entity> attackingPlayers:->:<player>
         - narrate "<server.flag[eventTag]> <reset>You've hit the dragon. You are flagged as an attacking player. Kill the dragon to get points toward the event!"
+
+      # records damage dealt on the player
+      ## this flag is constructed oddly, might want to rewrite it to flag the dragon, not player
       - flag player damage_dealt_<context.entity>:+:<context.damage>
+
+      ## these two conditionals can probably be put into the dragon death listener unless we want to display the highest damager to players currently fighting the dragon
+      # if the dragon doesn't have a highest damager, record the current player
       - if !<context.entity.has_flag[highestDamager]>:
         - flag <context.entity> highestDamager:<player>
         - stop
+      # if the player is not the highest damager, check to see if this new player has done more damage to the entity
       - if <player> != <context.entity.flag[highestDamager]>:
         - define highestDMGER <player[<context.entity.flag[highestDamager]>]>
         - if <player.flag[damage_dealt_<context.entity>]> > <[highestDMGER].flag[damage_dealt_<context.entity>]>:
@@ -37,24 +71,40 @@ Dragon_Death_Listener_World:
   debug: false
   events:
     after player kills ender_dragon:
-    - if <server.has_flag[hollow_event]>:
+    # check to see if the event is enabled
+    - if <server.has_flag[dragonEvent]>:
+      ## I don't see where mostDMG is used in this function, remove?
       - define mostDMG 0
+      # reward the highest damager with 2 additional points
       - define highestDMGER <player[<context.entity.flag[highestDamager]>]>
       - narrate "<server.flag[eventTag]> <reset>You dealt the highest damage and received an extra 2 points!" targets:<[highestDMGER]>
       - flag <context.entity.flag[highestDamager]> enderDragonsKilled:+:2
+
+      # reward the dragon slayer with 2 aditional points
+
+      # reward all participants involved in killing the dragon with 3 points
+      ## modify the foreach to reference as:player
       - foreach <context.entity.flag[attackingPlayers]>:
         - flag player damage_dealt_<context.entity>:!
         - define killer <player[<[value]>]>
-        - flag <[killer]> enderDragonsKilled:+:5
+        ## update this flag name to a point name
+        - flag <[killer]> enderDragonsKilled:+:3
+        ## update style to match with /invite
         - narrate "<&a><&l>Hollowtree Dragon Event:<&nl> <&2>Dragon Points: <&a><[killer].flag[enderDragonsKilled]>" target:<[killer]>
         - run CheckTop def:<[killer]>
         - wait 1s
+
+      # notify all event participants of the dragon slay, display the leaderboard for all participants of the recently killed dragon
       - foreach <server.online_players>:
         - if !<[value].has_flag[nohollowevent]>:
+          ## conform style
           - narrate "<server.flag[eventTag]> <reset>An ender dragon was defeated! <dark_aqua><[highestDMGER].name><reset> was awarded <dark_green>7 <reset>points for the highest damage<aqua>!" target:<[value]>
+          ## push this into a hovertext suggestcommand
           - if !<[value].has_flag[notiTotals]>:
             - narrate "<&7><&o>To view the event leaderboard, use /HollowEvent sidebar" target:<[value]>
             - flag <[value]> notiTotals expire:20m
+
+## conform flag naming conventions
 CheckTop:
   type: task
   debug: false
@@ -174,7 +224,7 @@ Set4thPlace:
 #Start, Stop, reset, sidebar, and count cmds
 
 #permissions seperate for the administrative cmds and the player cmds
-hollow_event_CMDs:
+dragonEvent_CMDs:
   type: command
   debug: false
   description: Command handler for hollow event
@@ -189,12 +239,12 @@ hollow_event_CMDs:
         - if <player.has_permission[event.toggle]>:
           - if <player.has_permission[event.toggle]>:
             - narrate "<server.flag[eventTag]> You have stopped the event! Event will not be tracked, no points will be reset. <&nl>This is for debugging! Use /hollowevent reset to reset all totals! <&nl><&6>To continue the current event, use /HollowEvent continue!"
-            - flag server hollow_event:!
+            - flag server dragonEvent:!
       - case pause:
         - if <player.has_permission[event.toggle]>:
           - if <player.has_permission[event.toggle]>:
             - narrate "<server.flag[eventTag]> You have stopped the event! Event will not be tracked. <&nl><&6>To continue the current event, use /HollowEvent continue!"
-            - flag server hollow_event:!
+            - flag server dragonEvent:!
       - case reset:
         - if <player.has_permission[event.toggle.admin]>:
           - narrate "<server.flag[eventTag]> You've reset all the event counters!"
@@ -210,11 +260,11 @@ hollow_event_CMDs:
           - flag server name5th:!
           - foreach <server.players>:
             - flag <[value]> enderDragonsKilled:!
-          - flag server hollow_event:!
+          - flag server dragonEvent:!
       - case start:
-        - if <player.has_permission[event.toggle]> && !<server.has_flag[hollow_event]>:
+        - if <player.has_permission[event.toggle]> && !<server.has_flag[dragonEvent]>:
           - execute as_server 'cmi broadcast !<&8>---------------------------------------<&nl>{#00ff94>}&lHollow Dragon Hunting{#188377<>} Event Has Begun!&l{#00ff94<} <&nl><&nl><&r>{#188377}<&l>Dragon slayers<reset> will be awarded <dark_green>5<reset> points per kill and <aqua>2<reset> extra points will be awarded to the <bold>highest damager<aqua>!<reset><&nl><&nl>Kill {#00ff94}dragons <reset>to earn your place on the {#00ff94}<&l>Leaderboard<&color[#00e6ca]>! <&nl><&nl>Use command {#00ff94}/HollowEvent sidebar <&color[#00e6ca]>to view the leaderboard and {#00ff94}/HollowEvent count <&color[#00e6ca]>for your totals!<&nl><&a>| <&7><&o>To opt out, use the command /HollowEvent leave!<&a> | <&8>---------------------------------------'
-          - flag server hollow_event
+          - flag server dragonEvent
           - flag server ph1:0
           - flag server ph2:0
           - flag server ph3:0
@@ -229,10 +279,10 @@ hollow_event_CMDs:
           - narrate "<server.flag[eventTag]> You attempted to start a new event before resetting the old event! Use /HollowEvent reset before starting a new event!"
       - case continue:
         - if <player.has_permission[event.toggle]>:
-          - flag server hollow_event
+          - flag server dragonEvent
           - narrate "<server.flag[eventTag]> You have resumed the current event!"
       - case count:
-        - if <server.has_flag[hollow_event]>:
+        - if <server.has_flag[dragonEvent]>:
           - if <player.has_flag[enderDragonsKilled]> && !<player.has_flag[noHollowEvent]>:
             - narrate "<&a><&l>Your current dragon hunting event total:<&nl> <&2>Killed: <&a><player.flag[enderDragonsKilled]>"
           - if <player.has_flag[enderDragonsKilled]> < 1:
@@ -246,31 +296,31 @@ hollow_event_CMDs:
           - narrate "<server.flag[eventTag]> Event sidebar disabled! <&nl><&7><&o>/hollowevent sidebar to enable."
           - stop
         - if !<player.has_flag[sidebarStickOn]>:
-          - if <server.has_flag[hollow_event]> && !<player.has_flag[noHollowEvent]>:
+          - if <server.has_flag[dragonEvent]> && !<player.has_flag[noHollowEvent]>:
             - flag player sidebarStickOn duration:5d
             - run Sidebar_handler_personal def:<player>
             - narrate "<server.flag[eventTag]> Enabling sidebar! <&nl><&7><&o>/hollowevent sidebar to disable."
-          - else if !<server.has_flag[hollow_event]>:
+          - else if !<server.has_flag[dragonEvent]>:
             - narrate "<server.flag[eventTag]> No event is currently active!"
             - sidebar remove
             - flag <player> sidebarStickOn:!
       - case score:
-        - if <server.has_flag[hollow_event]> && !<player.has_flag[noHollowEvent]>:
+        - if <server.has_flag[dragonEvent]> && !<player.has_flag[noHollowEvent]>:
           - if <player.has_flag[enderDragonsKilled]>:
             - narrate "<&a><&l>Your current dragon hunting event total:<&nl> <&2>Killed: <&a><player.flag[enderDragonsKilled]>"
           - run Sidebar_handler
           - wait 60s
           - sidebar remove
-        - else if !<server.has_flag[hollow_event]>:
+        - else if !<server.has_flag[dragonEvent]>:
           - narrate "<server.flag[eventTag]> No event is currently active!"
         - else if !<player.has_flag[noHollowEvent]>:
           - narrate "<server.flag[eventTag]> The event is not currently active for you! /HollowEvent join to rejoin the hunt!"
       - case leave:
-        - if <server.has_flag[hollow_event]>:
+        - if <server.has_flag[dragonEvent]>:
           - flag player noHollowEvent expire:5d
           - narrate "<server.flag[eventTag]> You have opted out of the dragon hunting event! To join back, use the command /HollowEvent join."
       - case join:
-        - if <server.has_flag[hollow_event]>:
+        - if <server.has_flag[dragonEvent]>:
           - narrate "<server.flag[eventTag]> You have rejoined the dragon hunting event! Best of luck!"
           - flag player noHollowEvent:!
 

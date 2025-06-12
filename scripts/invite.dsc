@@ -1,10 +1,10 @@
-# This file contains the the script which handles the /invite commands
+# This file contains the the scripts which handles the /invite commands
 
 ## Flags used in this file:
-# <server.flag[inviteList]> ListTag of <list[<code|<playerTag>]> - to store generated invite codes and player objects
-# <player.flag[inviteEnt]> a <playerTag> - to store the player's Ents aka inviter
-# <player.flag[inviteSaplings]> a ListTag of <playerTag> - to store a player's invitees
-# <player.flag[inviteRewards]> a ListTag of string elements - to store a player's pending rewards
+# <server.flag[inviteList]> is a ListTag of <list[<code|<playerTag>]> - to store generated invite codes and player objects
+# <player.flag[inviteEnt]> is a <playerTag> - to store the player's Ents aka inviter
+# <player.flag[inviteSaplings]> is a ListTag of <playerTag> - to store a player's invitees
+# <player.flag[inviteRewards]> is a ListTag of string elements - to store a player's pending rewards
 
 invite:
   type: command
@@ -40,6 +40,7 @@ invite:
         # defines the inviteList to be an empty list if it DNE
         - if !<server.flag[invitelist].exists>:
           - flag server inviteList:<list[]>
+          ## rewrite this and the other 4 instances in this file of this with list insert <server.flag[]>:->:<Tag>
 
         # check to see if player already has an invite
         - define exists:False
