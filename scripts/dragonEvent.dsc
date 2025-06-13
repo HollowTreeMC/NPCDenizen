@@ -2,7 +2,7 @@
 
 ## Flags used in this file:
 # <server.flag[eventTag]> is a string element - used as the prefix for event messages
-# <server.flag[dragonEvent]> is a TYPE - to store ?
+# <server.flag[dragonEvent]> is a BOOLEAN - used to indicate whether the event is ongoing
 
 # <player.flag[nohollowevent]> is a TYPE - to store ?
 # <player.flag[notiAttackCD]> is a TYPE - to store ?
@@ -19,35 +19,21 @@ Dragon_Listener_World:
     # check to see if the event is enabled
     - if <server.has_flag[dragonEvent]>:
 
-      # check to see if the player has joined the event
-      ## wait why are we asking this? maybe just hand out the flag to the player upon this initial hitting of the dragon
-      - if <player.has_flag[nohollowevent]>:
-        - narrate "If you wish to rejoin the dragon hunt, use command /HollowEvent join!"
-
-        ## this is probably unnecessary, we can add everyone who fights the dragon to the event leaderboard I think
-        - if !<player.has_flag[notiAttackCD]>:
-          - narrate "<dark_aqua>[<dark_red>!<dark_aqua>] <reset>You've hit the dragon but you are not currently part of the event, if you wish to join, use command /HollowEvent join!"
-          - flag player notiAttackCD 5m
-        - stop
-
-      # if the ender dragon has not attacked players, give the flag notating the fight starting, then announce the fight to all online players
+      # if this is the first time the dragon has been attacked, announce to all players
       - if !<context.entity.has_flag[attackingPlayers]>:
-        - flag <context.entity> attackingPlayers:->:<player>
-        # announce fight to all online players
         - foreach <server.online_players>:
-          ## ah so we don't want other players to be disturbed? I figure it's fine to bother them for a couple of weeks to join in the festivities
-          - if !<player.has_flag[nohollowevent]>:
-            - narrate "<server.flag[eventTag]> &rA Dragon fight has started! Get your points by attacking the dragon!"
+          - narrate "<server.flag[eventTag]> <&r>A <&d>Dragon Fight <&f>has started! Head to the <server.flag[loc_StellarGallery]> and get points by attacking the dragon!"
 
-        # give the player who attacked a flag which does ?
-        ## rewrite - resets upon the dragon's death
-        - narrate "<server.flag[eventTag]> <reset>You've hit the dragon. You are flagged as an attacking player. Kill the dragon to get points toward the event!"
-        - flag player notiAttackCD duration:5m
+      # add player to current dragon's fight if they are not on the list already
+      - if !<context.entity.flag[attackingPlayers].contains[<player>]>:
+        - flag <context.entity> attackingPlayers:->:<player> expire:3d
 
-      # if the dragon does not have the player as an attacker and the player is part of the event OR the entity has the attacking player listTag, add the player to the attacking player listTag
-      - if !<context.entity.flag[attackingPlayers].contains[<player>]> && !<player.has_flag[nohollowevent]> || <context.entity.has_flag[attackingPlayers]>:
-        - flag <context.entity> attackingPlayers:->:<player>
-        - narrate "<server.flag[eventTag]> <reset>You've hit the dragon. You are flagged as an attacking player. Kill the dragon to get points toward the event!"
+      - flag <context.entity> attackingPlayersDmg
+
+      - narrate "<server.flag[eventTag]> <&r>You've entered the dragon fight! Kill the dragon to get points toward the event!"
+
+      # add the player's attack to their total
+
 
       # records damage dealt on the player
       ## this flag is constructed oddly, might want to rewrite it to flag the dragon, not player
@@ -81,6 +67,7 @@ Dragon_Death_Listener_World:
       - flag <context.entity.flag[highestDamager]> enderDragonsKilled:+:2
 
       # reward the dragon slayer with 2 aditional points
+      - define highestDMGR <player[<context.entity.flag[highestDamager]>]>
 
       # reward all participants involved in killing the dragon with 3 points
       ## modify the foreach to reference as:player
@@ -131,7 +118,6 @@ CheckTop:
     - wait 60s
     - sidebar remove
 
-#Listener for dragon kills
 #Once the players take their places on the top 5, the scoreboard is updated for everyone with the flag that they enable when they use the command /hollowevent sidebar
 #Placeholder handler to set each player to the proper place on the top 5 chart
 Set1stPlace:

@@ -3,7 +3,7 @@ npc_handler:
     debug: false
     events:
         on scripts loaded:
-        # SET PREFIX FLAGS
+        ## SET PREFIX FLAGS
         - flag server pfx_chronarch:<&7>{<&color[#530179]>C<&color[#890079]>h<&color[#b70071]>r<&color[#dd0063]>o<&color[#f94051]>n<&color[#ff6f3b]>a<&color[#ff9f31]>r<&color[#ffc900]>c<&color[#f5f50a]>h<&7>}<&f>
         #   Job NPCs
         - flag server pfx_bulki:<&8>{<&f>Scrapper<&8>}<&sp><&6>Bulki<&f>:<&f>
@@ -57,3 +57,8 @@ npc_handler:
         - flag server infoTag:<&b>[<&3>!<&7><&b>]<&r><&sp>
 
         - flag server voteTag:<&hover[<&7>/vote]><element[<&7>[<&b>✨<&7>]].on_click[/vote ].type[SUGGEST_COMMAND]><&f><&end_hover>
+
+
+        ## LOCATIONS
+        - flag server loc_StellarGallery:<&hover[<&7><&o>Speak with <&6>Astra <&7><&o>at /spawn!]><&6>Stellar<&sp>Gallery<&end_hover>
+        # add hover to this in the future (speak with Astra at spawn)
