@@ -26,10 +26,10 @@ Dragon_Slayer:
       - if <[atkPlayersMap].contains[<player.uuid>]>:
         # player is already on the list, increase their damage
         - define totalDMG:<[atkPlayersMap].get[<player.uuid>].add[<context.damage>]>
-        - flag <context.entity> <[atkPlayersMap].with[<player.uuid>].as[<[totalDMG]>]>
+        - flag <context.entity> attackingPlayers:<[atkPlayersMap].with[<player.uuid>].as[<[totalDMG]>]>
       - else:
         # player is not on the list, add them to the list
-        - flag <context.entity> <[atkPlayersMap].include[<player.uuid>=<context.damage>]>
+        - flag <context.entity> attackingPlayers:<[atkPlayersMap].include[<player.uuid>=<context.damage>]>
         - narrate "<server.flag[eventTag]> <&r>You've entered the <&d>Dragon Fight<&f>! Kill the dragon to get points toward the event!"
 
     # Listens for dragons being killed by players
