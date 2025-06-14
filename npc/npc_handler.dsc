@@ -53,9 +53,9 @@ npc_handler:
             - run xur_shop
         # Event
         - flag server eventTag:<&7>[<&3>Event<&7>]<&b>
+        - flag server inviteTag:<&8>[<&a>🌲<&8>]
         # Info
         - flag server infoTag:<&b>[<&3>!<&7><&b>]<&r><&sp>
-
         - flag server voteTag:<&hover[<&7>/vote]><element[<&7>[<&b>✨<&7>]].on_click[/vote ].type[SUGGEST_COMMAND]><&f><&end_hover>
 
 

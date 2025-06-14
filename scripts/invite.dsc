@@ -19,7 +19,7 @@ invite:
   script:
     ## return the status of the panel
     - if <context.args.first> == list || <context.args.first.if_null[].equals[]>:
-        - narrate "<&8>[<&a>🌲<&8>] <&2>HollowTree Invitations"
+        - narrate "<server.flag[inviteTag]> <&2>HollowTree Invitations"
         # display the inviter
         - narrate " <&e>E<&color[#f1f150]>n<&color[#c9c942]>t<&7>: <player.flag[inviteEnt].name.if_null[/invite accept]>"
         # display the three invites a player can create, create the invites for them if they haven't already been created
@@ -48,6 +48,7 @@ invite:
           - if <[invite].get[2].equals[<player>]>:
             - define code:<[invite]>
             - define exists:True
+            - stop
 
         # create an invitation code, add to the existing list of invites
         - if !<[exists]>:
@@ -56,7 +57,7 @@ invite:
           - flag server inviteList:<[new_inviteList].include_single[<[code]>]>
 
         # tell the player what their invite code is
-        - narrate "<&8>[<&a>🌲<&8>] <&f>Your invite code is: <&a><[code].get[1]> <&7>"
+        - narrate "<server.flag[inviteTag]> <&f>Your invite code is: <&a><[code].get[1]> <&7>"
 
         - stop
 
@@ -64,7 +65,7 @@ invite:
     - if <context.args.first> == accept:
       # check to see if the player has an ent
       - if !<player.flag[inviteEnt].is_empty>:
-        - narrate "<&8>[<&a>🌲<&8>] <&f>You have already accepted an ent!"
+        - narrate "<server.flag[inviteTag]> <&f>You have already accepted an ent!"
         - stop
       # search for the invitation code in the server flag list
       - define exists:False
@@ -84,14 +85,14 @@ invite:
               - define old_list:<[ent].flag[inviteSaplings]>
               - flag <[ent]> inviteSaplings:<[old_list].include_single[<player>]>
               # run the vote rewarder for the initial invite
-              - narrate "<&8>[<&a>🌲<&8>] <&f>You have accepted <[ent].name>'s invitation! Here are the initial rewards!"
+              - narrate "<server.flag[inviteTag]> <&f>You have accepted <[ent].name>'s invitation! Here are the initial rewards!"
               - run invite_reward def:<player.uuid>|sapling
             - else:
-              - narrate "<&8>[<&a>🌲<&8>] <&f><[ent].name> cannot accept you as a sapling!"
+              - narrate "<server.flag[inviteTag]> <&f><[ent].name> cannot accept you as a sapling!"
 
       # invite not in the server flag list
       - if !<[exists]>:
-        - narrate "<&8>[<&a>🌲<&8>] <&f>The code <&c><context.args.get[2]> <&f>could not be found!"
+        - narrate "<server.flag[inviteTag]> <&f>The code <&c><context.args.get[2]> <&f>could not be found!"
 
       - stop
 
@@ -99,20 +100,20 @@ invite:
     # this could probably be further extended to notify players upon login
     - if <context.args.first> == claim:
       - if <player.flag[inviteRewards].exists>:
-        - narrate "<&8>[<&a>🌲<&8>] <&f>Your rewards will be meted out!"
+        - narrate "<server.flag[inviteTag]> <&f>Your rewards will be meted out!"
         - wait 2s
         - foreach <player.flag[inviteRewards]> as:milestone:
           - run invite_reward <player.uuid> <[milestone]>
           - flag <player> inviteRewards:!
       - else:
-        - narrate "<&8>[<&a>🌲<&8>] <&f>You have no outstanding rewards"
+        - narrate "<server.flag[inviteTag]> <&f>You have no outstanding rewards"
 
       - stop
 
     ## accepts an invite
     - if <context.args.first> == help:
       # return an explanation of each of the commands
-      - narrate "<&8>[<&a>🌲<&8>] <&2>HollowTree Invitations"
+      - narrate "<server.flag[inviteTag]> <&2>HollowTree Invitations"
       - narrate "<&a>/invite create <&f>to generate your invitation code"
       - narrate "<&a>/invite view <&f>to view your saplings(invited players)"
       - narrate "<&a>/invite accept <&2>[code] <&f>to accept an invite"
@@ -131,7 +132,7 @@ invite_reward:
     - foreach <[sapling]>|<[ent]> as:user:
       # check to see if the player is online
       - if <[user].is_online>:
-        - narrate targets:<[user]> "<&8>[<&a>🌲<&8>] <&f>Rewards are being given for <[sapling].name> reaching <&a><[milestone]><&f>!"
+        - narrate targets:<[user]> "<server.flag[inviteTag]> <&f>Rewards are being given for <[sapling].name> reaching <&a><[milestone]><&f>!"
         - if <[milestone]> == sapling:
           - execute as_server 'money give <[user].name> 1500 coins'
           - execute as_server 'acb <[user].name> 200'

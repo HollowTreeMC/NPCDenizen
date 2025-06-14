@@ -4,18 +4,15 @@
 # <server.flag[eventTag]> is a string element - used as the prefix for event messages
 # <server.flag[dragonEvent]> is a BOOLEAN - used to indicate whether the event is ongoing
 
-# <player.flag[nohollowevent]> is a TYPE - to store ?
-# <player.flag[notiAttackCD]> is a TYPE - to store ?
+# <entity.flag[attackingPlayers]> is a mapTag - keys are player.uuid and values are damage dealt
 
-# <entity.flag[attackingPlayers]> is a ListTag storing <playerTag> - used to note who is attacking the dragon
-
-
-# Listens for the player damaging the ender dragon
-Dragon_Listener_World:
+Dragon_Slayer:
   type: world
   debug: false
   events:
+    # Listens for players damaging the ender dragon
     on player damages ender_dragon:
+
     # check to see if the event is enabled
     - if <server.has_flag[dragonEvent]>:
 
@@ -24,41 +21,31 @@ Dragon_Listener_World:
         - foreach <server.online_players>:
           - narrate "<server.flag[eventTag]> <&r>A <&d>Dragon Fight <&f>has started! Head to the <server.flag[loc_StellarGallery]> and get points by attacking the dragon!"
 
-      # add player to current dragon's fight if they are not on the list already
-      - if !<context.entity.flag[attackingPlayers].contains[<player>]>:
-        - flag <context.entity> attackingPlayers:->:<player> expire:3d
+      # add player's damage to the current entity, attackingplayers is a map containing playerUUID=damage
+      - define atkPlayersMap:<context.entity.flag[attackingPlayers]>
+      - if <[atkPlayersMap].contains[<player.uuid>]>:
+        # player is already on the list, increase their damage
+        - define totalDMG:<[atkPlayersMap].get[<player.uuid>].add[<context.damage>]>
+        - flag <context.entity> <[atkPlayersMap].with[<player.uuid>].as[<[totalDMG]>]>
+      - else:
+        # player is not on the list, add them to the list
+        - flag <context.entity> <[atkPlayersMap].include[<player.uuid>=<context.damage>]>
+        - narrate "<server.flag[eventTag]> <&r>You've entered the <&d>Dragon Fight<&f>! Kill the dragon to get points toward the event!"
 
-      - flag <context.entity> attackingPlayersDmg
-
-      - narrate "<server.flag[eventTag]> <&r>You've entered the dragon fight! Kill the dragon to get points toward the event!"
-
-      # add the player's attack to their total
-
-
-      # records damage dealt on the player
-      ## this flag is constructed oddly, might want to rewrite it to flag the dragon, not player
-      - flag player damage_dealt_<context.entity>:+:<context.damage>
-
-      ## these two conditionals can probably be put into the dragon death listener unless we want to display the highest damager to players currently fighting the dragon
-      # if the dragon doesn't have a highest damager, record the current player
-      - if !<context.entity.has_flag[highestDamager]>:
-        - flag <context.entity> highestDamager:<player>
-        - stop
-      # if the player is not the highest damager, check to see if this new player has done more damage to the entity
-      - if <player> != <context.entity.flag[highestDamager]>:
-        - define highestDMGER <player[<context.entity.flag[highestDamager]>]>
-        - if <player.flag[damage_dealt_<context.entity>]> > <[highestDMGER].flag[damage_dealt_<context.entity>]>:
-          - define highestDMGER <player>
-          - flag <context.entity> highestDamager:<player>
-
-#Listens for dragon dying
-Dragon_Death_Listener_World:
-  type: world
-  debug: false
-  events:
-    after player kills ender_dragon:
+    # Listens for dragons being killed by players
+    on player kills ender_dragon:
     # check to see if the event is enabled
     - if <server.has_flag[dragonEvent]>:
+
+      # give the slayer 2 points
+
+      # give the highest damager 2 points
+
+      # give all participants 3 points
+
+
+
+
       ## I don't see where mostDMG is used in this function, remove?
       - define mostDMG 0
       # reward the highest damager with 2 additional points
