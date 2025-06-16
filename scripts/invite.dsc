@@ -17,52 +17,51 @@ invite:
   debug: false
 
   script:
-    ## return the status of the panel
-    - if <context.args.first> == list || <context.args.first.if_null[].equals[]>:
-        - narrate "<server.flag[inviteTag]> <&2>HollowTree Invitations"
-        # display the inviter
-        - narrate " <&e>E<&color[#f1f150]>n<&color[#c9c942]>t<&7>: <player.flag[inviteEnt].name.if_null[/invite accept]>"
-        # display the three invites a player can create, create the invites for them if they haven't already been created
-        - narrate " <&color[#86c96e]>S<&color[#76bf5f]>a<&color[#66b550]>p<&color[#55ab41]>l<&color[#42a232]>i<&color[#2c9821]>n<&color[#068e0a]>g<&color[#068e0a]>s<&7>: (3)"
-        # look through all the player's sapling tags
-        - if !<player.has_flag[inviteSaplings]>:
-          # player has no saplings
-          - narrate "  <&7><&o>/invite create"
-        - else:
-          # list all saplings
-          - foreach <player.flag[inviteSaplings]> as:Sapling:
-            - narrate "  <&7><&o><[Sapling].name>"
+  - choose <context.args.first.if_null[list]>:
 
-        - stop
+    # display a menu in chat including the player's invites and invitee
+    - case list:
+      - narrate "<server.flag[inviteTag]> <&2>HollowTree Invitations"
+      # display the inviter
+      - narrate " <&e>E<&color[#f1f150]>n<&color[#c9c942]>t<&7>: <player.flag[inviteEnt].name.if_null[/invite accept]>"
+      # display the three invites a player can create, create the invites for them if they haven't already been created
+      - narrate " <&color[#86c96e]>S<&color[#76bf5f]>a<&color[#66b550]>p<&color[#55ab41]>l<&color[#42a232]>i<&color[#2c9821]>n<&color[#068e0a]>g<&color[#068e0a]>s<&7>: (3)"
+      # look through all the player's sapling tags
+      - if !<player.has_flag[inviteSaplings]>:
+        # player has no saplings
+        - narrate "  <&7><&o>/invite create"
+      - else:
+        # list all saplings
+        - foreach <player.flag[inviteSaplings]> as:Sapling:
+          - narrate "  <&7><&o><[Sapling].name>"
 
-    ## creates an invite
-    - if <context.args.first> == create:
-        # defines the inviteList to be an empty list if it DNE
-        - if !<server.flag[invitelist].exists>:
-          - flag server inviteList:<list[]>
-          ## rewrite this and the other 4 instances in this file of this with list insert <server.flag[]>:->:<Tag>
+    # creates an invite
+    - case create:
+      # defines the inviteList to be an empty list if it DNE
+      - if !<server.flag[invitelist].exists>:
+        - flag server inviteList:<list[]>
+        ## rewrite this and the other 4 instances in this file of this with list insert <server.flag[]>:->:<Tag>
 
-        # check to see if player already has an invite
-        - define exists:False
-        - foreach <server.flag[inviteList]> as:invite:
-          - if <[invite].get[2].equals[<player>]>:
-            - define code:<[invite]>
-            - define exists:True
-            - stop
+      # check to see if player already has an invite
+      ## this should be a maptag
+      - define exists:False
+      - foreach <server.flag[inviteList]> as:invite:
+        - if <[invite].get[2].equals[<player>]>:
+          - define code:<[invite]>
+          - define exists:True
+          - foreach stop
 
-        # create an invitation code, add to the existing list of invites
-        - if !<[exists]>:
-          - define code:<list[<util.random_uuid.substring[32]>|<player>]>
-          - define new_inviteList:<server.flag[inviteList]>
-          - flag server inviteList:<[new_inviteList].include_single[<[code]>]>
+      # create an invitation code, add to the existing list of invites
+      - if !<[exists]>:
+        - define code:<list[<util.random_uuid.substring[32]>|<player>]>
+        - define new_inviteList:<server.flag[inviteList]>
+        - flag server inviteList:<[new_inviteList].include_single[<[code]>]>
 
-        # tell the player what their invite code is
-        - narrate "<server.flag[inviteTag]> <&f>Your invite code is: <&a><[code].get[1]> <&7>"
+      # tell the player what their invite code is
+      - narrate "<server.flag[inviteTag]> <&f>Your invite code is: <&a><[code].get[1]> <&7>"
 
-        - stop
-
-    ## accepts an invite
-    - if <context.args.first> == accept:
+    # accepts an invite
+    - case accept:
       # check to see if the player has an ent
       - if !<player.flag[inviteEnt].is_empty>:
         - narrate "<server.flag[inviteTag]> <&f>You have already accepted an ent!"
@@ -94,11 +93,9 @@ invite:
       - if !<[exists]>:
         - narrate "<server.flag[inviteTag]> <&f>The code <&c><context.args.get[2]> <&f>could not be found!"
 
-      - stop
-
-    ## runs reward script if player holds flags
-    # this could probably be further extended to notify players upon login
-    - if <context.args.first> == claim:
+    # runs reward script if player holds flags
+    ## this could probably be further extended to notify players upon login
+    - case claim:
       - if <player.flag[inviteRewards].exists>:
         - narrate "<server.flag[inviteTag]> <&f>Your rewards will be meted out!"
         - wait 2s
@@ -108,18 +105,14 @@ invite:
       - else:
         - narrate "<server.flag[inviteTag]> <&f>You have no outstanding rewards"
 
-      - stop
-
-    ## accepts an invite
-    - if <context.args.first> == help:
+    # displays the invitation commands and their usages
+    - case help:
       # return an explanation of each of the commands
       - narrate "<server.flag[inviteTag]> <&2>HollowTree Invitations"
       - narrate "<&a>/invite create <&f>to generate your invitation code"
       - narrate "<&a>/invite view <&f>to view your saplings(invited players)"
       - narrate "<&a>/invite accept <&2>[code] <&f>to accept an invite"
       - narrate "<&a>/invite claim <&f>to claim outstanding rewards"
-
-      - stop
 
 ## reward distribution script
 invite_reward:

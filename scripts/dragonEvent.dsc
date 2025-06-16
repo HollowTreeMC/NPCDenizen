@@ -105,35 +105,20 @@ dragonEventCmd:
   name: dragon
   usage: /dragon [command]
   tab completions:
-    1: count|sidebar|score
+    1: count|sidebar|score|<player.has_permission[event.toggle].if_true[restart|stop|continue].if_false[]>
   script:
-  - define argument <context.args.get[1]>
   - choose <context.args.first>:
     - case stop:
-
-
-
-#permissions seperate for the administrative cmds and the player cmds
-dragonEvent_CMDs:
-  type: command
-  debug: false
-  description: Command handler for hollow event
-  name: hollowevent
-  usage: /hollowevent [command]
-  tab completions:
-      1: count|sidebar|score|join|leave
-  script:
-    - choose <context.args.first>:
-      - case stop:
         - if <player.has_permission[event.toggle]>:
-          - if <player.has_permission[event.toggle]>:
-            - narrate "<server.flag[eventTag]> You have stopped the event! Event will not be tracked, no points will be reset. <&nl>This is for debugging! Use /hollowevent reset to reset all totals! <&nl><&6>To continue the current event, use /HollowEvent continue!"
-            - flag server dragonEvent:!
-      - case pause:
-        - if <player.has_permission[event.toggle]>:
-          - if <player.has_permission[event.toggle]>:
-            - narrate "<server.flag[eventTag]> You have stopped the event! Event will not be tracked. <&nl><&6>To continue the current event, use /HollowEvent continue!"
-            - flag server dragonEvent:!
+          - narrate "<server.flag[eventTag]> You have stopped the event! Event will not be tracked, no points will be reset. <&nl>This is for debugging! Use /hollowevent start to reset all totals! <&nl><&6>To continue the current event, use /HollowEvent continue!"
+          - flag server dragonEvent:!
+    - case pause:
+      - if <player.has_permission[event.toggle]>:
+        - narrate "<server.flag[eventTag]> You have stopped the event! Event will not be tracked. <&nl><&6>To continue the current event, use /HollowEvent continue!"
+        - flag server dragonEvent:!
+
+
+
       - case reset:
         - if <player.has_permission[event.toggle.admin]>:
           - narrate "<server.flag[eventTag]> You've reset all the event counters!"
