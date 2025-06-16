@@ -51,6 +51,7 @@ npc_handler:
         #   Xur NPC
         - if <util.time_now.day_of_week> == 1 || <util.time_now.day_of_week> == 5:
             - run xur_shop
+
         # Event
         - flag server eventTag:<&7>[<&3>Event<&7>]<&b>
         - flag server inviteTag:<&8>[<&a>🌲<&8>]

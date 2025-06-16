@@ -3,13 +3,15 @@
 ## Flags used in this file:
 # <server.flag[eventTag]> is a string element - used as the prefix for event messages
 # <server.flag[dragonEvent]> is a BOOLEAN - used to indicate whether the event is ongoing
+# <server.flag[dragonEventPoints]> is a maptag - keys are players.uuid and values are points
 
 # <entity.flag[attackingPlayers]> is a mapTag - keys are player.uuid and values are damage dealt
 
 Dragon_Slayer:
   type: world
-  debug: false
+  debug: true
   events:
+
     # Listens for players damaging the ender dragon
     on player damages ender_dragon:
 
@@ -34,167 +36,82 @@ Dragon_Slayer:
 
     # Listens for dragons being killed by players
     on player kills ender_dragon:
+
     # check to see if the event is enabled
     - if <server.has_flag[dragonEvent]>:
 
+      # store the entity's damage map tag
+      - define atkPlayersMap:<context.entity.flag[attackingPlayers]>
+
       # give the slayer 2 points
+      - define slayerPoints:<server.flag[dragonEventPoints].get[<player.uuid>].if_null[0].add[2]>
+      - flag server dragonEventPoints:<server.flag[dragonEventPoints].with[<player.uuid>].as[<[slayerPoints]>]>
+      - narrate "<server.flag[eventTag]> <reset>You slayed the <&d>Dragon<&f>! <&7><&o>+2 points" targets:<player>
 
-      # give the highest damager 2 points
+      # sort the player damage to dragon map (dict)
+      - define sorted_atkPlayersMap:<context.entity.flag[attackingPlayers].sort_by_value[mul[-1]]>
+      - foreach <[sorted_atkPlayersMap].keys> as:key:
 
-      # give all participants 3 points
+        # give the highest damager 2 points
+        - if <[loop_index]> == 1:
+          - define damagerPoints:<server.flag[dragonEventPoints].get[<[key]>].if_null[0].add[2]>
+          - flag server dragonEventPoints:<server.flag[dragonEventPoints].with[<[key]>].as[<[damagerPoints]>]>
+          - narrate "<server.flag[eventTag]> <reset>You dealt the most damage to the <&d>Dragon<&f>! <&7><&o>+2 points" targets:<player[p@<[key]>]>
 
+        # give each participant 3 points
+        - define participantPoints:<server.flag[dragonEventPoints].get[<[key]>].if_null[0].add[2]>
+        - flag server dragonEventPoints:<server.flag[dragonEventPoints].with[<[key]>].as[<[participantPoints]>]>
+        - narrate "<server.flag[eventTag]> <reset>You helped slay the <&d>Dragon<&f>! <&7><&o>+3 points" targets:<player[p@<[key]>]>
 
+      # let all players know a dragon has been defeated
+      ## add clickable to view leaderboard in this message
+      - narrate "<server.flag[eventTag]> <reset>A <&d>Dragon<&f> was defeated by <player.name>" target:<server.online_players>
+      # display the leaderboard for all players for 30 seconds
+      - foreach <server.online_players> as:players:
+        - run dragonleaderboard def:<[players]>
 
-
-      ## I don't see where mostDMG is used in this function, remove?
-      - define mostDMG 0
-      # reward the highest damager with 2 additional points
-      - define highestDMGER <player[<context.entity.flag[highestDamager]>]>
-      - narrate "<server.flag[eventTag]> <reset>You dealt the highest damage and received an extra 2 points!" targets:<[highestDMGER]>
-      - flag <context.entity.flag[highestDamager]> enderDragonsKilled:+:2
-
-      # reward the dragon slayer with 2 aditional points
-      - define highestDMGR <player[<context.entity.flag[highestDamager]>]>
-
-      # reward all participants involved in killing the dragon with 3 points
-      ## modify the foreach to reference as:player
-      - foreach <context.entity.flag[attackingPlayers]>:
-        - flag player damage_dealt_<context.entity>:!
-        - define killer <player[<[value]>]>
-        ## update this flag name to a point name
-        - flag <[killer]> enderDragonsKilled:+:3
-        ## update style to match with /invite
-        - narrate "<&a><&l>Hollowtree Dragon Event:<&nl> <&2>Dragon Points: <&a><[killer].flag[enderDragonsKilled]>" target:<[killer]>
-        - run CheckTop def:<[killer]>
-        - wait 1s
-
-      # notify all event participants of the dragon slay, display the leaderboard for all participants of the recently killed dragon
-      - foreach <server.online_players>:
-        - if !<[value].has_flag[nohollowevent]>:
-          ## conform style
-          - narrate "<server.flag[eventTag]> <reset>An ender dragon was defeated! <dark_aqua><[highestDMGER].name><reset> was awarded <dark_green>7 <reset>points for the highest damage<aqua>!" target:<[value]>
-          ## push this into a hovertext suggestcommand
-          - if !<[value].has_flag[notiTotals]>:
-            - narrate "<&7><&o>To view the event leaderboard, use /HollowEvent sidebar" target:<[value]>
-            - flag <[value]> notiTotals expire:20m
-
-## conform flag naming conventions
-CheckTop:
+DragonLeaderboard:
   type: task
-  debug: false
-  definitions: killer
+  debug: true
+  definitions: players
   script:
-    - if <[killer].flag[enderDragonsKilled]> > <server.flag[ph5]>:
-      - if <[killer].flag[enderDragonsKilled]> > <server.flag[ph1]>:
-          - run Set1stPlace def:<[killer]>
-          - stop
-      - else if <[killer].flag[enderDragonsKilled]> > <server.flag[ph2]>:
-          - run Set2ndPlace def:<[killer]>
-          - stop
-      - else if <[killer].flag[enderDragonsKilled]> > <server.flag[ph3]>:
-          - run Set3rdPlace def:<[killer]>
-          - stop
-      - else if <[killer].flag[enderDragonsKilled]> > <server.flag[ph4]>:
-          - run Set4thPlace def:<[killer]>
-          - stop
-      - else if <[killer].flag[enderDragonsKilled]> > <server.flag[ph5]>:
-          - flag server ph5:<[killer].flag[enderDragonsKilled]>
-          - flag server name5th:<[killer].name>
-    - flag <[killer]> sidebarStick duration:60s
-    - run Sidebar_handler
-    - wait 60s
-    - sidebar remove
-
-#Once the players take their places on the top 5, the scoreboard is updated for everyone with the flag that they enable when they use the command /hollowevent sidebar
-#Placeholder handler to set each player to the proper place on the top 5 chart
-Set1stPlace:
-  type: task
-  debug: false
-  definitions: killer
-  script:
-    - if <[killer].name> == <server.flag[name2nd]>:
-      - flag server ph2:<server.flag[ph1]>
-      - flag server name2nd:<server.flag[name1st]>
-    - if <[killer]> == <server.flag[name3rd]>:
-      - flag server ph3:<server.flag[ph2]>
-      - flag server name3rd:<server.flag[name2nd]>
-      - flag server ph2:<server.flag[ph1]>
-      - flag server name2nd:<server.flag[name1st]>
-    - if <[killer]> == <server.flag[name4th]>:
-      - flag server ph4:<server.flag[ph3]>
-      - flag server name4th:<server.flag[name3rd]>
-      - flag server ph3:<server.flag[ph2]>
-      - flag server name3rd:<server.flag[name2nd]>
-      - flag server ph2:<server.flag[ph1]>
-      - flag server name2nd:<server.flag[name1st]>
-    - if <[killer]> == <server.flag[name5th]>:
-      - flag server ph5:<server.flag[ph4]>
-      - flag server name5th:<server.flag[name4th]>
-      - flag server ph4:<server.flag[ph3]>
-      - flag server name4th:<server.flag[name3rd]>
-      - flag server ph3:<server.flag[ph2]>
-      - flag server name3rd:<server.flag[name2nd]>
-      - flag server ph2:<server.flag[ph1]>
-      - flag server name2nd:<server.flag[name1st]>
-    - flag server ph1:<[killer].flag[enderDragonsKilled]>
-    - flag server name1st:<[killer].name>
-    - run Sidebar_handler
-
-Set2ndPlace:
-  type: task
-  debug: false
-  definitions: killer
-  script:
-    - if <[killer].name> == <server.flag[name3rd]>:
-      - flag server ph3:<server.flag[ph2]>
-      - flag server name3rd:<server.flag[name2nd]>
-    - if <[killer]> == <server.flag[name4th]>:
-      - flag server ph4:<server.flag[ph3]>
-      - flag server name4th:<server.flag[name3rd]>
-      - flag server ph3:<server.flag[ph2]>
-      - flag server name3rd:<server.flag[name2nd]>
-    - if <[killer]> == <server.flag[name5th]>:
-      - flag server ph5:<server.flag[ph4]>
-      - flag server name5th:<server.flag[name4th]>
-      - flag server ph4:<server.flag[ph3]>
-      - flag server name4th:<server.flag[name3rd]>
-      - flag server ph3:<server.flag[ph2]>
-      - flag server name3rd:<server.flag[name2nd]>
-    - flag server ph2:<[killer].flag[enderDragonsKilled]>
-    - flag server name2nd:<[killer].name>
-    - run Sidebar_handler
-
-Set3rdPlace:
-  type: task
-  debug: false
-  definitions: killer
-  script:
-    - if <[killer].name> == <server.flag[name4th]>:
-      - flag server ph4:<server.flag[ph3]>
-      - flag server name4th:<server.flag[name3rd]>
-    - if <[killer]> == <server.flag[name5th]>:
-      - flag server ph5:<server.flag[ph4]>
-      - flag server name5th:<server.flag[name4th]>
-      - flag server ph4:<server.flag[ph3]>
-      - flag server name4th:<server.flag[name3rd]>
-    - flag server ph3:<[killer].flag[enderDragonsKilled]>
-    - flag server name3rd:<[killer].name>
-    - run Sidebar_handler
-
-Set4thPlace:
-  type: task
-  debug: false
-  definitions: killer
-  script:
-    - if <[killer].name> == <server.flag[name5th]>:
-      - flag server ph5:<server.flag[ph4]>
-      - flag server name5th:<server.flag[name4th]>
-    - flag server ph4:<[killer].flag[enderDragonsKilled]>
-    - flag server name4th:<[killer].name>
-    - run Sidebar_handler
-
+    # sort the server leaderboard maptag
+    - define sorted_PointsMap:<server.flag[dragonEventPoints].sort_by_value[mul[-1]]>
+    # populate places 1 to 5
+    - foreach <[sorted_PointsMap].keys> as:key:
+      - if <[loop_index]> < 6:
+        - define values:->:'<&6><[loop_index]>:<&sp><&e><player[p@<[key]>].name>'
+        - define scores:->:<server.flag[dragonEventPoints].get[<[key]>]>
+      # obtain the player's place
+      - if key == <[players].uuid>:
+        - define personalPlace:<[loop_index]>
+    # add a space to make the personal place a footer
+    - define values:->:'<&sp>'
+    - define scores:->:'<&sp>'
+    # populate player's place
+    - define values:->:'<&6><[personalPlace]>:<&sp><&e><[player].name>'
+    - define scores:->:<server.flag[dragonEventPoints].get[<[players].uuid>]>
+    # display the sidebar for the player
+    - define title:<&d>Dragon<&sp>Hunters<&sp>Leaderboard
+    - sidebar set title:<[title]> values:<[values]> scores:<[scores]> players:<[players]>
+    - wait 30s
+    - sidebar remove players:<[players]>
 
 #Start, Stop, reset, sidebar, and count cmds
+dragonEventCmd:
+  type: command
+  debug: true
+  description: Dragon Slayer Event Commands
+  name: dragon
+  usage: /dragon [command]
+  tab completions:
+    1: count|sidebar|score
+  script:
+  - define argument <context.args.get[1]>
+  - choose <context.args.first>:
+    - case stop:
+
+
 
 #permissions seperate for the administrative cmds and the player cmds
 dragonEvent_CMDs:
@@ -206,7 +123,6 @@ dragonEvent_CMDs:
   tab completions:
       1: count|sidebar|score|join|leave
   script:
-    - define argument <context.args.get[1]>
     - choose <context.args.first>:
       - case stop:
         - if <player.has_permission[event.toggle]>:
