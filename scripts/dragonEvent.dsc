@@ -6,6 +6,7 @@
 # <server.flag[dragonEventPoints]> is a maptag - keys are players.uuid and values are points
 
 # <entity.flag[attackingPlayers]> is a mapTag - keys are player.uuid and values are damage dealt
+# <entity.flag[lastAttackingPlayer]> is a playerTag - used to store the last player who dealt damage to the dragon
 
 Dragon_Slayer:
   type: world
@@ -33,18 +34,21 @@ Dragon_Slayer:
         - flag <context.entity> attackingPlayers:<[atkPlayersMap].include[<player.uuid>=<context.damage>]>
         - narrate "<server.flag[eventTag]> <&r>You've entered the <&5>Dragon Fight<&f>! Attack the dragon to get dragon slayer points!"
 
+      - flag <context.entity> lastAttackingPlayer:<player>
+
     # Listens for dragons being killed by players
-    on player kills ender_dragon:
+    on ender_dragon dies:
     # check to see if the event is enabled
     - if <server.has_flag[dragonEvent]>:
 
       # store the entity's damage map tag
       - define atkPlayersMap:<context.entity.flag[attackingPlayers]>
+      - define slayer:<context.entity.flag[lastAttackingPlayer]>
 
       # give the slayer 2 points
-      - define slayerPoints:<server.flag[dragonEventPoints].get[<player.uuid>].if_null[0].add[2]>
-      - flag server dragonEventPoints:<server.flag[dragonEventPoints].with[<player.uuid>].as[<[slayerPoints]>]>
-      - narrate "<server.flag[eventTag]> <reset>You slayed the <&5>Dragon<&f>! <&7><&o>+2 points" targets:<player>
+      - define slayerPoints:<server.flag[dragonEventPoints].get[<[slayer].uuid>].if_null[0].add[2]>
+      - flag server dragonEventPoints:<server.flag[dragonEventPoints].with[<[slayer].uuid>].as[<[slayerPoints]>]>
+      - narrate "<server.flag[eventTag]> <reset>You slayed the <&5>Dragon<&f>! <&7><&o>+2 points" targets:<[slayer]>
 
       # sort the player damage to dragon map (dict)
       - define sorted_atkPlayersMap:<context.entity.flag[attackingPlayers].sort_by_value[mul[-1]]>
@@ -63,7 +67,7 @@ Dragon_Slayer:
 
       # let all players know a dragon has been defeated
       ## add clickable to view leaderboard in this message
-      - narrate "<server.flag[eventTag]> <reset>A <&5>Dragon<&f> was defeated by <&6>@<player.name>" target:<server.online_players>
+      - narrate "<server.flag[eventTag]> <reset>A <&5>Dragon<&f> was defeated by <&6>@<[slayer].name>" target:<server.online_players>
       # display the leaderboard for all players for 30 seconds
       - foreach <server.online_players> as:players:
         - run dragonleaderboard def:<[players]>
