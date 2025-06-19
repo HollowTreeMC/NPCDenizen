@@ -115,7 +115,7 @@ xur_shop:
     # teleports xur to the correct location
     - teleport <npc[28]> <server.flag[xur_location]>
 
-# Contains all the black market items
+# Contains all the black market items. Assign using /ex flag
 xur_tier1:
     type: task
     definitions: slot_flag

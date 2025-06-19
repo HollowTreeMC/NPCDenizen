@@ -35,7 +35,7 @@ ladyvalvewright_main:
                 # player does not have the pass
                 - else:
                     # player meets the requisite rank or balance
-                    - if <player.has_permission[group.chronarch]> || <player.money> > 1000000:
+                    - if <player.has_permission[group.chronarch]> || <player.money> > 250000:
                         - narrate "<server.flag[pfx_ladyvalvewright]><&f> Wonderful! With your status, you may purchase a temporary emporium pass!"
                         - wait 2
                         - narrate "<server.flag[pfx_ladyvalvewright]><&f> Would like to purchase a pass? For 5,000 coins, you can purchase a 1-week pass! <server.flag[npc_dialogue_yesno]>"

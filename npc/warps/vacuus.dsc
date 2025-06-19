@@ -3,6 +3,7 @@ vacuus:
     actions:
         on assignment:
         - trigger name:click state:true
+        - trigger name:chat state:true radius:5
     interact scripts:
     - vacuus_main
 
