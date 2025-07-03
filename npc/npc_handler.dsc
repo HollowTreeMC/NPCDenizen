@@ -25,6 +25,7 @@ npc_handler:
         - flag server pfx_lewis:<[pfxL]><&f>Aeronaut<[pfxR]><&6>Lewis<&f>:<&f>
         - flag server pfx_vacuus:<[pfxL]><&f>Aeronaut<[pfxR]><&6>Vacuus<&f>:<&f>
 
+
         #   Tutorial NPCs
         - flag server pfx_tutorial:<&7>[<&f>Tutorial<&7>]<&sp>
         - flag server pfx_cali:<[pfxL]><&f>Aeronaut<[pfxR]><&6>Cali<&f>:<&f>
@@ -35,6 +36,11 @@ npc_handler:
         - flag server pfx_ladyvalvewright:<server.flag[pfx_chronarch]><&sp><&6>Lady<&sp>Valvewright<&f>:<&f>
         - flag server pfx_ladymarina:<server.flag[pfx_chronarch]><&sp><&6>Lady<&sp>Marina<&f>:<&f>
         - flag server pfx_lordwestwood:<server.flag[pfx_chronarch]><&sp><&6>Lord<&sp>Westwood<&f>:<&f>
+        - flag server pfx_the_duke:<&l><&Color[#5c4466]>T<&Color[#80708f]>h<&Color[#a0a0a0]>e<&sp><&Color[#b0b0b0]>D<&Color[#a0a0a0]>u<&Color[#80708f]>k<&Color[#6e567a]>e<&f>:<&f>
+
+        #   Trial NPCs
+        - flag server pfx_roland:<&8>{<&f>Aeronaut<&8>}<&sp><&6>Roland<&f>:<&f>
+
 
         #   Misc NPCs
         - flag server pfx_arlo:<[pfxL]><&f>Bard<[pfxR]><&6>Arlo<&f>:<&f>
@@ -56,7 +62,6 @@ npc_handler:
         - if <util.time_now.day_of_week> == 1 || <util.time_now.day_of_week> == 5:
             - run xur_shop
 
-
         ## LOCATION / NPC INTEREST FLAGS
         # <&hover[HOVER TEXT]><element[TEXT].on_click[URL TEXT].type[OPEN_URL]><&end_hover>
         - flag server loc_StellarGallery:<&hover[<&7><&o>Speak to <&6>Astra <&7><&o>at /spawn!]><element[<&6>Stellar<&sp>Gallery].on_click[https://wiki.hollowcraft.net/Stellar_Gallery].type[OPEN_URL]><&end_hover>
@@ -72,5 +77,4 @@ npc_handler:
         # Info
         - flag server infoTag:<&b>[<&3>!<&7><&b>]<&r><&sp>
         - flag server voteTag:<&hover[<&7>/vote]><element[<&7>[<&b>✨<&7>]].on_click[/vote ].type[SUGGEST_COMMAND]><&f><&end_hover>
-
 

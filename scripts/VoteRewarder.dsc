@@ -100,6 +100,7 @@ VoteRewardGiver:
           #todo-fix the VoteRewardSpiller script
           #- run VoteRewardSpiller
 
+
         - wait 30s
 
 ## Components to the Vote Party Script
