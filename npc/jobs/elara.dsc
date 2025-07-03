@@ -1,4 +1,9 @@
 #Elara is the NPC which hands out the Bladewarden job, located on the PVP Island.
+
+## Flags used in this file:
+# <server.flag[pfx_elara]> is an elementTag - used as the prefix for this npc's messages
+# <player.flag[npc_chatted]> is a boolean - used as a cooldown for entering a seperate zap state
+
 elara:
     type: assignment
     actions:

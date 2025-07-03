@@ -1,4 +1,11 @@
-# Bulki is a job NPC who assigns the "Scrapper" job to players
+#Bulki is the NPC who hands out the Tinkerer job, located on the spawn island.
+
+## Flags used in this file:
+# <server.flag[pfx_bulki]> is an elementTag - used as the prefix for this npc's messages
+# <player.flag[npc_chatted]> is a boolean - used as a cooldown for entering a seperate zap state
+
+# <player.flag[tutorial_bulki_quest]> is a boolean - used to coordinate with bulki NPC
+
 bulki:
     type: assignment
     actions:
@@ -25,7 +32,13 @@ bulki_main:
             click trigger:
                 script:
                 - cooldown 3s
-                - narrate "<server.flag[pfx_bulki]><&f> If you'd like to join The Scrapclad Collective as a Scrapper, you'll need to <&hover[<&a>[Obtain an Iron Nugget]]><&6>bring me an iron nugget<&end_hover><&f>..."
+                - narrate "<server.flag[pfx_bulki]><&f> If you'd like to join The Scrapclad Collective as a Scrapper, you'll need to <&hover[<&a>[Obtain an Copper Ingot]]><&6>bring me a copper ingot<&end_hover><&f>..."
+                - wait 1s
+                - if <player.has_flag[tutorial_bulki_quest]>:
+                    - zap 9 tutorial_script_main
+                    - narrate "<server.flag[pfx_cali]><&f><&l> <player.name>, sorry I forgot to give you the Copper Ingot! Catch!"
+                    - wait 1s
+                    - give copper_ingot
                 - zap 3
 
         # check quest
@@ -33,11 +46,11 @@ bulki_main:
             click trigger:
                 script:
                 - cooldown 3s
-                - if <player.inventory.contains_item[iron_nugget]>:
+                - if <player.inventory.contains_item[copper_ingot]>:
                     - narrate "<server.flag[pfx_bulki]><&f> That Iron Nugget looks nice! You've completed my quest. Impressive work!"
                     - zap 4
                 - else:
-                    - narrate "<server.flag[pfx_bulki]><&f> Where's your shiny nugget? As a reminder, you need to <&hover[<&a>[Obtain an Iron Nugget]]><&6>bring me an iron nugget<&end_hover><&f>!"
+                    - narrate "<server.flag[pfx_bulki]><&f> Where's your shiny nugget? As a reminder, you need to <&hover[<&a>[Obtain an opper Ingot]]><&6>bring me a copper ingot<&end_hover><&f>!"
 
         # main - job handout script
         4:

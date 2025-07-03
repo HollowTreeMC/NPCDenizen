@@ -1,4 +1,9 @@
 #Sterling is the Artificer job NPC
+
+## Flags used in this file:
+# <server.flag[pfx_sterling]> is an elementTag - used as the prefix for this npc's messages
+# <player.flag[npc_chatted]> is a boolean - used as a cooldown for entering a seperate zap state
+
 sterling:
     type: assignment
     actions:

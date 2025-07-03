@@ -1,5 +1,5 @@
 # this script is for the black market npc who teleports around depending on the day
-xur:
+xur_assign:
     type: assignment
     actions:
         on assignment:
@@ -67,6 +67,7 @@ xur_main:
 # Configures Xur
 xur_shop:
     type: task
+    debug: false
     script:
 
     # Monday Reset
@@ -118,6 +119,7 @@ xur_shop:
 # Contains all the black market items. Assign using /ex flag
 xur_tier1:
     type: task
+    debug: false
     definitions: slot_flag
     script:
     - random:
@@ -137,6 +139,7 @@ xur_tier1:
 # Contains Tier 3 crate gear
 xur_tier2:
     type: task
+    debug: false
     definitions: slot_flag
     script:
     - random:

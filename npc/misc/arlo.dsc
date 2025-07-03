@@ -1,4 +1,12 @@
 #this script is for arlo, the bard at the brewery
+
+## Flags used in this file:
+# <server.flag[arlo_playing]> is an elementTag - used to store the current song being played - expiry is set to song lengths
+# <player.flag[arlo_plays]> is an integer - used to count the number of plays remaining
+
+# <server.flag[pfx_arlo]> is an elementTag - used as the prefix for this npc's messages
+# <player.flag[npc_chatted]> is a boolean - used as a cooldown for entering a seperate zap state
+
 arlo:
     type: assignment
     actions:
