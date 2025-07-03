@@ -4,8 +4,10 @@
 # <server.flag[pfx_cali]> is an elementTag - used as the prefix for this npc's messages
 # <player.flag[npc_chatted]> is a boolean - used as a cooldown for entering a seperate zap state
 
-# <player.flag[cali_first_join]> is a boolean - used to limit free keys only to new players
+# <player.flag[cali_first_join]> is a boolean - used to limit free keys only to the first tutorial run
 # <player.flag[cali_crates_question]> is a boolean - used to limit free keys only to new players
+# <player.flag[cali_rewards]> is a boolean - used to limit free rewards only to the first tutorial run
+
 # <player.flag[tutorial_bulki_quest]> is a boolean - used to coordinate with bulki NPC
 
 cali:
@@ -13,6 +15,7 @@ cali:
     actions:
         on assignment:
         - trigger name:proximity state:true radius:5
+        - trigger name:chat state:true cooldown:false radius:5
         - trigger name:click state:true
     interact scripts:
     - cali_main
@@ -27,37 +30,36 @@ cali_main:
             proximity trigger:
                 entry:
                     script:
+                    - ratelimit <player> 100s
                     # Welcome player if its their first time
                     - if !<player.has_flag[cali_first_join]>:
-                        - narrate "<server.flag[pfx_cali]><&f> Hello <player.name>! Welcome to Hollowtree! I'm Cali, your guide!"
-                        - wait 3s
-                        - narrate "<server.flag[pfx_cali]><&f> In order to interact with NPCs such as myself, right click them!"
+                        - narrate "<server.flag[pfx_cali]><&f> Hello <player.name>! Welcome to Hollowtree! I'm Cali, your guide! In order to interact with NPCs such as myself, right click them!"
                     - flag <player> cali_first_join
 
                     # Offer tutorial
                     - narrate "<server.flag[pfx_cali]><&f> I see you haven't completed the tutorial yet. Would you like to? Rewards are in order if you do!"
-                    - narrate <n><&7><&o><&sp>→<&sp>Respond<&sp>with<&sp><&hover[<&7>click to respond]><element[[<&e>Start Tutorial<&7>]].on_click[/denizenclickable chat Start Tutorial]><&end_hover><&sp><&hover[<&7>click to respond]><element[[<&e>Skip Tutorial<&7>]].on_click[/denizenclickable chat Skip Tutorial]><&end_hover>
+                    - narrate <&7><&o><&sp>→<&sp>Respond<&sp>with<&sp><&hover[<&7>click to respond]><element[[<&e>Start Tutorial<&7>]].on_click[/denizenclickable chat Start Tutorial]><&end_hover><&sp><&hover[<&7>click to respond]><element[[<&e>Skip Tutorial<&7>]].on_click[/denizenclickable chat Skip Tutorial]><&end_hover>
 
             click trigger:
                 script:
-                    - cooldown 5
+                    - ratelimit <player> 5s
                     # Offer tutorial
                     - narrate "<server.flag[pfx_cali]><&f> I see you haven't completed the tutorial yet. Would you like to? Rewards are in order if you do!"
-                    - narrate <n><&7><&o><&sp>→<&sp>Respond<&sp>with<&sp><&hover[<&7>click to respond]><element[[<&e>Start Tutorial<&7>]].on_click[/denizenclickable chat Start Tutorial]><&end_hover><&sp><&hover[<&7>click to respond]><element[[<&e>Skip Tutorial<&7>]].on_click[/denizenclickable chat Skip Tutorial]><&end_hover>
+                    - narrate <&7><&o><&sp>→<&sp>Respond<&sp>with<&sp><&hover[<&7>click to respond]><element[[<&e>Start Tutorial<&7>]].on_click[/denizenclickable chat Start Tutorial]><&end_hover><&sp><&hover[<&7>click to respond]><element[[<&e>Skip Tutorial<&7>]].on_click[/denizenclickable chat Skip Tutorial]><&end_hover>
 
             chat trigger:
                 # player starts tutorial
                 1:
-                    trigger: Start Tutorial
+                    trigger: /Start Tutorial/
                     hide trigger message: true
                     show as normal chat: false
                     script:
-                    - narrate "<server.flag[pfx_cali]><&f> Okay, let's begin the tutorial!"
+                    - narrate "<server.flag[pfx_cali]><&f> Okay, let's begin the tutorial! Click me for the next step!"
                     - zap 2
 
                 # player skips tutorial
                 2:
-                    trigger: Skip Tutorial
+                    trigger: /Skip Tutorial/
                     hide trigger message: true
                     show as normal chat: false
                     script:
@@ -69,7 +71,7 @@ cali_main:
         2:
             click trigger:
                 script:
-                - cooldown 15s
+                - ratelimit <player> 15s
                 - narrate "<server.flag[pfx_cali]><&f> Getting to know your way around spawn is essential for you to find helpful information."
                 - wait 3s
                 - narrate "<server.flag[pfx_cali]><&f> The best hub for information is the <&9>Discovery Lounge<&f>! It's right across the square!"
@@ -81,10 +83,10 @@ cali_main:
         3:
             click trigger:
                 script:
-                - cooldown 15s
-                - narrate "<server.flag[pfx_cali]><&f>A test for you, <player.name>. At what rank can a Trailblazer take to the sky?"
+                - ratelimit <player> 15s
+                - narrate "<server.flag[pfx_cali]><&f> A test for you, <player.name>. At what rank can a Trailblazer take to the sky?"
                 - wait 1s
-                - narrate <n><&7><&o><&sp>→<&sp>Respond<&sp>with<&sp><&hover[<&7>click to respond]><element[[<&e>Watchmaker<&7>]].on_click[/denizenclickable chat Watchmaker]><&end_hover><&sp><&hover[<&7>click to respond]><element[[<&e>Timekeeper<&7>]].on_click[/denizenclickable chat Timekeeper]><&end_hover><&sp><&hover[<&7>click to respond]><element[[<&e>Inventor<&7>]].on_click[/denizenclickable chat Inventor]><&end_hover>
+                - narrate <&7><&o><&sp>→<&sp>Respond<&sp>with<&sp><&hover[<&7>click to respond]><element[[<&e>Watchmaker<&7>]].on_click[/denizenclickable chat Watchmaker]><&end_hover><&sp><&hover[<&7>click to respond]><element[[<&e>Timekeeper<&7>]].on_click[/denizenclickable chat Timekeeper]><&end_hover><&sp><&hover[<&7>click to respond]><element[[<&e>Inventor<&7>]].on_click[/denizenclickable chat Inventor]><&end_hover>
 
             chat trigger:
                 1:
@@ -114,13 +116,17 @@ cali_main:
         4:
             click trigger:
                 script:
-                - cooldown 15s
-                - narrate "<server.flag[pfx_cali]><&f> Atlas Crates & Co. is a great way for you to gear up with powerful tools!"
+                - ratelimit <player> 15s
+                - narrate "<server.flag[pfx_cali]><&f> <&b>Atlas Crates & Co. <&f>is a great way for you to gear up with powerful tools!"
                 - wait 3s
+
                 - if !<player.has_flag[crates_question]>:
                     - execute as_server 'crates giveKey equipinator <player.name> 1'
                     - narrate "<server.flag[pfx_cali]><&f> Here, a Spark Plug on us to be given to EquiPINator for some tools and gear!"
                 - flag player cali_crates_question
+
+                - narrate "<server.flag[pfx_cali]><&f> Take a look around! It's right by the <&9>Discovery Lounge"
+
                 - zap 5
 
         ## Daily Chest / Crates
@@ -128,10 +134,9 @@ cali_main:
         5:
             click trigger:
                 script:
-                - cooldown 15s
-                - narrate "<server.flag[pfx_cali]><&f>Our Trailblazers come across all sorts of loot on their expeditions. Sometimes, they share their treasures! Where would I find this Daily Loot?"
-                - wait 1s
-                - narrate <n><&7><&o><&sp>→<&sp>Respond<&sp>with<&sp><&hover[<&7>click to respond]><element[[<&e>Brass Cog & Tankard<&7>]].on_click[/denizenclickable chat Brass Cog & Tankard]><&end_hover><&sp><&hover[<&7>click to respond]><element[[<&e>Grand Archives<&7>]].on_click[/denizenclickable chat Grand Archives]><&end_hover><&sp><&hover[<&7>click to respond]><element[[<&e>Outside Atlas Crates & co.<&7>]].on_click[/denizenclickable chat Atlas Crates & co.]><&end_hover>
+                - ratelimit <player> 15s
+                - narrate "<server.flag[pfx_cali]><&f> Our Trailblazers come across all sorts of loot on their expeditions. Sometimes, they share their treasures! Where would I find this Daily Loot?"
+                - narrate <&7><&o><&sp>→<&sp>Respond<&sp>with<&sp><&hover[<&7>click to respond]><element[[<&e>Brass Cog & Tankard<&7>]].on_click[/denizenclickable chat Brass Cog & Tankard]><&end_hover><&sp><&hover[<&7>click to respond]><element[[<&e>Grand Archives<&7>]].on_click[/denizenclickable chat Grand Archives]><&end_hover><&sp><&hover[<&7>click to respond]><element[[<&e>Outside Atlas Crates & co.<&7>]].on_click[/denizenclickable chat Atlas Crates & co.]><&end_hover>
 
             chat trigger:
                 1:
@@ -159,7 +164,7 @@ cali_main:
         6:
             click trigger:
                 script:
-                - cooldown 15s
+                - ratelimit <player> 15s
                 - narrate "<server.flag[pfx_cali]><&f> <player.name>, exploration is not easy. Setting up a camp will become very beneficial when you are out in the wilds!"
                 - wait 3s
                 - narrate "<server.flag[pfx_cali]><&f> Take this book. It contains valuable information. Return here once you have set a home!"
@@ -174,9 +179,9 @@ cali_main:
         7:
             click trigger:
                 script:
-                - cooldown 15s
+                - ratelimit <player> 15s
                 - if <placeholder[cmi_user_homeamount]> >= 1:
-                    - narrate "<server.flag[pfx_bulki]><&f> You’ve found yourself a nice camping spot, eh?"
+                    - narrate "<server.flag[pfx_bulki]><&f> You’ve found yourself a nice camping spot, eh? Well done, onto the next topic!"
                     - zap 8
                 - else:
                     - narrate "<server.flag[pfx_bulki]><&f> It would be best to <&9>set a home<&f>. You don’t want to get lost at night, after all!"
@@ -186,19 +191,17 @@ cali_main:
         8:
             click trigger:
                 script:
-                - cooldown 15s
-                - narrate "<server.flag[pfx_cali]><&f> Jobs are crucial to conintue the March of Progress."
-                - wait 3s
-                - narrate "<server.flag[pfx_cali]><&6> Speak to Bulki <&f>. He can guide you through obtaining a job."
+                - ratelimit <player> 15s
+                - narrate "<server.flag[pfx_cali]><&f> Jobs are crucial to conintue the March of Progress.<&6> Speak to Bulki<&f>! He can guide you through obtaining a job."
                 - flag player tutorial_bulki_quest
-                - zap 6 bulki_main
+                - zap 2 bulki_main
 
         ## PVP island question
         # Find the statute on PVP island
         9:
             click trigger:
                 script:
-                - cooldown 15s
+                - ratelimit <player> 15s
                 - flag player tutorial_bulki_quest:!
                 - narrate "<server.flag[pfx_cali]><&f> There are many islands that the March of Progress is stationed at."
                 - wait 3s
@@ -211,9 +214,9 @@ cali_main:
         10:
             click trigger:
                 script:
-                - cooldown 15s
-                - narrate "<server.flag[pfx_cali]><&f>This Realm houses many celestials and deities, but none are more important than Auriel. Can you find where Auriel’s statue resides?"
-                - narrate <n><&7><&o><&sp>→<&sp>Respond<&sp>with<&sp><&hover[<&7>click to respond]><element[[<&e>Shatterpoint Spire<&7>]].on_click[/denizenclickable chat Shatterpoint Spire]><&end_hover><&sp><&hover[<&7>click to respond]><element[[<&e>Stellar Gateway Isle<&7>]].on_click[/denizenclickable chat Stellar Gateway Isle]><&end_hover><&sp><&hover[<&7>click to respond]><element[[<&e>Windspire Cove<&7>]].on_click[/denizenclickable chat Windspire Cove]><&end_hover>
+                - ratelimit <player> 15s
+                - narrate "<server.flag[pfx_cali]><&f> This Realm houses many celestials and deities, but none are more important than Auriel. Can you find where Auriel’s statue resides?"
+                - narrate <&7><&o><&sp>→<&sp>Respond<&sp>with<&sp><&hover[<&7>click to respond]><element[[<&e>Shatterpoint Spire<&7>]].on_click[/denizenclickable chat Shatterpoint Spire]><&end_hover><&sp><&hover[<&7>click to respond]><element[[<&e>Stellar Gateway Isle<&7>]].on_click[/denizenclickable chat Stellar Gateway Isle]><&end_hover><&sp><&hover[<&7>click to respond]><element[[<&e>Windspire Cove<&7>]].on_click[/denizenclickable chat Windspire Cove]><&end_hover>
 
             chat trigger:
                 1:
@@ -243,11 +246,18 @@ cali_main:
         11:
             click trigger:
                 script:
-                - cooldown 15s
+                - ratelimit <player> 15s
                 - narrate "<server.flag[pfx_cali]><&f> You have successfull completed the tutorial! Please enjoy your rewards!"
                 - wait 3s
                 - narrate "<server.flag[pfx_cali]><&f> Come find me if you have any questions!"
-                # give rewards here
+
+                ## give rewards here
+                #- if !<player.has_flag[cali_rewards]>:
+                #    - narrate hello
+                #- flag player cali_rewards
+
+                - execute as_server 'money give <player.name> 3 Sigils'
+                - execute as_server 'acb <player.name> 200'
 
         # Primary zap step, prompts player with the deluxemenu
         12:

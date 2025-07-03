@@ -5,7 +5,7 @@ npc_handler:
         on scripts loaded:
         ## SET PREFIX FLAGS
         - define pfxL:<&7>⎱
-        - define pfxR:<&7>⎱<&sp>
+        - define pfxR:<&7>⎱
         - flag server pfx_chronarch:<[pfxL]>{<&color[#530179]>C<&color[#890079]>h<&color[#b70071]>r<&color[#dd0063]>o<&color[#f94051]>n<&color[#ff6f3b]>a<&color[#ff9f31]>r<&color[#ffc900]>c<&color[#f5f50a]>h<&7>}<&f>
 
         #   Job NPCs
@@ -72,4 +72,5 @@ npc_handler:
         # Info
         - flag server infoTag:<&b>[<&3>!<&7><&b>]<&r><&sp>
         - flag server voteTag:<&hover[<&7>/vote]><element[<&7>[<&b>✨<&7>]].on_click[/vote ].type[SUGGEST_COMMAND]><&f><&end_hover>
+
 

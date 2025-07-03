@@ -35,9 +35,9 @@ bulki_main:
                 - narrate "<server.flag[pfx_bulki]><&f> If you'd like to join The Scrapclad Collective as a Scrapper, you'll need to <&hover[<&a>[Obtain an Copper Ingot]]><&6>bring me a copper ingot<&end_hover><&f>..."
                 - wait 1s
                 - if <player.has_flag[tutorial_bulki_quest]>:
-                    - zap 9 tutorial_script_main
-                    - narrate "<server.flag[pfx_cali]><&f><&l> <player.name>, sorry I forgot to give you the Copper Ingot! Catch!"
-                    - wait 1s
+                    - zap 9 cali_main
+                    - wait 2s
+                    - narrate "<server.flag[pfx_cali]><&f> <&l><player.name>! <&f>Sorry I forgot to give you the Copper Ingot! Catch!"
                     - give copper_ingot
                 - zap 3
 
@@ -47,7 +47,7 @@ bulki_main:
                 script:
                 - cooldown 3s
                 - if <player.inventory.contains_item[copper_ingot]>:
-                    - narrate "<server.flag[pfx_bulki]><&f> That Iron Nugget looks nice! You've completed my quest. Impressive work!"
+                    - narrate "<server.flag[pfx_bulki]><&f> That Copper Ingot looks nice! You've completed my quest. Impressive work!"
                     - zap 4
                 - else:
                     - narrate "<server.flag[pfx_bulki]><&f> Where's your shiny nugget? As a reminder, you need to <&hover[<&a>[Obtain an opper Ingot]]><&6>bring me a copper ingot<&end_hover><&f>!"
