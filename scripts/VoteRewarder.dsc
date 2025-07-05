@@ -97,7 +97,9 @@ VoteRewardGiver:
           - run VoteRewardCoins
           - run VoteRewardExp
           - run VoteRewardClaim
-          - run VoteRewardSpiller
+          #todo-fix the VoteRewardSpiller script
+          #- run VoteRewardSpiller
+
 
         - wait 30s
 

@@ -1,4 +1,9 @@
 #ladyvalvewright is the NPC informs the player whether or not they are allowed to use the adminmart, found in the adminmart storefront in Spawn.
+
+## Flags used in this file:
+# <server.flag[pfx_ladyvalvewright]> is an elementTag - used as the prefix for this npc's messages
+# <player.flag[npc_chatted]> is a boolean - used as a cooldown for entering a seperate zap state
+
 ladyvalvewright:
     type: assignment
     actions:

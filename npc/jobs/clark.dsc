@@ -1,4 +1,10 @@
 #Clark is the NPC which hands out the Trailblazer job, located on the explorer island.
+
+## Flags used in this file:
+# <server.flag[pfx_clark]> is an elementTag - used as the prefix for this npc's messages
+# <player.flag[npc_chatted]> is a boolean - used as a cooldown for entering a seperate zap state
+
+
 clark:
     type: assignment
     actions:
@@ -71,7 +77,7 @@ clark_main:
                         - narrate "<server.flag[pfx_clark]><&f> You have too many jobs! Leave one to become a Trailblazer <server.flag[npc_dialogue_leavejob]>"
                     - else:
                         - jobs join Trailblazer
-                        - narrate "<&9>You have been employed as a Trailblaze. Welcome to the Trailblazer Corps!"
+                        - narrate "<&9>You have been employed as a Trailblazer. Welcome to the Trailblazer Corps!"
                         - narrate "<server.flag[pfx_clark]><&f> Welcome aboard! Hot air balloon not included, haha."
                 2:
                     trigger: /no|na/
