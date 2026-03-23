@@ -35,21 +35,6 @@ npc_handler:
         - flag server pfx_ladyvalvewright:<server.flag[pfx_chronarch]><&sp><&6>Lady<&sp>Valvewright<&f>:<&f>
         - flag server pfx_ladymarina:<server.flag[pfx_chronarch]><&sp><&6>Lady<&sp>Marina<&f>:<&f>
         - flag server pfx_lordwestwood:<server.flag[pfx_chronarch]><&sp><&6>Lord<&sp>Westwood<&f>:<&f>
-        - flag server pfx_the_duke:<&l><&Color[#5c4466]>T<&Color[#80708f]>h<&Color[#a0a0a0]>e<&sp><&Color[#b0b0b0]>D<&Color[#a0a0a0]>u<&Color[#80708f]>k<&Color[#6e567a]>e<&f>:<&f>
-
-        #   Trial NPCs
-        - flag server pfx_roland:<&8>{<&f>Aeronaut<&8>}<&sp><&6>Roland<&f>:<&f>
-
-
-        #   Misc NPCs
-        - flag server pfx_arlo:<[pfxL]><&f>Bard<[pfxR]><&6>Arlo<&f>:<&f>
-        - flag server pfx_fischer:<[pfxL]><&f>Aeronaut<[pfxR]><&6>Fischer<&f>:<&f>
-        - flag server pfx_juniper:<[pfxL]><&f>Aeronaut<[pfxR]><&6>Juniper<&f>:<&f>
-        - flag server pfx_Nara:<&6>Mechanic<&sp>Nara<&f>:<&f>
-        - flag server pfx_the_duke:<&Color[#5c4466]>T<&Color[#80708f]>h<&Color[#a0a0a0]>e<&sp><&Color[#b0b0b0]>D<&Color[#a0a0a0]>u<&Color[#80708f]>k<&Color[#6e567a]>e<&f>:<&f>
-
-        #   Trial NPCs
-        - flag server pfx_roland:<[pfxL]><&f>Aeronaut<[pfxR]><&6>Roland<&f>:<&f>
 
         #   Misc NPCs
         - flag server pfx_arlo:<[pfxL]><&f>Bard<[pfxR]><&6>Arlo<&f>:<&f>
