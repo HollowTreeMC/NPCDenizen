@@ -10,6 +10,7 @@ jett:
         on assignment:
         - trigger name:click state:true
         - trigger name:chat state:true cooldown:false radius:5
+        - trigger name:proximity state:true radius:5
     interact scripts:
     - jett_main
 
