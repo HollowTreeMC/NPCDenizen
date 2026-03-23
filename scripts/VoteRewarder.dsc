@@ -30,10 +30,11 @@ voteannounce:
     - define player_obj:<server.match_player[<context.args.get[1]>]>
     - flag <[player_obj]> voteCooldown:+:1 expire:5m
     - if <[player_obj].flag[voteCooldown].if_null[0]> < 9:
-      - announce "<server.flag[voteTag]> <gray><italic><context.args.get[1]> voted (<placeholder[votingplugin_alltimetotal].player[<[player_obj]>]>)"
-      - execute as_server 'crates givekey votinator <[player_obj].name> 1'
-      - execute as_server 'money give <[player_obj].name> 250 Coins'
-      - execute as_server 'money give <[player_obj].name> 1 Sigils'
+        - announce "<server.flag[voteTag]> <gray><italic><context.args.get[1]> voted (<placeholder[votingplugin_alltimetotal].player[<[player_obj]>]>)"
+        - execute as_server 'crates givekey votinator <[player_obj].name> 1'
+        - execute as_server 'money give <[player_obj].name> 250 Coins'
+        - execute as_server 'money give <[player_obj].name> 1 Sigils'
+
 
 #Sends a message in Discord when the vote party is occuring
 discordannounce:
@@ -99,7 +100,6 @@ VoteRewardGiver:
           - run VoteRewardClaim
           #todo-fix the VoteRewardSpiller script
           #- run VoteRewardSpiller
-
 
         - wait 30s
 

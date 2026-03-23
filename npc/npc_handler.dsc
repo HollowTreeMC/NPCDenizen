@@ -25,7 +25,6 @@ npc_handler:
         - flag server pfx_lewis:<[pfxL]><&f>Aeronaut<[pfxR]><&6>Lewis<&f>:<&f>
         - flag server pfx_vacuus:<[pfxL]><&f>Aeronaut<[pfxR]><&6>Vacuus<&f>:<&f>
 
-
         #   Tutorial NPCs
         - flag server pfx_tutorial:<&7>[<&f>Tutorial<&7>]<&sp>
         - flag server pfx_cali:<[pfxL]><&f>Aeronaut<[pfxR]><&6>Cali<&f>:<&f>
@@ -52,6 +51,16 @@ npc_handler:
         #   Trial NPCs
         - flag server pfx_roland:<[pfxL]><&f>Aeronaut<[pfxR]><&6>Roland<&f>:<&f>
 
+        #   Misc NPCs
+        - flag server pfx_arlo:<[pfxL]><&f>Bard<[pfxR]><&6>Arlo<&f>:<&f>
+        - flag server pfx_fischer:<[pfxL]><&f>Aeronaut<[pfxR]><&6>Fischer<&f>:<&f>
+        - flag server pfx_juniper:<[pfxL]><&f>Aeronaut<[pfxR]><&6>Juniper<&f>:<&f>
+        - flag server pfx_Nara:<[pfxL]><&f>Mechanic<[pfxR]><&6>Nara<&f>:<&f>
+        - flag server pfx_the_duke:<&Color[#5c4466]>T<&Color[#80708f]>h<&Color[#a0a0a0]>e<&sp><&Color[#b0b0b0]>D<&Color[#a0a0a0]>u<&Color[#80708f]>k<&Color[#6e567a]>e<&f>:<&f>
+
+        #   Trial NPCs
+        - flag server pfx_roland:<[pfxL]><&f>Aeronaut<[pfxR]><&6>Roland<&f>:<&f>
+
         # NPC HELPERS
         - flag server npc_dialogue_okay:<n><&7><&o><&sp>→<&sp>Respond<&sp>with<&sp><&hover[<&7>click to respond]><element[[<&e>Okay<&7>]].on_click[/denizenclickable chat Yes]><&end_hover>
         - flag server npc_dialogue_yes:<n><&7><&o><&sp>→<&sp>Respond<&sp>with<&sp><&hover[<&7>click to respond]><element[[<&e>Yes<&7>]].on_click[/denizenclickable chat Yes]><&end_hover>
@@ -61,6 +70,7 @@ npc_handler:
         #   Xur NPC
         - if <util.time_now.day_of_week> == 1 || <util.time_now.day_of_week> == 5:
             - run xur_shop
+
 
         ## LOCATION / NPC INTEREST FLAGS
         # <&hover[HOVER TEXT]><element[TEXT].on_click[URL TEXT].type[OPEN_URL]><&end_hover>
@@ -77,4 +87,5 @@ npc_handler:
         # Info
         - flag server infoTag:<&b>[<&3>!<&7><&b>]<&r><&sp>
         - flag server voteTag:<&hover[<&7>/vote]><element[<&7>[<&b>✨<&7>]].on_click[/vote ].type[SUGGEST_COMMAND]><&f><&end_hover>
+
 

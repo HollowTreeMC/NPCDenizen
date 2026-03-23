@@ -8,6 +8,9 @@
 # <player.flag[cali_crates_question]> is a boolean - used to limit free keys only to new players
 # <player.flag[cali_rewards]> is a boolean - used to limit free rewards only to the first tutorial run
 
+# <player.flag[cali_reward_pick]> is an item - used to reward players for completing the tutorial
+
+
 # <player.flag[tutorial_bulki_quest]> is a boolean - used to coordinate with bulki NPC
 
 cali:
@@ -167,12 +170,12 @@ cali_main:
                 - ratelimit <player> 15s
                 - narrate "<server.flag[pfx_cali]><&f> <player.name>, exploration is not easy. Setting up a camp will become very beneficial when you are out in the wilds!"
                 - wait 3s
-                - narrate "<server.flag[pfx_cali]><&f> Take this book. It contains valuable information. Return here once you have set a home!"
+                - narrate "<server.flag[pfx_cali]><&f> Here are some useful commands! Return here once you have set a home in the world!"
                 # side bar for commands for this step
-                # /wild - “Teleport to a random location in the vast wilderness and uncover hidden treasures, breathtaking landscapes, or uncharted territories!”
-                # /sethome - “Secure your favorite spot with ease and mark the location youre at as your personal retreat!”
-                # /home - “Instantly teleport back to the location you've marked as your home, no matter where your journey takes you.”
-                # /spawn - "Travel back to the heart of the isles by teleporting back to [Tutorial NPC]!."
+                - narrate "  <&6>/wild<&f>: Teleport to a random location in the vast wilderness and uncover hidden treasures, breathtaking landscapes, or uncharted territories!"
+                - narrate "  <&6>/sethome<&f>: Secure your favorite spot with ease and mark the location youre at as your personal retreat!"
+                - narrate "  <&6>/home<&f>: Instantly teleport back to the location you've marked as your home, no matter where your journey takes you."
+                - narrate "  <&6>/spawn<&f>: Travel back to the heart of the isles by teleporting back to [Tutorial NPC]!."
                 - zap 7
 
         # Check to see if a player has set a home
@@ -251,13 +254,14 @@ cali_main:
                 - wait 3s
                 - narrate "<server.flag[pfx_cali]><&f> Come find me if you have any questions!"
 
-                ## give rewards here
-                #- if !<player.has_flag[cali_rewards]>:
-                #    - narrate hello
-                #- flag player cali_rewards
+                # give rewards here
+                - if !<player.has_flag[cali_rewards]>:
+                    - execute as_server 'money give <player.name> 3 Sigils'
+                    - execute as_server 'acb <player.name> 200'
+                    - give <server.flag[cali_reward_pick]>
+                - flag player cali_rewards
 
-                - execute as_server 'money give <player.name> 3 Sigils'
-                - execute as_server 'acb <player.name> 200'
+                - zap 12
 
         # Primary zap step, prompts player with the deluxemenu
         12:
