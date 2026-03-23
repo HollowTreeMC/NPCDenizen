@@ -1,4 +1,9 @@
 #Rune is the NPC which hands out the Runweaver job, located on the portal island inside the brewery hall.
+
+## Flags used in this file:
+# <server.flag[pfx_rune]> is an elementTag - used as the prefix for this npc's messages
+# <player.flag[npc_chatted]> is a boolean - used as a cooldown for entering a seperate zap state
+
 rune:
     type: assignment
     actions:

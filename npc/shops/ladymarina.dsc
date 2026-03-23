@@ -19,9 +19,9 @@ LadyMarina_NPC:
           entry:
             script:
             - define pfx_ladymarina <npc.nickname.parse_color>
-            - if <player.has_flag[marinaCD]>:
+            - if <player.has_flag[marinaCd]>:
                 - stop
-            - flag player marinaCD 20m
+            - flag player marinaCd expire:20m
             - chat "<[pfx_ladymarina]><&f>Good do you have any shulker boxes you would like to sell?"
         click trigger:
             script:
@@ -33,8 +33,9 @@ LadyMarina_NPC:
             - foreach <player.inventory.list_contents> as:checkedItem:
                 - if <[checkedItem].material.name.contains[shulker_box]>:
                     - if <[checkedItem].inventory_contents.is_empty>:
-                        - flag player countBoxes:++
-            - if <player.flag[countboxes]> == 1:
+                        - flag player countboxes:++
+            - if <player.has_flag[countboxes]>:
+              - if <player.flag[countboxes]> == 1:
                 - narrate "<[pfx_ladymarina]><&f>I see you have an empty shulker box."
                 - wait 3s
                 - narrate "<[pfx_ladymarina]><&f>Would you like to trade that in for <gold>⚙<yellow>2 Sigils<white>?"
@@ -47,7 +48,7 @@ LadyMarina_NPC:
                 - flag player countboxes:!
                 - flag player npcBusy:!
                 - stop
-            - if <player.flag[countboxes]> > 1:
+              - if <player.flag[countboxes]> > 1:
                 - narrate "<[pfx_ladymarina]><&f>I see you have <player.flag[countboxes]> empty shulker boxes."
                 - wait 3s
                 - narrate "<[pfx_ladymarina]><&f>Would you like to trade all those in for <gold>⚙<yellow>2 Sigils<white>? a piece?"
@@ -60,7 +61,7 @@ LadyMarina_NPC:
                 - flag player countboxes:!
                 - flag player npcBusy:!
                 - stop
-            - narrate "<[pfx_ladymarina]><&f>I would be happy to buy your unused shulker boxes for <gold>⚙<yellow>2 Sigils<white>? each."
+            - narrate "<[pfx_ladymarina]><&f>I would be happy to buy your unused shulker boxes for <gold>⚙<yellow>2 Sigils<white> each."
             - wait 2s
             - narrate "<[pfx_ladymarina]><&f>Please come back when you have some!"
             - flag player countboxes:!
@@ -81,7 +82,6 @@ LadyMarina_NPC:
                 - foreach <player.inventory.list_contents> as:checkedItem:
                     - if <[checkedItem].material.name.contains[shulker_box]>:
                         - if <[checkedItem].inventory_contents.is_empty>:
-                          - narrate <[loop_index]>
                           - flag player countb:++
                           - take slot:<[loop_index]>
                           - execute as_server "money give <player.name> 2 Sigils"

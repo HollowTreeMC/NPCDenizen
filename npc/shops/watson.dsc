@@ -38,8 +38,7 @@ watson_main:
                     script:
                     - flag player npc_chatted expire:15s
                     # Add novels to sell and guide books for free
-                    # Change biomewarps_menu to librarybooks_menu when that deluxe menu is working
-                    - execute as_server "dm open biomewarps_menu <player.name>"
+                    - execute as_server "dm open librarybooks_menu <player.name>"
                 2:
                     trigger: /no|na/
                     hide trigger message: true

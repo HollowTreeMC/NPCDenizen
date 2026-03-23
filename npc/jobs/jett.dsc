@@ -1,4 +1,9 @@
 #Jett is the NPC which hands out the Quartermaster job, located inside the Tavern / Brewery.
+
+## Flags used in this file:
+# <server.flag[pfx_jett]> is an elementTag - used as the prefix for this npc's messages
+# <player.flag[npc_chatted]> is a boolean - used as a cooldown for entering a seperate zap state
+
 jett:
     type: assignment
     actions:

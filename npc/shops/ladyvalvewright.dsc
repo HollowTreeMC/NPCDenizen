@@ -1,4 +1,9 @@
 #ladyvalvewright is the NPC informs the player whether or not they are allowed to use the adminmart, found in the adminmart storefront in Spawn.
+
+## Flags used in this file:
+# <server.flag[pfx_ladyvalvewright]> is an elementTag - used as the prefix for this npc's messages
+# <player.flag[npc_chatted]> is a boolean - used as a cooldown for entering a seperate zap state
+
 ladyvalvewright:
     type: assignment
     actions:
@@ -35,7 +40,7 @@ ladyvalvewright_main:
                 # player does not have the pass
                 - else:
                     # player meets the requisite rank or balance
-                    - if <player.has_permission[group.chronarch]> || <player.money> > 1000000:
+                    - if <player.has_permission[group.chronarch]> || <player.money> > 250000:
                         - narrate "<server.flag[pfx_ladyvalvewright]><&f> Wonderful! With your status, you may purchase a temporary emporium pass!"
                         - wait 2
                         - narrate "<server.flag[pfx_ladyvalvewright]><&f> Would like to purchase a pass? For 5,000 coins, you can purchase a 1-week pass! <server.flag[npc_dialogue_yesno]>"
@@ -44,39 +49,41 @@ ladyvalvewright_main:
                         - zap 3
                         - wait 15s
                         - zap 2
+
+                        # player does not respond to the chat
                         - if !<player.has_flag[npc_chatted]>:
                             - narrate "<server.flag[pfx_ladyvalvewright]><&f> I've business matters to attend to."
                     # player does not meet the requisite to purchase the pass
                     - else:
                         - narrate "<server.flag[pfx_ladyvalvewright]><&f> Ugh, you lack <&hover[<&a>Achieve the Chronarch rank]><&6>status and wealth<&end_hover><&f>! Return once you have progressed through the echelon!"
 
-            3:
-                chat trigger:
-                    1:
-                        trigger: /ye/ok/
-                        hide trigger message: true
-                        show as normal chat: false
-                        script:
-                        - flag player npc_chatted expire:15s
-                        - if <player.has_permission[group.chronarch]> || <player.money> > 1000000:
-                            - if <player.money> >= 5000:
-                                - money take quantity:5000 players:<player>
-                                - execute as_server "/lp user <player.name> permission settemp cmi.command.portal.adminshop 7d replace hollowtreeproject"
-                                - wait 5
-                                - narrate "<server.flag[pfx_ladyvalvewright]><&f> Your pass is now valid. Enjoy the Emporium!"
-                            - else:
-                                - define temp 5000
-                                - narrate "<server.flag[pfx_ladyvalvewright]><&f> Your esteemed self, another <[temp].sub[<player.money>].round_up> coins are required."
-                    2:
-                        trigger: /no|na/
-                        hide trigger message: true
-                        show as normal chat: false
-                        script:
-                        - flag player npc_chatted expire:15s
-                        - narrate "<server.flag[pfx_ladyvalvewright]><&f> Be sure to purchase your pass to enjoy our emporium!"
-                    3:
-                        trigger: /*/
-                        hide trigger message: true
-                        show as normal chat: false
-                        script:
-                        - narrate "<server.flag[pfx_ladyvalvewright]><&f> I don't understand"
+        3:
+            chat trigger:
+                1:
+                    trigger: /ye/ok/
+                    hide trigger message: true
+                    show as normal chat: false
+                    script:
+                    - flag player npc_chatted expire:15s
+
+                    - if <player.money> >= 5000:
+                        - money take quantity:5000 players:<player>
+                        - execute as_server "/lp user <player.name> permission settemp cmi.command.portal.adminshop 7d replace hollowtreeproject"
+                        - wait 5
+                        - narrate "<server.flag[pfx_ladyvalvewright]><&f> Your pass is now valid. Enjoy the Emporium!"
+                    - else:
+                        - define temp 5000
+                        - narrate "<server.flag[pfx_ladyvalvewright]><&f> Your esteemed self, another <[temp].sub[<player.money>].round_up> coins are required."
+                2:
+                    trigger: /no|na/
+                    hide trigger message: true
+                    show as normal chat: false
+                    script:
+                    - flag player npc_chatted expire:15s
+                    - narrate "<server.flag[pfx_ladyvalvewright]><&f> Be sure to purchase your pass to enjoy our emporium!"
+                3:
+                    trigger: /*/
+                    hide trigger message: true
+                    show as normal chat: false
+                    script:
+                    - narrate "<server.flag[pfx_ladyvalvewright]><&f> I don't understand"

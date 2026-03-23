@@ -1,4 +1,10 @@
 #Cogsworth is the NPC which hands out the Tinkerer job, located in the workshop.
+
+## Flags used in this file:
+# <server.flag[pfx_cogsworth]> is an elementTag - used as the prefix for this npc's messages
+# <player.flag[npc_chatted]> is a boolean - used as a cooldown for entering a seperate zap state
+
+
 cogsworth:
     type: assignment
     actions:
