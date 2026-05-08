@@ -4,9 +4,12 @@
 # <server.flag[eventTag]> is a string element - used as the prefix for event messages
 # <server.flag[dragonEvent]> is a BOOLEAN - used to indicate whether the event is ongoing
 # <server.flag[dragonEventPoints]> is a maptag - keys are players.uuid and values are points
-
 # <entity.flag[attackingPlayers]> is a mapTag - keys are player.uuid and values are damage dealt
 # <entity.flag[lastAttackingPlayer]> is a playerTag - used to store the last player who dealt damage to the dragon
+
+## Permissions used in this file:
+# event.toggle - permission required to manage the event
+# event.toggle.admin - permission required to reset the event
 
 Dragon_Slayer:
   type: world
