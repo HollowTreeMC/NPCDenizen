@@ -84,7 +84,7 @@ LadyMarina_NPC:
                         - if <[checkedItem].inventory_contents.is_empty>:
                           - flag player countb:++
                           - take slot:<[loop_index]>
-                          - execute as_server "money give <player.name> 2 Sigils"
+                          - execute as_server "sigil give <player.name> 2"
                 - narrate "<player.flag[countb]> Shulker boxes sold!"
                 - flag player countb:!
                 - else:
@@ -103,7 +103,7 @@ LadyMarina_NPC:
                 - define pfx_ladymarina '<npc.nickname.parse_color>: <&f>'
                 - if <player.item_in_hand.inventory_contents.is_empty> && <player.item_in_hand.material.name.contains[shulker_box]>:
                     - ^take iteminhand
-                    - execute as_server "money give <player.name> 2 Sigils"
+                    - execute as_server "sigil give <player.name> 2"
                 - else:
                     - narrate "<[pfx_ladymarina]> You are not holding any empty shulker boxes right now. You can hold one out to me and we can try again!"
                     - flag player npcBusy:!

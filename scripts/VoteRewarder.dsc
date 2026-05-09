@@ -33,7 +33,7 @@ voteannounce:
         - announce "<server.flag[voteTag]> <gray><italic><context.args.get[1]> voted (<placeholder[votingplugin_alltimetotal].player[<[player_obj]>]>)"
         - execute as_server 'crates givekey votinator <[player_obj].name> 1'
         - execute as_server 'money give <[player_obj].name> 250 Coins'
-        - execute as_server 'money give <[player_obj].name> 1 Sigils'
+        - execute as_server 'sigil give <[player_obj].name> 1'
 
 
 #Sends a message in Discord when the vote party is occuring

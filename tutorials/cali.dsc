@@ -256,7 +256,7 @@ cali_main:
 
                 # give rewards here
                 - if !<player.has_flag[cali_rewards]>:
-                    - execute as_server 'money give <player.name> 3 Sigils'
+                    - execute as_server 'sigil give <player.name> 3'
                     - execute as_server 'acb <player.name> 200'
                     - give <server.flag[cali_reward_pick]>
                 - flag player cali_rewards
