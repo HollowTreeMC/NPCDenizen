@@ -64,6 +64,33 @@ SigilDBLoad:
             # set player flag
             - flag <player> Sigils:<entry[query_result].result_list.get[1].get[1]>
 
+        on delta time minutely:
+        # update the local flags for all online players
+        # for passing through updates from other servers
+        - foreach <server.online_players> as:player_to_query:
+            - ~sql id:sigildb "query:SELECT sigils FROM sigils WHERE uuid='<[player_to_query].uuid>'" save:loop_query_result
+            - flag <[player_to_query]> Sigils:<entry[loop_query_result].result_list.get[1].get[1]>
+
+## Function to run in order to add entries for all existing players into the database. Should only be used once when initilizing the system for the first tiime.
+#SigilDBQLogPlayers:
+#    type: task
+#    debug: false
+#    enabled: false
+#    script:
+#        - foreach <server.offline_players> as:player_to_query:
+#            # create an entry in the table if the player does not currently exist
+#            - ~sql id:sigildb "query:SELECT sigils FROM sigils WHERE uuid='<[player_to_query].uuid>'" save:query_result
+#
+#            - if <entry[query_result].result_list.is_empty>:
+#                - ~sql id:sigildb "update:INSERT INTO sigils VALUES ('<player.uuid>',0);"
+#                - debug '[Sigils] Created new entry for <[player_to_query].name>!'
+#                # set player flag
+#                - flag <[player_to_query]> Sigils:0
+#            - else:
+#                # set player flag
+#                - flag <[player_to_query]> Sigils:<entry[query_result].result_list.get[1].get[1]>
+
+
 # Looks up the player's balance AND updates the player's local flag
 SigilDBQuery:
     type: task
@@ -112,11 +139,12 @@ SigilCMD:
                     - define first_check <[first_check].include[set|take|give]>
 
                 # return server.player to player with perms
-                - if <[first_check].contains[<context.args.first>]>:
-                    - if <context.args.get[2].exists>:
-                        - determine <server.players.parse_tag[<[parse_value].name>].filter_tag[<[filter_value].starts_with[<context.args.get[2]>]>]>
-                    - else:
-                        - determine <server.players.parse_tag[<[parse_value].name>]>
+                - if <context.args.get[1].exists>:
+                    - if <[first_check].contains[<context.args.first>]>:
+                        - if <context.args.get[2].exists>:
+                            - determine <server.players.parse_tag[<[parse_value].name>].filter_tag[<[filter_value].starts_with[<context.args.get[2]>]>]>
+                        - else:
+                            - determine <server.players.parse_tag[<[parse_value].name>]>
 
                 # return server.online to player with no perms
                 - else:
@@ -127,6 +155,10 @@ SigilCMD:
 
     script:
     ## Player Commands
+    - if !<context.args.first.exists>:
+        - execute as_player 'sigil help'
+        - stop
+
     - choose <context.args.first>:
         # return an explanation of each of the commands
         - case help:
