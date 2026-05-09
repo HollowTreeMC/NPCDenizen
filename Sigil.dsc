@@ -3,6 +3,7 @@
 
 ## Flags used in this file
 # <player.flag[Sigils]> is an int - returns the number of sigils the player has
+# %denizen_<player.flag[Sigils]>% to use as a read-only PAPI
 
 ## Permissions in this file
 # sigil.helper - grants /bal auditing commands
@@ -15,6 +16,7 @@ SigilDBLoad:
         on server start:
         # prefix for all sigil messages
         - flag server sigilTag:<&8>[<&e><&l>ღ<&8>]<&7>
+        - flag server sigilSym:<&e><&l>ღ<&r><&7>
 
         # load credentials from config
         - if !<util.has_file[sigildb.yml]>:
@@ -81,6 +83,7 @@ SigilDBSet:
         - ~sql id:sigildb "update:UPDATE sigils SET sigils=<[Value]> WHERE uuid='<[Player].uuid>';"
         - flag <[player]> Sigils:<[Value]>
 
+
 SigilCMD:
     type: command
     debug: false
@@ -89,22 +92,22 @@ SigilCMD:
     usage: /sigil [argument]
     tab complete:
     - choose <context.raw_args.to_list.count[ ]>:
-        ## first argument
+        ## First argument
         # gives players options: help, balance, send, top
         # gives admins options: set, take, give
         - case 0:
-            - define first <list[help|balance|send|top]>
+            - define first <list[help|balance|bal|send|top]>
             - if <player.has_permission[sigil.admin]>:
                 - define first <[first].include[set|take|give]>
             - determine <[first]>
-        ## second argument
+        ## Second argument
         # gives players <server.online> option if: send
         # gives helpers <server.player> if: balance
         # gives admins <server.player> if: set, take, give
         - case 1:
             - define first_check <list[send]>
             - if <player.has_permission[sigil.helper]>:
-                - define first_check <[first_check].include[balance]>
+                - define first_check <[first_check].include[balance|bal]>
                 - if <player.has_permission[sigil.admin]>:
                     - define first_check <[first_check].include[set|take|give]>
 
@@ -123,25 +126,28 @@ SigilCMD:
                         - determine <server.online_players.parse_tag[<[parse_value].name>]>
 
     script:
+    ## Player Commands
     - choose <context.args.first>:
+        # return an explanation of each of the commands
         - case help:
-            # return an explanation of each of the commands
             - narrate "<server.flag[sigilTag]> HollowCraft Sigils"
-            - narrate "<&e>/sigil balance <&7>to view your sigil balance"
-            - narrate "<&e>/sigil send [player] [amount] <&7>to send sigils to other players"
-            - narrate "<&e>/sigil top <&7>to view the sigil leaderboard"
+            - narrate "<&e>/sigil balance <&f>to view your sigil balance"
+            - narrate "<&e>/sigil send [player] [amount] <&f>to send sigils to other players"
+            - narrate "<&e>/sigil top <&f>to view the sigil leaderboard"
             - if <player.has_permission[sigil.admin]>:
-                - narrate "<&e>/sigil set [player] [amount] <&7>to set the sigil balance of a player"
-                - narrate "<&e>/sigil take [player] [amount] <&7>to take sigils from a player"
-                - narrate "<&e>/sigil give [player] [amount] <&7>to give sigils to a player"
+                - narrate "<&e>/sigil set [player] [amount] <&f>to set the sigil balance of a player"
+                - narrate "<&e>/sigil take [player] [amount] <&f>to take sigils from a player"
+                - narrate "<&e>/sigil give [player] [amount] <&f>to give sigils to a player"
+
+            - stop
 
         # returns the balance from the db
-        - case balance:
+        - case balance bal:
             # obtain player object
             - define query:<player>
             # helper command to look up other players
             - if <context.args.get[2].exists>:
-                - if <player.has_permission[sigil.helper].if_null[!<player.exists>]>:
+                - if <player.has_permission[sigil.helper].if_null[<player.exists.not>]>:
                     # lookup fails, stop
                     - if !<server.match_offline_player[<context.args.get[2]>].exists>:
                         - narrate "<server.flag[sigiltag]> <&7>Error! Recipient <&e><context.args.get[2]> <&7>not found!"
@@ -151,7 +157,9 @@ SigilCMD:
 
             # do a sql lookup for the player, narrate the balance
             - ~run SigilDBQuery def:<[query]> save:balance
-            - narrate "<server.flag[sigiltag]> <&7><[query].name>: <&e><entry[balance].created_queue.determination.get[1]><&l>ღ"
+            - narrate "<server.flag[sigiltag]> <&7><[query].name>: <&e><entry[balance].created_queue.determination.get[1]><server.flag[SigilSym]>"
+
+            - stop
 
         # transfers specified balance to another player via db
         - case send:
@@ -167,26 +175,37 @@ SigilCMD:
                 - narrate "<server.flag[sigiltag]> Error! Recipient <&e><context.args.get[2]> <&7>not found!"
                 - stop
 
-            # sigils sent is not an integer value
-            - if !<context.args.get[3].is_integer>:
+            # sigils sent is not an positive integer value
+            - if !<context.args.get[3].is_integer.if_true[<context.args.get[3].is_more_than[0]>].if_false[False]>:
                 - narrate "<server.flag[sigiltag]> Error! <&e><context.args.get[3]> Sigils <&7>is not a valid amount!"
                 - stop
 
-            # check to see if the sender has the balance
-            #- ~sql id:sigildb "query:SELECT "
-            - define balance:PLACEHOLDER
+            - else:
+                # vars for below script bcos I got lost
+                - define amount:<context.args.get[3]>
+                - define sender:<player>
+                - define reciever:<[reciever]>
 
-            - if false:
-                - narrate "<server.flag[sigiltag]> Error! You only have <&e><[balance]> <&l>ღ <&r><&e>Sigils<&7>!"
+            # check to see if the sender has the balance
+            - ~run SigilDBQuery def:<[sender]> save:sender
+            - define sender_bal:<entry[sender].created_queue.determination.get[1]>
+            - if !<[sender_bal].is_more_than_or_equal_to[<[amount]>]>:
+                - narrate "<server.flag[sigiltag]> Error! You only have <&e><[sender_bal]><server.flag[SigilSym]> <&e>Sigils<&7>!"
                 - stop
 
             # subtract the balance from the sender
-            #- ~sql id:sigildb "query:SELECT "
+            - ~run SigilDBSet def:<player>|<[sender_bal].sub[<[amount]>]>
+            - narrate "<server.flag[sigiltag]> You have sent <&e><[amount]><server.flag[SigilSym]> to <[reciever].name>"
 
-            # give the balance to the other player
-            #- ~sql id:sigildb "query:SELECT "
+            # look up the other player's balance
+            - ~run SigilDBQuery def:<[reciever]> save:reciever
+            - define reciever_bal:<entry[reciever].created_queue.determination.get[1]>
 
-            - narrate "<server.flag[sigiltag]> You have sent <&e><context.args.get[3]><&l>ღ<&r><&7> to <[reciever].name>"
+            # add the new balance to the other player
+            - ~run SigilDBSet def:<[reciever]>|<[reciever_bal].add[<[amount]>]>
+            - narrate "<server.flag[sigiltag]> <player.name> has sent you <&e><[amount]><server.flag[SigilSym]>" targets:<[reciever]>
+
+            - stop
 
         # queries db to view the top sigil balances
         - case top:
@@ -194,48 +213,73 @@ SigilCMD:
             - narrate 'here is the leaderboard'
             - debug top
 
-        #TODO Admin commands
-        # admin - sets the balance of the player
+            - stop
+
+        - case default:
+            - narrate "<server.flag[sigiltag]> Command not recognized!"
+            - stop
+
+        - case set take give:
+            - define pass:pass
+
+    ## Admin/Console Commands
+    - if !<player.has_permission[sigil.admin].if_null[<context.source_type.equals[server]>]>:
+        - narrate "<server.flag[sigiltag]> You do not have permission to do this!"
+        - stop
+
+    # check input to see if amount sent is a positive integer value
+    - if !<context.args.get[3].is_integer.if_true[<context.args.get[3].is_more_than_or_equal_to[0]>].if_false[False]>:
+        - narrate "<server.flag[sigiltag]> Error! <&e><context.args.get[3]> Sigils <&7>is not a valid amount!"
+        - stop
+    - else:
+        - define amount:<context.args.get[3]>
+
+    # check input to see if player is valid, define playertag with <[query]>
+    - if !<context.args.get[2].exists>:
+        - narrate "<server.flag[sigiltag]> Error! Recipient <&e><context.args.get[2]> <&7>not found!"
+        - stop
+    - else:
+        - if !<server.match_offline_player[<context.args.get[2]>].exists>:
+            - narrate "<server.flag[sigiltag]> Error! Recipient <&e><context.args.get[2]> <&7>not found!"
+            - stop
+        - else:
+            - define query:<server.match_offline_player[<context.args.get[2]>]>
+            - debug <[query]>
+
+    - choose <context.args.first>:
+        # Sets the balance of the player
         - case set:
-            - if <player.has_permission[sigil.admin].if_null[!<player.exists>]>:
 
-                # sigils sent is not an integer value
-                - if !<context.args.get[3].is_integer>:
-                    - narrate "<server.flag[sigiltag]> Error! <&e><context.args.get[3]> Sigils <&7>is not a valid amount!"
-                    - stop
+            # set new balance
+            - ~run SigilDBSet def:<[query]>|<[amount]>
+            - narrate "<server.flag[sigiltag]> <&7><[query].name> new balance is: <&e><[amount]><server.flag[SigilSym]>"
 
-                # check to see if player is valid, construct obj
-                - if <context.args.get[2].exists>:
-                    # lookup fails, stop
-                    - if !<server.match_offline_player[<context.args.get[2]>].exists>:
-                        - narrate "<server.flag[sigiltag]> Error! Recipient <&e><context.args.get[2]> <&7>not found!"
-                        - stop
-                    # lookup success, pass player value to database
-                    - define query:<server.match_offline_player[<context.args.get[2]>]>
+            - stop
 
-                    # checks are sucsessful, set new balance
-                    - ~run SigilDBSet def:<[query]>|<context.args.get[3]>
-                    - narrate "<server.flag[sigiltag]> <&7><[query].name> new balance is: <&e><context.args.get[3]><&l>ღ"
-
-            - else:
-                - narrate "<server.flag[sigiltag]> Error! You do not have permissiont to do this!"
-
-        # admin - removes balance from the player
+        # Removes balance from the player
         - case take:
-            - if <player.has_permission[sigil.admin].if_null[!<player.exists>]>:
 
-                #- ~sql id:sigildb "query:SELECT "
-                - debug take
+            # look up the player's balance
+            - ~run SigilDBQuery def:<[query]> save:take
+            - define query_bal:<entry[take].created_queue.determination.get[1]>
 
-            - else:
-                - narrate "<server.flag[sigiltag]> Error! You do not have permissiont to do this!"
+            # subtract the relevant amount
+            - define new_bal:<[query_bal].sub[<[amount]>]>
+            - ~run SigilDBSet def:<[query]>|<[new_bal]>
+            - narrate "<server.flag[sigiltag]> <&e><[amount]><server.flag[SigilSym]> has been removed, your new balance: <&e><[new_bal]><server.flag[SigilSym]>" targets:<[query]>
 
-        # admin - gives balance to the player
+            - stop
+
+        # Gives balance to the player
         - case give:
-            - if <player.has_permission[sigil.admin].if_null[!<player.exists>]>:
 
-                #- ~sql id:sigildb "query:SELECT "
-                - debug give
+            # look up the player's balance
+            - ~run SigilDBQuery def:<[query]> save:give
+            - define query_bal:<entry[give].created_queue.determination.get[1]>
 
-            - else:
-                - narrate "<server.flag[sigiltag]> Error! You do not have permissiont to do this!"
+            # add the relevant amount
+            - define new_bal:<[query_bal].add[<[amount]>]>
+            - ~run SigilDBSet def:<[query]>|<[query_bal].add[<[amount]>]>
+            - narrate "<server.flag[sigiltag]> You have recieved <&e><[amount]><server.flag[SigilSym]> your new balance: <&e><[new_bal]><server.flag[SigilSym]>" targets:<[query]>
+
+            - stop
