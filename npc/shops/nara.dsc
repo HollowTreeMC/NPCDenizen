@@ -20,7 +20,7 @@ nara_main:
                 - if !<player.has_flag[nara_daily]>:
                     - narrate "<server.flag[pfx_nara]><&f> Here are your daily log in rewards!"
                     - execute as_server 'crates givekey votinator <player.name> 4'
-                    - execute as_server 'money give <player.name> 6 Sigils'
+                    - execute as_server 'sigil give <player.name> 6'
                     - flag <player> nara_daily:1 expire:22h
 
                 - else:
