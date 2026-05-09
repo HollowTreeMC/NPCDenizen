@@ -134,7 +134,7 @@ SigilCMD:
         # gives admins <server.player> if: set, take, give
         - case 1:
             - define first_check <list[send]>
-            - if <player.has_permission[sigil.helper].or[sigil.admin]>:
+            - if <player.has_permission[sigil.helper].if_null[<context.source_type.equals[server]>]> || <player.has_permission[sigil.admin].if_null[<context.source_type.equals[server]>]>:
                 - define first_check <[first_check].include[balance|bal]>
                 - if <player.has_permission[sigil.admin]>:
                     - define first_check <[first_check].include[set|take|give]>
@@ -178,7 +178,7 @@ SigilCMD:
             - define query <player>
             # helper command to look up other players
             - if <context.args.get[2].exists>:
-                - if <player.has_permission[sigil.helper].or[sigil.admin].if_null[<context.source_type.equals[server]>]>:
+                - if <player.has_permission[sigil.helper].if_null[<context.source_type.equals[server]>]> || <player.has_permission[sigil.admin].if_null[<context.source_type.equals[server]>]>:
                     # lookup fails, stop
                     - if !<server.match_offline_player[<context.args.get[2]>].exists>:
                         - narrate "<server.flag[sigiltag]> <&7>Error! Recipient <&e><context.args.get[2]> <&7>not found!"
