@@ -32,8 +32,8 @@ theduke_main:
                         - narrate "You already got this package today. Come back tomorrow."
                         - stop
                     - ^flag <player> eventPackage duration:18h
-                    - if <placeholder[tne_currency_sigils]> >= 2:
-                        - execute as_server "money take <player.name> 2 sigils"
+                    - if <player.flag[sigils]> >= 2:
+                        - execute as_server "sigil take <player.name> 2"
                         - random:
                             - narrate "<server.flag[pfx_the_duke]><&f> There you are my good... human."
                             - narrate "<server.flag[pfx_the_duke]><&f> Here's you stuff, now get to it."
@@ -42,7 +42,7 @@ theduke_main:
                         - narrate "<dark_aqua>[<aqua>!<dark_aqua>] <reset>The event package was added to your inventory!"
                     - else:
                         - define temp 250
-                        - narrate "<server.flag[pfx_the_duke]><&f> You'll need more sigils for that. It appears that you only have <placeholder[tne_currency_sigils]>."
+                        - narrate "<server.flag[pfx_the_duke]><&f> You'll need more sigils for that. It appears that you only have <player.flag[sigils]>."
                 No:
                     trigger: /no|n/
                     hide trigger message: true

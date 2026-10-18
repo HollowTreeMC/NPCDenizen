@@ -34,8 +34,8 @@ arlo_main:
                     hide trigger message: true
                     show as normal chat: false
                     script:
-                    - if <placeholder[tne_currency_Sigils]> >= 1:
-                        - execute as_server "money take <player.name> 1 Sigils"
+                    - if <player.flag[sigils]> >= 1:
+                        - execute as_server "sigil take <player.name> 1"
                         - flag <player> arlo_plays:5
                         - zap 2
 

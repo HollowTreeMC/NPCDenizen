@@ -5,4 +5,4 @@ Balance:
   debug: false
   usage: /balance
   script:
-    - narrate "<&e>Balance: <&6><placeholder[cmi_user_balance_formatted]> <&e>Sigils: <&6>⚙TRANSFERRING"
+    - narrate "<&6>Balance: <&e><placeholder[cmi_user_balance_formatted]><&sp> <&6>Sigils: <&e><player.flag[Sigils]><&l>ღ"
