@@ -52,9 +52,13 @@ npc_handler:
         - flag server npc_dialogue_yesno:<n><&7><&o><&sp>→<&sp>Respond<&sp>with<&sp><&hover[<&7>click to respond]><element[[<&e>Yes<&7>]].on_click[/denizenclickable chat Yes]><&end_hover><&sp><&hover[<&7>click to respond]><element[[<&e>No<&7>]].on_click[/denizenclickable chat No]><&end_hover>
         - flag server npc_dialogue_leavejob:<n><&7><&o>→<&sp><&hover[<&7>autofill command]><element[/jobs leave ].on_click[/jobs leave ].type[SUGGEST_COMMAND]><&end_hover>
 
-        #   Xur NPC
+        ## Schedule scripts
+        # Script runs on restart - daily
+        - run Nara_quest_gen
+        # Script runs on restart - monday/friday
         - if <util.time_now.day_of_week> == 1 || <util.time_now.day_of_week> == 5:
             - run xur_shop
+
 
 
         ## LOCATION / NPC INTEREST FLAGS
